@@ -1,0 +1,49 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject",
+    "test": "node ./node_modules/jest/bin/jest.js --watchAll",
+    "clear_jest": "node ./node_modules/jest/bin/jest.js --clearCache"
+  },
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "dependencies": {
+    "@expo/samples": "2.1.1",
+    "axios": "^0.18.0",
+    "expo": "^32.0.0",
+    "react": "16.5.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-elements": "^1.1.0",
+    "react-navigation": "^3.0.9",
+    "react-redux": "^6.0.0",
+    "redux-ignore": "^1.2.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "url": "^0.11.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/expo": "^32.0.0",
+    "@types/jest": "^24.0.12",
+    "@types/react-native": "^0.57.0",
+    "@types/uuid": "^3.4.4",
+    "babel-preset-expo": "^5.0.0",
+    "eslint": "^5.16.0",
+    "jest": "^24.7.1",
+    "jest-expo": "^32.0.0",
+    "prettier": "^1.17.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
+  },
+  "prettier": {
+    "printWidth": 128,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "semi": true
+  },
+  "private": true
+}

@@ -1,0 +1,13 @@
+{
+  "id": "benefit-id-4",
+  "type": "voucher",
+  "voucher": {
+    "key": "VOUCHER_APRIL_200K",
+    "name": "Phiếu mua hàng 200K"
+  },
+  "quantity": 1,
+  "promotionQuantity": {
+    "maxQuantity": 100,
+    "remainQuantity": 50
+  }
+}

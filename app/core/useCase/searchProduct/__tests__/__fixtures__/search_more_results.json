@@ -1,0 +1,53 @@
+[
+  {
+    "sku": "18110278",
+    "name": "Chuột máy tính Logitech M238 Marvel Panther",
+    "price": 499000.0,
+    "category": "03-N004-02",
+    "status": 5,
+    "stocks": []
+  },
+  {
+    "sku": "1501960",
+    "name": "Miếng lót chuột Kingmaster X2",
+    "price": 30000.0,
+    "category": "03-N004-01",
+    "status": 4,
+    "stocks": [
+      {
+        "code": "2601",
+        "name": "Kho hàng bán Long An (Kho kiểm hàng)",
+        "quantity": 10
+      },
+      {
+        "code": "2604",
+        "name": "Kho hàng bán ở Long An chuyển ra tr bày",
+        "quantity": 1
+      },
+      {
+        "code": "2801",
+        "name": "Kho hàng bán Ninh Thuận (Kho kiểm hàng)",
+        "quantity": 4
+      },
+      {
+        "code": "2901",
+        "name": "Kho hàng bán Cà Mau (Kho kiểm hàng)",
+        "quantity": 16
+      }
+    ]
+  },
+  {
+    "sku": "1204431",
+    "name": "Chuột máy tính Logitech B100",
+    "price": 75000.0,
+    "category": "03-N004-02",
+    "status": 1,
+    "stocks": [
+      {
+        "code": "1801",
+        "name": "Kho hàng bán Đồng Tháp (Kho kiểm hàng)",
+        "quantity": 7
+      }
+    ]
+  }
+]

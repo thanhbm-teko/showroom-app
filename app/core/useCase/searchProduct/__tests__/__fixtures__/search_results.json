@@ -1,0 +1,59 @@
+[
+  {
+    "sku": "1204495",
+    "name": "Chuột máy tính Mitsumi 6603",
+    "price": 137000.0,
+    "category": "03-N004-15",
+    "status": 1,
+    "stocks": [
+      {
+        "code": "1404",
+        "name": "Kho hàng bán Vũng Tàu chuyển ra trưng bày",
+        "quantity": 1
+      },
+      {
+        "code": "1801",
+        "name": "Kho hàng bán Đồng Tháp (Kho kiểm hàng)",
+        "quantity": 15
+      }
+    ]
+  },
+  {
+    "sku": "1703162",
+    "name": "Máy tính xách tay/ Laptop MacBook Pro 2017 13.3\" MPXR2 (Bạc)",
+    "price": 33300000.0,
+    "category": "01-N004-03",
+    "status": 6,
+    "stocks": [
+      {
+        "code": "0104",
+        "name": "Kho hàng PV trưng bày 264",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "sku": "18110290",
+    "name": "Bộ vi xử lý/ CPU Intel Coffee Lake Core i9-9900K Processor (16M Cache, up to 5.0GHz)",
+    "price": 13690000.0,
+    "category": "02-N003-02-08",
+    "status": 1,
+    "stocks": [
+      {
+        "code": "3204",
+        "name": "Kho hàng bán Đắk Lắk chuyển ra tr bày",
+        "quantity": 1
+      },
+      {
+        "code": "3304",
+        "name": "Kho hàng bán Bến Tre chuyển ra tr bày",
+        "quantity": 1
+      },
+      {
+        "code": "100101",
+        "name": "Kho hàng bán ở Nguyễn Văn Linh - Đà Nẵng",
+        "quantity": 5
+      }
+    ]
+  }
+]

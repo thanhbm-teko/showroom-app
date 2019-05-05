@@ -1,0 +1,14 @@
+{
+  "id": "benefit-id-2",
+  "type": "gift",
+  "product": {
+    "sku": "1200512",
+    "name": "Bàn laptop Mlucky Win",
+    "price": 100000
+  },
+  "quantity": 2,
+  "promotionQuantity": {
+    "maxQuantity": 100,
+    "remainQuantity": 50
+  }
+}

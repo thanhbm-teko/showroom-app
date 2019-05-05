@@ -1,0 +1,144 @@
+[
+  {
+    "key": "CTKM_1",
+    "name": "Chương trình khuyến mãi 1",
+    "promotionQuantity": {
+      "maxQuantity": 100,
+      "remainQuantity": 50
+    },
+    "applyWithOther": false,
+    "condition": {
+      "type": "sku",
+      "sku": "1204495"
+    },
+    "benefit": {
+      "id": "benefit-id-1",
+      "type": "oneOf",
+      "children": [
+        {
+          "id": "benefit-id-1-1",
+          "type": "discount",
+          "value": 25000,
+          "promotionQuantity": {
+            "maxQuantity": 100,
+            "remainQuantity": 50
+          }
+        },
+        {
+          "id": "benefit-id-1-2",
+          "type": "gift",
+          "product": {
+            "sku": "1200512",
+            "name": "Bàn laptop Mlucky Win",
+            "price": 100000
+          },
+          "quantity": 2,
+          "promotionQuantity": {
+            "maxQuantity": 100,
+            "remainQuantity": 50
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "CTKM_2",
+    "name": "Chương trình khuyến mãi 2 (đồng thời)",
+    "promotionQuantity": {
+      "maxQuantity": 100,
+      "remainQuantity": 50
+    },
+    "applyWithOther": true,
+    "condition": {
+      "type": "oneOf",
+      "children": [
+        {
+          "type": "sku",
+          "sku": "1200512"
+        },
+        {
+          "type": "category",
+          "category": "03-N004",
+          "includeChildren": true
+        }
+      ]
+    },
+    "benefit": {
+      "id": "benefit-id-2",
+      "type": "discount",
+      "value": 10000,
+      "promotionQuantity": {
+        "maxQuantity": 100,
+        "remainQuantity": 50
+      }
+    }
+  },
+  {
+    "key": "CTKM_3",
+    "name": "Chương trình khuyến mãi 3",
+    "promotionQuantity": {
+      "maxQuantity": 100,
+      "remainQuantity": 50
+    },
+    "applyWithOther": false,
+    "condition": {
+      "type": "sku",
+      "sku": "1204495"
+    },
+    "benefit": {
+      "id": "benefit-id-3",
+      "type": "allOf",
+      "children": [
+        {
+          "id": "benefit-id-3-1",
+          "type": "discount",
+          "value": 15000,
+          "promotionQuantity": {
+            "maxQuantity": 100,
+            "remainQuantity": 50
+          }
+        },
+        {
+          "id": "benefit-id-3-2",
+          "type": "gift",
+          "product": {
+            "sku": "1200512",
+            "name": "Bàn laptop Mlucky Win",
+            "price": 100000
+          },
+          "quantity": 1,
+          "promotionQuantity": {
+            "maxQuantity": 100,
+            "remainQuantity": 50
+          }
+        }
+      ]
+    }
+  },
+  {
+    "key": "CTKM_4",
+    "name": "Chương trình khuyến mãi 4 (ko áp dụng cho 1204495)",
+    "promotionQuantity": {
+      "maxQuantity": 100,
+      "remainQuantity": 50
+    },
+    "applyWithOther": false,
+    "condition": {
+      "type": "sku",
+      "sku": "1200512"
+    },
+    "benefit": {
+      "id": "benefit-id-4",
+      "type": "voucher",
+      "voucher": {
+        "key": "VOUCHER_APRIL_200K",
+        "name": "Phiếu mua hàng 200K"
+      },
+      "quantity": 1,
+      "promotionQuantity": {
+        "maxQuantity": 100,
+        "remainQuantity": 50
+      }
+    }
+  }
+]

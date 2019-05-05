@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "asiaId": "A1",
+    "name": "Mock Name",
+    "phone": "0987654321",
+    "address": "123 abc",
+    "communeCode": "011901",
+    "districtCode": "0119",
+    "provinceCode": "01",
+    "scope": "Công việc",
+    "scopeCode": 1
+  },
+  {
+    "id": 2,
+    "asiaId": "A2",
+    "name": "Mock Name 2",
+    "phone": "0987654321",
+    "address": "456 def",
+    "communeCode": "",
+    "districtCode": "4808",
+    "provinceCode": "48",
+    "scope": "Công việc",
+    "scopeCode": 1
+  }
+]

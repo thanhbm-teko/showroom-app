@@ -1,0 +1,9 @@
+{
+  "id": "benefit-id-1",
+  "type": "discount",
+  "value": 25000,
+  "promotionQuantity": {
+    "maxQuantity": 100,
+    "remainQuantity": 50
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "sku": "1204495",
+  "name": "Chuột máy tính Mitsumi 6603",
+  "price": 137000.0,
+  "category": "03-N004-15",
+  "status": 5,
+  "stocks": [
+    {
+      "code": "1404",
+      "name": "Kho hàng bán Vũng Tàu chuyển ra trưng bày",
+      "quantity": 1
+    },
+    {
+      "code": "1801",
+      "name": "Kho hàng bán Đồng Tháp (Kho kiểm hàng)",
+      "quantity": 15
+    }
+  ],
+  "imageUrl": "https://img1.phongvu.vn/media/catalog/product/uploads/product/p_999/2017/06/09/999.jpg"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "benefit-id-3",
+  "children": [],
+  "promotionQuantity": {
+    "maxQuantity": 100,
+    "remainQuantity": 50
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "lib": ["es6"],
+    "noEmit": true,
+    "allowJs": true,
+    "strict": false,
+    "target": "esnext",
+    "module": "commonjs",
+    "outDir": "dist",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "jsx": "react-native",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules"]
+}
