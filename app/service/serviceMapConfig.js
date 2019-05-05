@@ -1,7 +1,7 @@
-import CustomerServiceImpl from './customer/Impl';
-import OrderServiceImpl from './order/Impl';
-import ProductServiceImpl from './product/Impl';
-import PromotionServiceImpl from './promotion/Impl';
+import CustomerServiceImpl from './customer/impl';
+import OrderServiceImpl from './order/impl';
+import ProductServiceImpl from './product/impl';
+import PromotionServiceImpl from './promotion/impl';
 
 export default {
   Customer: CustomerServiceImpl,

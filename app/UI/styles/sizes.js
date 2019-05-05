@@ -1,6 +1,6 @@
 import { Dimensions, Platform } from 'react-native';
 import { Constants } from 'expo';
-import { scale } from './Scale';
+import { scale } from './scale';
 
 const { width, height } = Dimensions.get('window');
 const softBarHeight = Dimensions.get('screen').height - Dimensions.get('window').height;

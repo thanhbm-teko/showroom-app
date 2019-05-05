@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 
-import CustomerInfoScreen from '../Screens/CustomerInfoScreen';
-import ProductSearchScreen from '../Screens/ProductSearchScreen';
+import CustomerInfoScreen from '../screens/customerInfoScreen';
+import ProductSearchScreen from '../screens/productSearchScreen';
 
 const MainStackNavigator = createStackNavigator({
   Home: ProductSearchScreen

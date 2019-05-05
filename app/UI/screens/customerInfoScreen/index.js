@@ -5,10 +5,10 @@ import Header from '../../components/header/Header';
 import CustomerTypeChooser from './CustomerTypeChooser';
 import SectionTitle from './SectionTitle';
 import CheckboxRow from './CheckboxRow';
-import InputRow from './InputRow';
-import TextInput from './InputRow/TextInput';
-import Selector from './InputRow/Selector';
-import Switcher from './InputRow/Switcher';
+import InputRow from './inputRow';
+import TextInput from './inputRow/TextInput';
+import Selector from './inputRow/Selector';
+import Switcher from './inputRow/Switcher';
 
 import ChangeTextModal from '../../components/modal/ChangeTextModal';
 

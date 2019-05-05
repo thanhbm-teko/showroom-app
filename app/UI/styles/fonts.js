@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from './Colors';
-import { scale, getLetterSpacing } from './Scale';
+import { Colors } from './colors';
+import { scale, getLetterSpacing } from './scale';
 
 export const Fonts = StyleSheet.create({
   fontGigantic: {
