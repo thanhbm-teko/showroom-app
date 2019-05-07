@@ -6,6 +6,10 @@ import Util from '../../../util';
 import PROMOTIONS from '../../promotionProgram/__tests__/__fixtures__/promotions.json';
 import BENEFIT_MULTI from './__fixtures__/benefit_multi.json';
 
+export function concatPromotionsPreview(promotions: PromotionPreview[], selects: boolean[]): PromotionPreview[] {
+  return promotions.map((p, i) => <PromotionPreview>{ ...p, selected: selects[i] });
+}
+
 export function makePromotionPreview(
   benefit: BenefitPreview,
   key: string = null,

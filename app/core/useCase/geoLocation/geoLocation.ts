@@ -1,3 +1,5 @@
+import { Location } from 'expo';
+
 export interface Location {
   code: string;
   name: string;
@@ -18,6 +20,12 @@ export interface Commune extends Location {
 export interface LocationQuery {
   name?: string;
   code?: string;
+}
+
+export interface LocationCodes {
+  province?: string;
+  district?: string;
+  commune?: string;
 }
 
 export interface GeoLocationData {
@@ -55,34 +63,28 @@ class GeoLocation {
   }
 
   getDistrict(query: LocationQuery): District {
-    let { key, value } = this.parseQuery(query);
-    for (let provinceCode in this.data.districts) {
-      let district = this.data.districts[provinceCode].find(d => d[key] === value);
-      if (district) {
-        let code = this.getGeoCodes(district.code);
-        let province = this.getProvince({ code: code.province });
-        return {
-          ...district,
-          province
-        };
-      }
+    let district = this.queryLocation(query, this.data.districts);
+    if (district) {
+      let code = this.getGeoCodes(district.code);
+      let province = this.getProvince({ code: code.province });
+      return {
+        ...district,
+        province
+      };
     }
 
     return null;
   }
 
   getCommune(query: LocationQuery): Commune {
-    let { key, value } = this.parseQuery(query);
-    for (let districtCode in this.data.communes) {
-      let commune = this.data.communes[districtCode].find(d => d[key] === value);
-      if (commune) {
-        let code = this.getGeoCodes(commune.code);
-        let district = this.getDistrict({ code: code.district });
-        return {
-          ...commune,
-          district
-        };
-      }
+    let commune = this.queryLocation(query, this.data.communes);
+    if (commune) {
+      let code = this.getGeoCodes(commune.code);
+      let district = this.getDistrict({ code: code.district });
+      return {
+        ...commune,
+        district
+      };
     }
 
     return null;
@@ -103,7 +105,19 @@ class GeoLocation {
     return { key, value };
   }
 
-  getGeoCodes(code: string): { province?: string; district?: string; commune?: string } {
+  queryLocation(query: LocationQuery, locationMap: { [code: string]: Location[] }): Location {
+    let { key, value } = this.parseQuery(query);
+    for (let code in locationMap) {
+      let location = locationMap[code].find(d => d[key] === value);
+      if (location) {
+        return location;
+      }
+    }
+
+    return null;
+  }
+
+  getGeoCodes(code: string): LocationCodes {
     if (code.length === 6) {
       return { province: code.slice(0, 2), district: code.slice(0, 4), commune: code };
     } else if (code.length === 4) {

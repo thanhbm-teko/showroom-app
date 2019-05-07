@@ -3,7 +3,13 @@ import { Benefit, BenefitType } from '../../../model/Promotion/Benefit';
 import { PromotionPreview } from '../PromotionPreview';
 import { choosePromotion, getPromotionsPreview } from '../choosePromotion';
 import { CombineBenefitPreview } from '../BenefitPreview';
-import { makePromotionPreview, makeBenefitPreview, makeOneOfBenefitPreview, makeAllOfBenefitPreview } from './testUtils';
+import {
+  makePromotionPreview,
+  makeBenefitPreview,
+  makeOneOfBenefitPreview,
+  makeAllOfBenefitPreview,
+  concatPromotionsPreview
+} from './testUtils';
 
 import PROMOTIONS from '../../promotionProgram/__tests__/__fixtures__/promotions.json';
 import BENEFIT_DISCOUNT from './__fixtures__/benefit_discount.json';
@@ -26,7 +32,7 @@ describe('choosePromotion', () => {
     });
 
     it('should select the chosen promotion', async () => {
-      promotions = [<PromotionPreview>{ ...promotion1, selected: false }, <PromotionPreview>{ ...promotion2, selected: false }];
+      promotions = concatPromotionsPreview([promotion1, promotion2], [false, false]);
 
       let res = await choosePromotion(promotions, 'key1', decisionCallbackYes);
       expect(res).toBe(ResultCode.Success);
@@ -36,7 +42,7 @@ describe('choosePromotion', () => {
     });
 
     it('should not deselect other promotions', async () => {
-      promotions = [<PromotionPreview>{ ...promotion1, selected: false }, <PromotionPreview>{ ...promotion2, selected: true }];
+      promotions = concatPromotionsPreview([promotion1, promotion2], [false, true]);
 
       let res = await choosePromotion(promotions, 'key1', decisionCallbackYes);
       expect(res).toBe(ResultCode.Success);
@@ -53,7 +59,7 @@ describe('choosePromotion', () => {
     });
 
     it('should auto select the chosen promotion when no other promotions selected', async () => {
-      promotions = [<PromotionPreview>{ ...promotion1, selected: false }, <PromotionPreview>{ ...promotion2, selected: false }];
+      promotions = concatPromotionsPreview([promotion1, promotion2], [false, false]);
 
       let res = await choosePromotion(promotions, 'key1', decisionCallbackYes);
       expect(res).toBe(ResultCode.Success);
@@ -64,10 +70,7 @@ describe('choosePromotion', () => {
 
     describe('when there are promotions selected', () => {
       beforeEach(() => {
-        promotions = [
-          <PromotionPreview>{ ...promotion1, selected: false },
-          <PromotionPreview>{ ...promotion2, selected: true }
-        ];
+        promotions = concatPromotionsPreview([promotion1, promotion2], [false, true]);
       });
 
       it('should notice user that other promotions might lost', async () => {
@@ -98,7 +101,7 @@ describe('choosePromotion', () => {
     it('should keep the current promotions and return failure', async () => {
       promotion1 = makePromotionPreview(giftBenefit, 'key1', true);
       promotion2 = makePromotionPreview(discountBenefit, 'key2', false);
-      promotions = [<PromotionPreview>{ ...promotion1, selected: false }, <PromotionPreview>{ ...promotion2, selected: false }];
+      promotions = concatPromotionsPreview([promotion1, promotion2], [false, false]);
 
       let res = await choosePromotion(promotions, 'key3', decisionCallbackYes);
       expect(res).toBe(ResultCode.Failure);
