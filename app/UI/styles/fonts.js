@@ -1,27 +1,27 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from './colors';
-import { scale, getLetterSpacing } from './scale';
+import { colors } from './colors';
+import { scale, getLetterSpacing } from './scaling';
 
-export const Fonts = StyleSheet.create({
+export const fonts = StyleSheet.create({
   fontGigantic: {
     fontFamily: 'sale-text-medium',
     fontSize: scale(60),
     letterSpacing: getLetterSpacing(-3),
-    color: Colors.brightOrange
+    color: colors.brightOrange
   },
   fontBig: {
     fontFamily: 'sale-text-bold',
     fontSize: scale(24),
     letterSpacing: getLetterSpacing(-0.6),
     lineHeight: scale(32),
-    color: Colors.black
+    color: colors.black
   },
   medium: {
     fontFamily: 'sale-text-semibold',
     fontSize: scale(20),
     letterSpacing: getLetterSpacing(-0.8),
     lineHeight: scale(22),
-    color: Colors.darkGray
+    color: colors.darkGray
   },
   heading1: {
     fontFamily: 'sale-text-semibold',
@@ -29,7 +29,7 @@ export const Fonts = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.4),
     lineHeight: scale(20),
     textAlignVertical: 'center',
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   },
   typeFace: {
     fontFamily: 'sale-text-medium',
@@ -37,7 +37,7 @@ export const Fonts = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.4),
     lineHeight: scale(20),
     textAlignVertical: 'center',
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   },
   heading2: {
     fontFamily: 'sale-text-semibold',
@@ -45,7 +45,7 @@ export const Fonts = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.41),
     lineHeight: scale(22),
     textAlignVertical: 'center',
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   },
   subheading: {
     fontFamily: 'sale-text-regular',
@@ -53,7 +53,7 @@ export const Fonts = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.1),
     lineHeight: scale(18),
     textAlignVertical: 'center',
-    color: Colors.darkGray
+    color: colors.darkGray
   },
   body1: {
     fontFamily: 'sale-text-medium',
@@ -61,7 +61,7 @@ export const Fonts = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.24),
     lineHeight: scale(20),
     textAlignVertical: 'center',
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   },
   body1Regular: {
     fontFamily: 'sale-text-regular',
@@ -69,7 +69,7 @@ export const Fonts = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.24),
     lineHeight: scale(20),
     textAlignVertical: 'center',
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   },
   original_price: {
     textDecorationLine: 'line-through',
@@ -78,7 +78,7 @@ export const Fonts = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.2),
     lineHeight: scale(18),
     textAlignVertical: 'center',
-    color: Colors.steel
+    color: colors.steel
   },
   body2: {
     fontFamily: 'sale-text-regular',
@@ -87,7 +87,7 @@ export const Fonts = StyleSheet.create({
     justifyContent: 'center',
     textAlignVertical: 'center',
     lineHeight: scale(19),
-    color: Colors.black
+    color: colors.black
   },
   body3: {
     fontFamily: 'sale-text-regular',
@@ -95,7 +95,7 @@ export const Fonts = StyleSheet.create({
     lineHeight: scale(14),
     letterSpacing: getLetterSpacing(-0.1),
     textAlignVertical: 'center',
-    color: Colors.darkGray
+    color: colors.darkGray
   },
   body3_mg_top: {
     fontFamily: 'sale-text-regular',
@@ -104,7 +104,7 @@ export const Fonts = StyleSheet.create({
     marginTop: scale(15),
     letterSpacing: getLetterSpacing(-0.1),
     textAlignVertical: 'center',
-    color: Colors.darkGray
+    color: colors.darkGray
   },
   botton_1: {
     letterSpacing: getLetterSpacing(-0.24),
@@ -123,7 +123,7 @@ export const Fonts = StyleSheet.create({
     justifyContent: 'center',
     textAlignVertical: 'center',
     lineHeight: scale(20),
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   },
   body5: {
     fontFamily: 'sale-text-semibold',
@@ -140,7 +140,7 @@ export const Fonts = StyleSheet.create({
     lineHeight: scale(20),
     letterSpacing: getLetterSpacing(-0.24),
     textAlignVertical: 'center',
-    color: Colors.steel
+    color: colors.steel
   },
   footnote: {
     fontFamily: 'sale-text-regular',
@@ -148,7 +148,7 @@ export const Fonts = StyleSheet.create({
     lineHeight: scale(16),
     letterSpacing: getLetterSpacing(-0.1),
     textAlignVertical: 'center',
-    color: Colors.darkGray
+    color: colors.darkGray
   },
   footnoteRed: {
     fontFamily: 'sale-text-regular',
@@ -156,7 +156,7 @@ export const Fonts = StyleSheet.create({
     lineHeight: scale(16),
     letterSpacing: getLetterSpacing(-0.1),
     textAlignVertical: 'center',
-    color: Colors.brightOrange
+    color: colors.brightOrange
   },
   display: {
     fontFamily: 'sale-text-semibold',
@@ -165,7 +165,7 @@ export const Fonts = StyleSheet.create({
     justifyContent: 'center',
     textAlignVertical: 'center',
     lineHeight: scale(22),
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   },
   caption: {
     fontFamily: 'sale-text-medium',
@@ -174,13 +174,13 @@ export const Fonts = StyleSheet.create({
     justifyContent: 'center',
     textAlignVertical: 'center',
     lineHeight: scale(18),
-    color: Colors.gray
+    color: colors.gray
   },
   medium11: {
     fontFamily: 'sale-text-medium',
     fontSize: scale(11),
     lineHeight: scale(18),
     letterSpacing: getLetterSpacing(-0.2),
-    color: Colors.brightOrange
+    color: colors.brightOrange
   }
 });

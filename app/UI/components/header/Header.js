@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, StyleSheet } from 'react-native';
 
-import { Colors } from '../../styles/colors';
-import { Sizes } from '../../styles/sizes';
-import { scale } from '../../styles/scale';
+import { colors, screen, scale } from '../../styles';
 
 export class Header extends Component {
   constructor(props) {
@@ -53,7 +51,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   title: '',
-  color: Colors.darkGreyBlue
+  color: colors.darkGreyBlue
 };
 
 const styles = StyleSheet.create({
@@ -67,12 +65,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: Sizes.header.headerHeight,
+    height: screen.header.headerHeight,
     padding: 0,
     alignSelf: 'stretch'
   },
   statusBar: {
-    height: Sizes.header.statusBarHeight
+    height: screen.header.statusBarHeight
   },
   iconSection: {
     backgroundColor: 'transparent',
@@ -91,7 +89,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: 'white',
-    fontSize: Sizes.header.textSize,
+    fontSize: screen.header.textSize,
     lineHeight: scale(22),
     fontFamily: 'sale-text-semibold',
     textAlign: 'center',

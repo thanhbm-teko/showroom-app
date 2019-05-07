@@ -2,8 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-import { Colors } from '../../../styles/colors';
-import { scale, getLetterSpacing } from '../../../styles/scale';
+import { colors, scale, getLetterSpacing } from '../../../styles';
 
 export default class Selector extends React.Component {
   render() {
@@ -12,7 +11,7 @@ export default class Selector extends React.Component {
       <TouchableOpacity style={styles.container}>
         <Text style={styles.text}>{value}</Text>
         <View style={styles.icon}>
-          <FontAwesome name="chevron-right" size={scale(14)} color={Colors.cloudyBlue} />
+          <FontAwesome name="chevron-right" size={scale(14)} color={colors.cloudyBlue} />
         </View>
       </TouchableOpacity>
     );
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.24),
     lineHeight: scale(20),
     textAlignVertical: 'center',
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   },
   icon: {
     justifyContent: 'center',

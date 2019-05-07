@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-import { Colors } from '../../../styles/colors';
-import { scale, getLetterSpacing } from '../../../styles/scale';
+import { colors, scale, getLetterSpacing } from '../../../styles';
 
 export default class InputRow extends React.Component {
   render() {
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
   },
   bottomSeparator: {
     height: 1,
-    backgroundColor: Colors.paleGrey,
+    backgroundColor: colors.paleGrey,
     paddingLeft: scale(12)
   },
   text: {
@@ -48,6 +47,6 @@ const styles = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.24),
     lineHeight: scale(20),
     textAlignVertical: 'center',
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   }
 });

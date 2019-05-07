@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Switch, View } from 'react-native';
-import { Colors } from '../../../styles/colors';
+import { colors } from '../../../styles';
 
 export default class Switcher extends React.Component {
   render() {
     let { value } = this.props;
     return (
       <View style={styles.container}>
-        <Switch value={value} trackColor={{ true: Colors.reddishOrange, false: Colors.cloudyBlue }} thumbColor="white" />
+        <Switch value={value} trackColor={{ true: colors.reddishOrange, false: colors.cloudyBlue }} thumbColor="white" />
       </View>
     );
   }

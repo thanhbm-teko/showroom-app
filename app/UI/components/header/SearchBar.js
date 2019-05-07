@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { Animated, StyleSheet, TouchableOpacity, View, TextInput, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import { Fonts } from '../../styles/fonts';
-import { Colors } from '../../styles/colors';
-import { Sizes } from '../../styles/sizes';
-import { scale } from '../../styles/scale';
+import { fonts, colors, screen, scale } from '../../styles';
 
 export default class SearchBar extends Component {
   state = {
@@ -17,7 +14,7 @@ export default class SearchBar extends Component {
   componentDidMount() {
     this.setState({ width: new Animated.Value(this.props.initialSearchWidth) }, () => {
       Animated.timing(this.state.width, {
-        toValue: Sizes.width - Sizes.iconSize.medium - Sizes.distance.smaller * 4 - scale(26),
+        toValue: screen.width - screen.iconSize.medium - screen.distance.smaller * 4 - scale(26),
         duration: 500
       }).start(() => {
         this.textInput.focus();
@@ -49,26 +46,26 @@ export default class SearchBar extends Component {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            padding: Sizes.distance.smaller
+            padding: screen.distance.smaller
           }}
           onPress={this.onBack}
         >
-          <Icon name="arrow-left" type="material-community" size={Sizes.iconSize.medium} color="white" />
+          <Icon name="arrow-left" type="material-community" size={screen.iconSize.medium} color="white" />
         </TouchableOpacity>
         <View style={{ flex: 1 }}>
           <Animated.View style={{ width: this.state.width }}>
             <View
               style={{
-                paddingHorizontal: Sizes.distance.default,
+                paddingHorizontal: screen.distance.default,
                 backgroundColor: 'white',
                 flexDirection: 'row',
                 alignItems: 'center',
                 borderRadius: scale(8)
               }}
             >
-              <Icon name="search" size={scale(20)} color={Colors.reddishOrange} />
+              <Icon name="search" size={scale(20)} color={colors.reddishOrange} />
               <TextInput
-                style={[Fonts.body1Regular, { flex: 1, paddingLeft: scale(4), height: scale(32) }]}
+                style={[fonts.body1Regular, { flex: 1, paddingLeft: scale(4), height: scale(32) }]}
                 underlineColorAndroid={'transparent'}
                 returnKeyType={'search'}
                 autoCorrect={false}
@@ -79,13 +76,13 @@ export default class SearchBar extends Component {
                 ref={input => {
                   this.textInput = input;
                 }}
-                selectionColor={Colors.reddishOrange}
+                selectionColor={colors.reddishOrange}
               />
               <Icon
                 type="material-community"
                 name="close-circle"
                 size={scale(18)}
-                color={Colors.cloudyBlue}
+                color={colors.cloudyBlue}
                 onPress={this.clearSearchText}
               />
             </View>
@@ -104,7 +101,7 @@ export default class SearchBar extends Component {
   renderCancelText = () => {
     return (
       <TouchableOpacity onPress={this.onBlur}>
-        <Text style={[Fonts.body1Regular, { color: 'white', padding: Sizes.distance.smaller }]}>Hủy</Text>
+        <Text style={[fonts.body1Regular, { color: 'white', padding: screen.distance.smaller }]}>Hủy</Text>
       </TouchableOpacity>
     );
   };
@@ -114,7 +111,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: Colors.darkGreyBlue,
-    paddingTop: Sizes.header.statusBarHeight
+    backgroundColor: colors.darkGreyBlue,
+    paddingTop: screen.header.statusBarHeight
   }
 });

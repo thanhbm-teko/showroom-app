@@ -2,34 +2,32 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, StyleSheet } from 'react-native';
 
-import { Fonts } from '../../styles/fonts';
-import { Colors } from '../../styles/colors';
-import { scale } from '../../styles/scale';
+import { fonts, colors, scale } from '../../styles';
 
 const labelStylesConfigs = {
   normal: {
-    text: { color: Colors.darkGray },
-    container: { backgroundColor: Colors.paleGrey, borderColor: 'rgba(23,127,255,0.2)' }
+    text: { color: colors.darkGray },
+    container: { backgroundColor: colors.paleGrey, borderColor: 'rgba(23,127,255,0.2)' }
   },
   success: {
-    text: { color: Colors.clearBlue },
-    container: { backgroundColor: Colors.iceBlue, borderColor: 'rgba(23,127,255,0.2)' }
+    text: { color: colors.clearBlue },
+    container: { backgroundColor: colors.iceBlue, borderColor: 'rgba(23,127,255,0.2)' }
   },
   error: {
-    text: { color: Colors.primary },
+    text: { color: colors.primary },
     container: { backgroundColor: '#ffefed' }
   },
   info: {
-    text: { color: Colors.frogGreen },
+    text: { color: colors.frogGreen },
     container: { backgroundColor: '#e1f8de', borderColor: 'rgba(83,195,5,0.2)' }
   },
   orange: {
-    text: { color: Colors.pumpkinOrange },
-    container: { backgroundColor: Colors.veryLightPinkTwo, borderColor: Colors.pumpkinOrangeblur }
+    text: { color: colors.pumpkinOrange },
+    container: { backgroundColor: colors.veryLightPinkTwo, borderColor: colors.pumpkinOrangeblur }
   },
   quantity: {
-    text: { color: Colors.steel },
-    container: { backgroundColor: 'white', borderColor: Colors.paleLilac }
+    text: { color: colors.steel },
+    container: { backgroundColor: 'white', borderColor: colors.paleLilac }
   }
 };
 
@@ -43,7 +41,7 @@ class ColoredTextLabel extends PureComponent {
 
     return (
       <View style={[styles.container, labelStyle.container, style]}>
-        <Text style={[Fonts.caption, labelStyle.text, textStyle]}>{text}</Text>
+        <Text style={[fonts.caption, labelStyle.text, textStyle]}>{text}</Text>
       </View>
     );
   }

@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-import { Colors } from '../../styles/colors';
-import { scale, getLetterSpacing } from '../../styles/scale';
+import { colors, scale, getLetterSpacing } from '../../styles';
 
 export default class SectionTitle extends React.Component {
   render() {
@@ -26,6 +25,6 @@ const styles = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.08),
     lineHeight: scale(18),
     textAlignVertical: 'center',
-    color: Colors.steel
+    color: colors.steel
   }
 });

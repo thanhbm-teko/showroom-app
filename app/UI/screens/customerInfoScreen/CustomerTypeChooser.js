@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-import { Colors } from '../../styles/colors';
-import { scale, getLetterSpacing } from '../../styles/scale';
+import { colors, scale, getLetterSpacing } from '../../styles';
 
 export const CUSTOMER_TYPE = {
   INDIVIDUAL: 0,
@@ -57,13 +56,13 @@ const styles = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.24),
     lineHeight: scale(20),
     textAlignVertical: 'center',
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   },
   hightlightBlock: {
     borderBottomWidth: scale(2),
-    borderBottomColor: Colors.reddishOrange
+    borderBottomColor: colors.reddishOrange
   },
   hightlightText: {
-    color: Colors.reddishOrange
+    color: colors.reddishOrange
   }
 });

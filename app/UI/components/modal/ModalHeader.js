@@ -2,9 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { Sizes } from '../../styles/sizes';
-import { Colors } from '../../styles/colors';
-import { scale } from '../../styles/scale';
+import { screen, colors, scale } from '../../styles';
 
 export default class ModalHeader extends PureComponent {
   renderHeaderButton = button => {
@@ -63,11 +61,11 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: scale(12),
     borderTopRightRadius: scale(12),
     flexDirection: 'row',
-    paddingHorizontal: Sizes.padding.smaller,
+    paddingHorizontal: screen.padding.smaller,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
-    borderColor: Colors.lightGray
+    borderColor: colors.lightGray
   },
   titleContainer: {
     height: '100%',
@@ -76,9 +74,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   title: {
-    fontSize: Sizes.s15,
+    fontSize: screen.s15,
     fontWeight: 'bold',
-    color: Colors.black
+    color: colors.black
   },
   left: {
     backgroundColor: 'transparent',
@@ -95,11 +93,11 @@ const styles = StyleSheet.create({
   },
   button: {
     height: '100%',
-    paddingHorizontal: Sizes.padding.smaller,
+    paddingHorizontal: screen.padding.smaller,
     justifyContent: 'center'
   },
   buttonTitle: {
-    fontSize: Sizes.s15,
-    color: Colors.secondary
+    fontSize: screen.s15,
+    color: colors.secondary
   }
 });

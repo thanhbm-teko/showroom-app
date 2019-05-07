@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import { Fonts } from '../../styles/fonts';
-import { Colors } from '../../styles/colors';
-import { Sizes } from '../../styles/sizes';
-import { scale } from '../../styles/scale';
+import { fonts, screen, colors, scale } from '../../styles';
 
 import Util from '../../../core/util/index.ts';
 import ColoredTextLabel from '../../components/label/ColoredTextLabel';
@@ -45,7 +42,7 @@ export default class SearchingItem extends Component {
                     <Icon type="font-awesome" name="gift" color="#e60000" size={scale(15)} />
                   </View>
                 ) : null}
-                <Text style={Fonts.body1} numberOfLines={3}>
+                <Text style={fonts.body1} numberOfLines={3}>
                   {hasGifts ? '     ' : ''}
                   {item.name}
                 </Text>
@@ -58,7 +55,7 @@ export default class SearchingItem extends Component {
               </View>
             </View>
           </View>
-          <View style={{ flexDirection: 'row', marginTop: Sizes.distance.smaller }}>
+          <View style={{ flexDirection: 'row', marginTop: screen.distance.smaller }}>
             <ColoredTextLabel text={`#${item.sku}`} type="success" />
             <View style={{ marginLeft: scale(8) }}>
               <ColoredTextLabel text={`Trạng thái: ${item.status}`} type="info" />
@@ -82,7 +79,7 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'lightgray',
     backgroundColor: 'white',
-    padding: Sizes.padding.default
+    padding: screen.padding.default
   },
   row: {
     flex: 1,
@@ -99,16 +96,16 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end'
   },
   infoText: {
-    fontSize: Sizes.commonRatio.fontSize
+    fontSize: screen.commonRatio.fontSize
   },
   priceText: {
     fontSize: scale(17),
-    color: Colors.brightOrange,
+    color: colors.brightOrange,
     fontFamily: 'sale-text-semibold',
     textAlign: 'right'
   },
   priceTextOriginal: {
-    fontSize: Sizes.commonRatio.fontSize,
+    fontSize: screen.commonRatio.fontSize,
     //fontWeight: '600',
     color: 'gray',
     textAlign: 'right',

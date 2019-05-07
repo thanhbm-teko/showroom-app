@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TextInput, View, StyleSheet } from 'react-native';
 
-import { scale, getLetterSpacing } from '../../styles/scale';
-import { Colors } from '../../styles/colors';
 import ModalHeader from '../modal/ModalHeader';
 import KeyboardModal from '../modal/KeyboardModal';
+import { colors, scale, getLetterSpacing } from '../../styles';
 
 /**
  * @augments {Component<{  title:string,  placeholder:string,  value:number,  unitText:string,  visible:boolean,  onSubmit:Function,  onClose:Function.isRequired>}
@@ -64,10 +63,10 @@ class ChangeTextModal extends Component {
             <TextInput
               keyboardType={keyboardType}
               placeholder={placeholder}
-              placeholderTextColor={Colors.darkGray}
+              placeholderTextColor={colors.darkGray}
               ref={this.onHandleInputRef}
               value={this.state.value}
-              selectionColor={Colors.primary}
+              selectionColor={colors.primary}
               underlineColorAndroid={'transparent'}
               style={[styles.input, { height }, inputStyle]}
               onChangeText={this.onChangeValueText}
@@ -109,7 +108,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(16)
   },
   input: {
-    color: Colors.black,
+    color: colors.black,
     fontSize: scale(14),
     fontFamily: 'sale-text-regular',
     lineHeight: scale(19),

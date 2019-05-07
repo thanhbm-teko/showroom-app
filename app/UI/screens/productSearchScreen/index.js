@@ -6,8 +6,7 @@ import SearchBar from '../../components/header/SearchBar';
 import HeaderIcon from '../../components/header/HeaderIcon';
 import SearchingItem from './SearchingItem';
 
-import { Colors } from '../../styles/colors';
-import { Sizes } from '../../styles/sizes';
+import { screen, colors } from '../../styles';
 
 import * as searchProductActions from '../../reduxConnector/searchProduct/actions';
 
@@ -20,9 +19,9 @@ export class ProductSearchScreen extends React.Component {
     return (
       <View style={styles.container}>
         <SearchBar
-          initialSearchWidth={Sizes.width * 0.6}
+          initialSearchWidth={screen.width * 0.6}
           onBack={this.onBackPressed}
-          rightButton={<HeaderIcon type="material" name="filter-list" size={Sizes.iconSize.medium} onPressIcon={() => {}} />}
+          rightButton={<HeaderIcon type="material" name="filter-list" size={screen.iconSize.medium} onPressIcon={() => {}} />}
           onSearchTextChange={this.onSearchTextChange}
         />
         <View style={{ flexDirection: 'column', flex: 1 }}>
@@ -92,6 +91,6 @@ export default connect(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.paleGrey
+    backgroundColor: colors.paleGrey
   }
 });

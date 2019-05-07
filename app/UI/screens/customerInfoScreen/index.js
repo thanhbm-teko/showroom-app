@@ -12,8 +12,7 @@ import Switcher from './inputRow/Switcher';
 
 import ChangeTextModal from '../../components/modal/ChangeTextModal';
 
-import { Colors } from '../../styles/colors';
-import { scale, getLetterSpacing } from '../../styles/scale';
+import { colors, scale, getLetterSpacing } from '../../styles';
 
 export default class CustomerInfoScreen extends React.Component {
   static navigationOptions = {
@@ -214,7 +213,7 @@ export default class CustomerInfoScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.paleGrey
+    backgroundColor: colors.paleGrey
   },
   separator: {
     height: scale(10)
@@ -223,10 +222,10 @@ const styles = StyleSheet.create({
     padding: scale(12),
     backgroundColor: 'white',
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderColor: Colors.paleGrey
+    borderColor: colors.paleGrey
   },
   button: {
-    backgroundColor: Colors.reddishOrange,
+    backgroundColor: colors.reddishOrange,
     height: scale(48),
     borderRadius: scale(8),
     justifyContent: 'center',

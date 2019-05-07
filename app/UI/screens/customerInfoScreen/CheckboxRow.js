@@ -2,8 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { Colors } from '../../styles/colors';
-import { scale, getLetterSpacing } from '../../styles/scale';
+import { colors, scale, getLetterSpacing } from '../../styles';
 
 export default class CheckboxRow extends React.Component {
   render() {
@@ -14,7 +13,7 @@ export default class CheckboxRow extends React.Component {
           <MaterialCommunityIcons
             name={value ? 'checkbox-marked' : 'checkbox-blank-outline'}
             size={scale(20)}
-            color={value ? Colors.reddishOrange : Colors.cloudyBlue}
+            color={value ? colors.reddishOrange : colors.cloudyBlue}
           />
         </TouchableOpacity>
         <View style={styles.content}>
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
   },
   bottomSeparator: {
     height: 1,
-    backgroundColor: Colors.paleGrey
+    backgroundColor: colors.paleGrey
   },
   text: {
     fontFamily: 'sale-text-regular',
@@ -57,6 +56,6 @@ const styles = StyleSheet.create({
     letterSpacing: getLetterSpacing(-0.24),
     lineHeight: scale(20),
     textAlignVertical: 'center',
-    color: Colors.darkGreyBlue
+    color: colors.darkGreyBlue
   }
 });

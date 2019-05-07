@@ -1,6 +1,6 @@
 import { Dimensions, Platform } from 'react-native';
 import { Constants } from 'expo';
-import { scale } from './scale';
+import { scale } from './scaling';
 
 const { width, height } = Dimensions.get('window');
 const softBarHeight = Dimensions.get('screen').height - Dimensions.get('window').height;
@@ -9,29 +9,26 @@ const headerHeight = Platform.OS === 'ios' ? scale(44) : scale(56);
 const base_resolution = Platform.OS === 'ios' ? 375 : 360; // screen width of iphone 6 - Nexus 5X
 const real_resolution = width;
 
-export const Sizes = {
+const distance = {
+  tiny: scale(5),
+  default: scale(8),
+  smaller: scale(12),
+  small: scale(16),
+  medium: scale(24),
+  large: scale(32)
+};
+
+export const screen = {
   width,
   height,
   softBarHeight,
+  isSmallDevice: width < 375,
   isLandscape: width > height,
   s15: scale(15),
   s20: scale(15),
-  padding: {
-    tiny: scale(5),
-    default: scale(8),
-    smaller: scale(12),
-    small: scale(16),
-    medium: scale(24),
-    large: scale(32)
-  },
-  margin: {
-    tiny: scale(5),
-    default: scale(8),
-    smaller: scale(12),
-    small: scale(16),
-    medium: scale(24),
-    large: scale(32)
-  },
+  distance,
+  padding: distance,
+  margin: distance,
   button: {
     height: scale(44)
   },
@@ -82,13 +79,5 @@ export const Sizes = {
     emptyCartImageHeight: width / 3,
     imageSizeInSearch: scale(50)
   },
-  fontScale: real_resolution / base_resolution,
-  distance: {
-    tiny: scale(5),
-    default: scale(8),
-    smaller: scale(12),
-    small: scale(16),
-    medium: scale(24),
-    large: scale(32)
-  }
+  fontScale: real_resolution / base_resolution
 };

@@ -10,4 +10,4 @@ const verticalScale = size => Math.floor((height / guidelineBaseHeight) * size);
 const moderateScale = (size, factor = 0.5) => Math.floor(size + (scale(size) - size) * factor);
 const getLetterSpacing = value => (Platform.OS === 'ios' ? value : 0);
 
-export { scale, verticalScale, moderateScale, getLetterSpacing };
+export const scaling = { scale, verticalScale, moderateScale, getLetterSpacing };

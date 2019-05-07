@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { View, TouchableWithoutFeedback, Modal, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 
-import { Colors } from '../../styles/colors';
+import { colors } from '../../styles';
 
 class KeyboardModal extends PureComponent {
   onRequestClose = () => {
@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     height: '100%',
-    backgroundColor: Colors.black60
+    backgroundColor: colors.black60
   }
 });

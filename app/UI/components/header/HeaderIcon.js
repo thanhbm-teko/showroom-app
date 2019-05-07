@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import { Sizes } from '../../styles/sizes';
-import { scale } from '../../styles/scale';
+import { screen, scale } from '../../styles';
 
 export default class HeaderIcon extends PureComponent {
   render() {
@@ -33,7 +32,7 @@ HeaderIcon.defaultProps = {
   color: 'white',
   accessibilityLabel: '',
   onPress: () => null,
-  size: Sizes.iconSize.default
+  size: screen.iconSize.default
 };
 
 const styles = StyleSheet.create({
