@@ -137,19 +137,16 @@ class GeoLocation {
     let commune = this.getCommune({ code: communeCode });
     if (commune) {
       addrs.push(commune.name);
-      addrs.push(commune.district.name);
-      addrs.push(commune.district.province.name);
-    } else {
-      let district = this.getDistrict({ code: districtCode });
-      if (district) {
-        addrs.push(district.name);
-        addrs.push(district.province.name);
-      } else {
-        let province = this.getProvince({ code: provinceCode });
-        if (province) {
-          addrs.push(province.name);
-        }
-      }
+      districtCode = commune.district.code;
+    }
+    let district = this.getDistrict({ code: districtCode });
+    if (district) {
+      addrs.push(district.name);
+      provinceCode = district.province.code;
+    }
+    let province = this.getProvince({ code: provinceCode });
+    if (province) {
+      addrs.push(province.name);
     }
 
     return addrs.join(', ');
