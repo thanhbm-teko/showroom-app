@@ -1,5 +1,5 @@
 import { ResultCode } from '../../../model/ResultCode';
-import { ProductDetailsData, getInitialDetailData, getProductDetail } from '../productDetail';
+import { ProductDetailsData, getInitialDetailData, fetchProductDetail, getProductDetail } from '../productDetail';
 import ServiceLocator from '../../../service/serviceLocator';
 import { ProductDetailResult } from '../../../service/product/interface';
 
@@ -10,13 +10,13 @@ let mockGetDetailFailureNoResult = async () => <ProductDetailResult>{ code: Resu
 let detailData: ProductDetailsData = null;
 let newDetailData: ProductDetailsData = null;
 
-describe('getProductDetail', () => {
+describe('fetchProductDetail', () => {
   describe('when call success with result', () => {
     beforeAll(async () => {
       Date.now = jest.fn(() => 123456789);
       ServiceLocator.getProductService().getDetail = jest.fn(mockGetDetailSuccessWResult);
       detailData = getInitialDetailData();
-      newDetailData = await getProductDetail(detailData, '1204495');
+      newDetailData = await fetchProductDetail(detailData, '1204495');
     });
 
     it('should call ProductService.getDetail', () => {
@@ -33,7 +33,7 @@ describe('getProductDetail', () => {
       it('should keep the existing data', async () => {
         Date.now = jest.fn(() => 987654321);
         ServiceLocator.getProductService().getDetail = jest.fn(mockGetDetailFailureNoResult);
-        newDetailData = await getProductDetail(newDetailData, '1204495');
+        newDetailData = await fetchProductDetail(newDetailData, '1204495');
 
         expect(ServiceLocator.getProductService().getDetail).toBeCalledWith('1204495');
         expect(newDetailData.lastResultCode).toBe(ResultCode.Failure);
@@ -48,7 +48,7 @@ describe('getProductDetail', () => {
       Date.now = jest.fn(() => 123456789);
       ServiceLocator.getProductService().getDetail = jest.fn(mockGetDetailFailureNoResult);
       detailData = getInitialDetailData();
-      newDetailData = await getProductDetail(detailData, '1204495');
+      newDetailData = await fetchProductDetail(detailData, '1204495');
     });
 
     it('should call ProductService.getDetail', () => {
@@ -58,6 +58,24 @@ describe('getProductDetail', () => {
     it('should update the result data', () => {
       expect(newDetailData.lastResultCode).toBe(ResultCode.Failure);
       expect(newDetailData.skus['1204495']).toBe(undefined);
+    });
+  });
+});
+
+describe('getProductDetail', () => {
+  describe('when call', () => {
+    it('should return null when data is not ready', () => {
+      detailData = getInitialDetailData();
+      let product = getProductDetail(detailData, '1204495');
+      expect(product).toBeNull();
+    });
+
+    it('should return data when product is fetched already', async () => {
+      ServiceLocator.getProductService().getDetail = jest.fn(mockGetDetailSuccessWResult);
+      detailData = getInitialDetailData();
+      newDetailData = await fetchProductDetail(detailData, '1204495');
+      let product = getProductDetail(newDetailData, '1204495');
+      expect(product).toEqual(PRODUCT);
     });
   });
 });

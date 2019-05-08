@@ -4,7 +4,7 @@ import { Benefit } from '../../../model/Promotion/Benefit';
 import { getPromotionApplyResult } from '../choosePromotion';
 import { makePromotionPreview, makeBenefitPreview, makeAllOfBenefitPreview, makeOneOfBenefitPreview } from './testUtils';
 
-import PRODUCT from '../../getProductDetail/__tests__/__fixtures__/product.json';
+import PRODUCT from '../../productDetail/__tests__/__fixtures__/product.json';
 import BENEFIT_DISCOUNT from './__fixtures__/benefit_discount.json';
 import BENEFIT_VOUCHER from './__fixtures__/benefit_voucher.json';
 import BENEFIT_GIFT from './__fixtures__/benefit_gift.json';

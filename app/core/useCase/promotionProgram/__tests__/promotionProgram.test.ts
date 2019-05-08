@@ -4,7 +4,7 @@ import { ResultCode } from '../../../model/ResultCode';
 import { PromotionData, getInitialPromotionData, fetchPromotions, getPromotionsForProduct } from '../promotionProgram';
 
 import PROMOTIONS from './__fixtures__/promotions.json';
-import PRODUCT from '../../getProductDetail/__tests__/__fixtures__/product.json';
+import PRODUCT from '../../productDetail/__tests__/__fixtures__/product.json';
 
 let mockApiSuccessWResults = async () => <PromotionListResult>{ code: ResultCode.Success, data: <unknown>PROMOTIONS };
 let mockApiSuccessNoResults = async () => <PromotionListResult>{ code: ResultCode.Success, data: [] };

@@ -1,7 +1,7 @@
 import { ResultCode } from '../../model/ResultCode';
 import { searchProduct, ProductSearchData, getInitialSearchData } from '../searchProduct/searchProduct';
 import ServiceLocator from '../../service/serviceLocator';
-import { ProductDetailsData, getInitialDetailData, getProductDetail } from '../getProductDetail/productDetail';
+import { ProductDetailsData, getInitialDetailData, fetchProductDetail } from '../productDetail/productDetail';
 import {
   fetchPromotions,
   getInitialPromotionData,
@@ -22,7 +22,7 @@ import { ProductSearchResult, ProductDetailResult } from '../../service/product/
 import { PromotionListResult } from '../../service/promotion/interface';
 
 import SEARCH_RESULTS from '../searchProduct/__tests__/__fixtures__/search_results.json';
-import PRODUCT from '../getProductDetail/__tests__/__fixtures__/product.json';
+import PRODUCT from '../productDetail/__tests__/__fixtures__/product.json';
 import PROMOTIONS from '../promotionProgram/__tests__/__fixtures__/promotions.json';
 
 describe('Add product to cart flow', () => {
@@ -55,7 +55,7 @@ describe('Add product to cart flow', () => {
 
   it('then get product detail should return result', async () => {
     let sku = searchData.results[0].sku;
-    detailData = await getProductDetail(detailData, sku);
+    detailData = await fetchProductDetail(detailData, sku);
     product = detailData.skus[sku].detail;
     expect(detailData.lastResultCode).toBe(ResultCode.Success);
     expect(product).toEqual(PRODUCT);

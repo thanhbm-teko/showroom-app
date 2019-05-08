@@ -3,6 +3,8 @@ import { View, StyleSheet, Text, ScrollView, TouchableOpacity, BackHandler } fro
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
+import * as useCaseCore from '../../../core/useCase/productDetail/productDetail.ts';
+
 import Button from '../../components/button/Button';
 import ImageWrapper from '../../components/ImageWrapper';
 import ColoredTextLabel from '../../components/label/ColoredTextLabel';
@@ -11,6 +13,8 @@ import ProductSpecTable from './ProductSpecTable';
 import StockInfo from './StockInfo';
 
 import { fonts, screen, colors, scale } from '../../styles';
+import * as productDetailActions from '../../reduxConnector/productDetail/actions';
+import * as util from '../../util';
 
 export class ProductDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -18,6 +22,7 @@ export class ProductDetailScreen extends Component {
   });
 
   componentDidMount() {
+    this.props.fetchProductDetail('1200512');
     BackHandler.addEventListener('hardwareBackPress', this.onBackPressed);
   }
 
@@ -31,6 +36,7 @@ export class ProductDetailScreen extends Component {
   };
 
   render() {
+    let { product } = this.props;
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -72,7 +78,7 @@ export class ProductDetailScreen extends Component {
             />
           </View> */}
           <ProductSpecTable
-            description={'Mô tả'}
+            description={util.valueOrPlaceholder(product, 'description')}
             specifications={[{ label: 'Thông số 1', value: '100' }, { label: 'Thông số 2', value: '200' }]}
             isLoading={false}
           />
@@ -116,14 +122,15 @@ export class ProductDetailScreen extends Component {
   };
 
   renderProductGeneralInfo() {
+    let { product } = this.props;
     return (
       <View style={styles.infoSection}>
-        <Text style={[fonts.subheading, { color: colors.clearBlue }]}>SKU: 123456</Text>
-        <Text style={fonts.display}>Tên sản phẩm</Text>
+        <Text style={[fonts.subheading, { color: colors.clearBlue }]}>SKU: {util.valueOrPlaceholder(product, 'sku')}</Text>
+        <Text style={fonts.display}>{util.valueOrPlaceholder(product, 'name')}</Text>
         <View style={{ flexDirection: 'row', marginTop: screen.distance.default }}>
           <ColoredTextLabel text={'Không xác định'} type={'info'} textStyle={{ fontFamily: 'sale-text-regular' }} />
           <ColoredTextLabel
-            text={`BH 12 tháng`}
+            text={`BH ${util.valueOrPlaceholder(product, 'warranty')} tháng`}
             type="orange"
             style={{ marginLeft: scale(4) }}
             textStyle={{ fontFamily: 'sale-text-regular' }}
@@ -134,14 +141,15 @@ export class ProductDetailScreen extends Component {
   }
 
   renderPriceSection() {
+    let { product } = this.props;
     return (
       <View style={styles.priceSection}>
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <Text style={[fonts.medium, { color: colors.brightOrange, paddingVertical: screen.distance.smaller }]}>
-            1.000.000
+            {util.valueOrPlaceholder(product, 'price_w_vat')}
           </Text>
           <Text style={[fonts.body1, { color: colors.darkGray, textDecorationLine: 'line-through', marginLeft: scale(4) }]}>
-            1.500.000
+            {util.valueOrPlaceholder(product, 'original_price')}
           </Text>
         </View>
         {this.renderCartButton()}
@@ -165,11 +173,16 @@ export class ProductDetailScreen extends Component {
 }
 
 function mapStateToProps(state, props) {
-  return {};
+  let product = useCaseCore.getProductDetail(state.productDetail, '1200512');
+  return {
+    product
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    fetchProductDetail: sku => dispatch(productDetailActions.fetchProductDetail(sku))
+  };
 }
 
 export default connect(

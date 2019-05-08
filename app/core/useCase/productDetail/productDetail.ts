@@ -19,7 +19,7 @@ export function getInitialDetailData(): ProductDetailsData {
   };
 }
 
-export async function getProductDetail(detailData: ProductDetailsData, sku: string): Promise<ProductDetailsData> {
+export async function fetchProductDetail(detailData: ProductDetailsData, sku: string): Promise<ProductDetailsData> {
   let newDetailData = { ...detailData };
   let res = await ServiceLocator.getProductService().getDetail(sku);
   if (res.code === ResultCode.Success) {
@@ -34,4 +34,8 @@ export async function getProductDetail(detailData: ProductDetailsData, sku: stri
 
   newDetailData.lastResultCode = res.code;
   return newDetailData;
+}
+
+export function getProductDetail(detailData: ProductDetailsData, sku: string): FullInfoProduct {
+  return detailData.skus[sku] ? detailData.skus[sku].detail : null;
 }

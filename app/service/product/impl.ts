@@ -44,13 +44,29 @@ class ProductServiceImpl implements ProductService {
     }
   }
 
-  getDetail(sku: string): Promise<ProductDetailResult> {
-    return new Promise((resolve, reject) => {
-      resolve({
+  async getDetail(sku: string): Promise<ProductDetailResult> {
+    let resp = await axios.get(
+      url.format({
+        protocol: 'https',
+        host: `pvis.teko.vn/api/products/${sku}`,
+        pathname: 'api',
+        query: {
+          DISABLE_SIGN: 2018
+        }
+      })
+    );
+
+    if (resp.status === 200) {
+      return {
         code: ResultCode.Success,
+        data: resp.data
+      };
+    } else {
+      return {
+        code: ResultCode.Failure,
         data: null
-      });
-    });
+      };
+    }
   }
 }
 

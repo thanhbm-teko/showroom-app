@@ -1,7 +1,7 @@
 import { checkCondition } from '../checkCondition';
 import { PartialInfoProduct } from '../../../model/Product';
 
-import PRODUCT from '../../getProductDetail/__tests__/__fixtures__/product.json';
+import PRODUCT from '../../productDetail/__tests__/__fixtures__/product.json';
 import { makeSkuCondition, makeCategoryCondition, makeOneOfCondition } from './testUtils';
 
 describe('checkCondition', () => {
