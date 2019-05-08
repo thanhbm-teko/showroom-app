@@ -89,7 +89,7 @@ class ImageWrapper extends Component {
           <Image
             style={style}
             resizeMode={resizeMode}
-            source={localUri ? { isStatic: true, uri: localUri } : require('../resources/images/no_product.png')}
+            source={localUri ? { isStatic: true, uri: localUri } : require('../../../assets/images/no_product.png')}
             onError={() => {
               if (this.state.step === STEP.TRY_LOCAL) {
                 this.setState({ step: STEP.DOWNLOADING }, () => this.downloadImage(localUri));
@@ -110,7 +110,7 @@ class ImageWrapper extends Component {
           <Image
             style={style}
             resizeMode={resizeMode}
-            source={this.state.step === STEP.USE_ONLINE ? { uri: source } : require('../resources/images/no_product.png')}
+            source={this.state.step === STEP.USE_ONLINE ? { uri: source } : require('../../../assets/images/no_product.png')}
             onError={() => this.setState({ step: STEP.USE_DEFAULT })}
           />
         );
@@ -121,7 +121,7 @@ class ImageWrapper extends Component {
           style={style}
           resizeMode={resizeMode}
           source={
-            source && this.state.step !== STEP.USE_DEFAULT ? { uri: source } : require('../resources/images/no_product.png')
+            source && this.state.step !== STEP.USE_DEFAULT ? { uri: source } : require('../../../assets/images/no_product.png')
           }
           onError={() => this.setState({ step: STEP.USE_DEFAULT })}
         />

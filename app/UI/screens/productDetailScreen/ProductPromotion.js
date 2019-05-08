@@ -15,7 +15,7 @@
 // import { scale } from '../utils/scaling';
 // import * as strings from '../resources/string';
 // import * as ProductActions from '../stores/product/actions';
-// import { screen, colors, textStyles } from '../resources/styles/common';
+// import { screen, colors, fonts } from '../resources/styles/common';
 // import ChoosePromotionsModal from '../components/modal/ChoosePromotionsModal';
 // import ColoredTextLabel from './label/ColoredTextLabel';
 
@@ -139,14 +139,14 @@
 //       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 //         {discount > 0 ? <Text style={styles.originalPrice}>{utils.formatPrice(priceAfterApplyOverlap)}</Text> : null}
 
-//         <Text style={[textStyles.heading1, { color: colors.brightOrange }]}>
+//         <Text style={[fonts.heading1, { color: colors.brightOrange }]}>
 //           {' '}
 //           {this.props.servicesSku.indexOf(this.props.product.sku) < 0
 //             ? utils.formatPrice(priceAfterApplyOverlap - discount)
 //             : utils.formatPrice(cartItem.price)}
 //         </Text>
 //         {discount > 0 ? (
-//           <Text style={[textStyles.subheading, { textDecorationLine: 'line-through', marginLeft: screen.distance.default }]}>
+//           <Text style={[fonts.subheading, { textDecorationLine: 'line-through', marginLeft: screen.distance.default }]}>
 //             {utils.formatPrice(this.props.product.price_w_vat)}
 //           </Text>
 //         ) : null}
@@ -167,7 +167,7 @@
 //             onPress={() => this.onChangeProductSale(promotion)}
 //             disabled={!editable}
 //           >
-//             <Text style={textStyles.body1}>{programName}</Text>
+//             <Text style={fonts.body1}>{programName}</Text>
 //           </TouchableOpacity>
 //         </View>
 //       );
@@ -190,20 +190,20 @@
 //             <View>
 //               {promotionFrom && promotionFrom !== 'none' ? (
 //                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-//                   <Text style={[textStyles.heading1]}>{programName}</Text>
+//                   <Text style={[fonts.heading1]}>{programName}</Text>
 //                 </View>
 //               ) : null}
 //               {this.renderPrice(discount)}
 //               {/* {quantity_left ? (
-//                 <Text style={[textStyles.footnote, { color: colors.clearBlue }]}>{`Số lượng KM: ${quantity_left}`}</Text>
+//                 <Text style={[fonts.footnote, { color: colors.clearBlue }]}>{`Số lượng KM: ${quantity_left}`}</Text>
 //               ) : null} */}
 //               {limited_quantity ? (
 //                 <Text
-//                   style={[textStyles.subheading, { color: colors.orangeRed }]}
+//                   style={[fonts.subheading, { color: colors.orangeRed }]}
 //                 >{`*Giới hạn ${limited_quantity} sp trên mỗi đơn hàng`}</Text>
 //               ) : null}
 //             </View>
-//             {quantity_left ? <ColoredTextLabel textStyle={textStyles.footnote} type="quantity" text={quantity_left} /> : null}
+//             {quantity_left ? <ColoredTextLabel textStyle={fonts.footnote} type="quantity" text={quantity_left} /> : null}
 //           </TouchableOpacity>
 //         </View>
 //       );
@@ -364,7 +364,7 @@
 //           }}
 //           onPress={this.togglePromotions}
 //         >
-//           <Text style={[textStyles.subheading, { color: colors.clearBlue }]}>{promotionsLength} CTKM đang áp dụng</Text>
+//           <Text style={[fonts.subheading, { color: colors.clearBlue }]}>{promotionsLength} CTKM đang áp dụng</Text>
 //           <Icon name="chevron-right" size={scale(16)} color={colors.clearBlue} />
 //         </TouchableOpacity>
 //         <Collapsible
@@ -423,7 +423,7 @@
 //         }}
 //       >
 //         <TouchableOpacity onPress={this.onToggleShowPromotions} style={styles.promotionTitle}>
-//           <Text style={[textStyles.body1, { color: 'white', flex: 1, textAlignVertical: 'center' }]}>Chọn khuyến mãi</Text>
+//           <Text style={[fonts.body1, { color: 'white', flex: 1, textAlignVertical: 'center' }]}>Chọn khuyến mãi</Text>
 //           <Icon name="chevron-right" type="material-community" size={scale(24)} color={'white'} />
 //         </TouchableOpacity>
 //         <View
