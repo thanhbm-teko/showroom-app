@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { AppLoading, Font } from 'expo';
+import { MenuProvider } from 'react-native-popup-menu';
 
 import store from './app/UI/reduxConnector/configureStore';
 import ServiceLocator from './app/core/service/serviceLocator';
@@ -25,10 +26,12 @@ export default class App extends React.Component {
     } else {
       return (
         <Provider store={store}>
-          <View style={styles.container}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <AppNavigator />
-          </View>
+          <MenuProvider>
+            <View style={styles.container}>
+              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+              <AppNavigator />
+            </View>
+          </MenuProvider>
         </Provider>
       );
     }

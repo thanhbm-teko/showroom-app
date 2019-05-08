@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import StockModal from '../../components/modal/StockModal';
+import StockModal from './StockModal';
 
 import { fonts, screen, colors, scale } from '../../styles';
 

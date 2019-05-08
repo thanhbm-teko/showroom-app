@@ -100,15 +100,7 @@ export class ProductDetailScreen extends Component {
           <Icon type="material-community" name="close" size={scale(24)} color={colors.brightOrange} />
         </TouchableOpacity>
         {/*  add emptyview and then you can add report button :D */}
-        <View
-          style={{
-            height: scale(14),
-            width: screen.width,
-            backgroundColor: 'white',
-            borderTopColor: colors.paleLilac,
-            borderTopWidth: 0.5
-          }}
-        />
+        <View style={styles.placeHolder} />
         {this.renderReportButton()}
       </View>
     );
@@ -126,7 +118,7 @@ export class ProductDetailScreen extends Component {
   renderProductGeneralInfo() {
     return (
       <View style={styles.infoSection}>
-        <Text style={[fonts.subheading, { color: colors.clearBlue }]}># 123456</Text>
+        <Text style={[fonts.subheading, { color: colors.clearBlue }]}>SKU: 123456</Text>
         <Text style={fonts.display}>Tên sản phẩm</Text>
         <View style={{ flexDirection: 'row', marginTop: screen.distance.default }}>
           <ColoredTextLabel text={'Không xác định'} type={'info'} textStyle={{ fontFamily: 'sale-text-regular' }} />
@@ -144,7 +136,7 @@ export class ProductDetailScreen extends Component {
   renderPriceSection() {
     return (
       <View style={styles.priceSection}>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, flexDirection: 'row' }}>
           <Text style={[fonts.medium, { color: colors.brightOrange, paddingVertical: screen.distance.smaller }]}>
             1.000.000
           </Text>
@@ -193,6 +185,13 @@ const styles = StyleSheet.create({
     paddingTop: screen.header.statusBarHeight,
     backgroundColor: colors.paleGrey
   },
+  placeHolder: {
+    height: scale(14),
+    width: screen.width,
+    backgroundColor: 'white',
+    borderTopColor: colors.paleLilac,
+    borderTopWidth: 0.5
+  },
   reportButton: {
     position: 'absolute',
     top: scale(176),
@@ -207,7 +206,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   cartButtonContainer: {
-    marginTop: screen.margin,
+    marginTop: screen.margin.default,
     flex: 1,
     justifyContent: 'flex-end',
     flexDirection: 'row'

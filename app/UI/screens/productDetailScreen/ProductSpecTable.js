@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 
+import { fonts, screen, colors, scale } from '../../styles';
 export default class ProductSpecTable extends Component {
   state = {
     showFirstTab: true
