@@ -1,18 +1,16 @@
 import { Service } from '../serviceLocator';
-import { ResultCode } from '../../model/ResultCode';
+import { ResultCode, ApiResult } from '../../model/ResultCode';
 import { PartialInfoProduct, FullInfoProduct } from '../../model/Product';
 import { ProductFilterData } from '../../useCase/searchProduct/filter';
 import { ProductSortData } from '../../useCase/searchProduct/sort';
 
-export interface ProductDetailResult {
-  code: ResultCode;
+export interface ProductDetailResult extends ApiResult {
   data: FullInfoProduct;
 }
 
 export type GetProductDetailFunc = (sku: string) => Promise<ProductDetailResult>;
 
-export interface ProductSearchResult {
-  code: ResultCode;
+export interface ProductSearchResult extends ApiResult {
   data: PartialInfoProduct[];
 }
 

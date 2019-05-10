@@ -1,3 +1,3 @@
-export function valueOrPlaceholder(data, fieldName) {
-  return data && data[fieldName] ? data[fieldName] : '-';
+export function safeValue(data, fieldName, defaultValue = '-') {
+  return data && data[fieldName] ? data[fieldName] : defaultValue;
 }

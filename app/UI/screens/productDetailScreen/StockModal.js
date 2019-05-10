@@ -37,12 +37,12 @@ const StockModal = ({ onClose, visible, data, isUsingOM }) => (
                 <View key={index} style={{ flexDirection: 'row' }}>
                   <View style={styles.labelContainer}>
                     <Text style={[fonts.body1Regular, { color: item.highlight ? colors.clearBlue : colors.darkGreyBlue }]}>
-                      {item.label}
+                      {item.name}
                     </Text>
                   </View>
                   <View style={styles.valueContainer}>
                     <Text style={[fonts.body1Regular, { color: item.highlight ? colors.clearBlue : colors.darkGreyBlue }]}>
-                      {item.value}
+                      {item.quantity}
                     </Text>
                   </View>
                 </View>

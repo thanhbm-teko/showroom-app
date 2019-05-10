@@ -22,7 +22,7 @@ export class ProductDetailScreen extends Component {
   });
 
   componentDidMount() {
-    this.props.fetchProductDetail('1200512');
+    this.props.fetchProductDetail('1808213');
     BackHandler.addEventListener('hardwareBackPress', this.onBackPressed);
   }
 
@@ -37,6 +37,7 @@ export class ProductDetailScreen extends Component {
 
   render() {
     let { product } = this.props;
+    console.log('product: ', product);
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -61,7 +62,7 @@ export class ProductDetailScreen extends Component {
               selectedProductType={'Biz'}
             />
             {this.renderPriceSection()}
-            <StockInfo stocks={[{ label: 'Kho 1', value: '1' }, { label: 'Kho 2', value: '2' }]} isUsingOm={false} />
+            <StockInfo stocks={util.safeValue(product, 'stocks', [])} isUsingOm={false} />
           </View>
           {/* Các chương trình khuyến mãi của sản phẩm */}
           {/* <View style={{ paddingTop: scale(10) }}>
@@ -78,8 +79,8 @@ export class ProductDetailScreen extends Component {
             />
           </View> */}
           <ProductSpecTable
-            description={util.valueOrPlaceholder(product, 'description')}
-            specifications={[{ label: 'Thông số 1', value: '100' }, { label: 'Thông số 2', value: '200' }]}
+            description={util.safeValue(product, 'description')}
+            specifications={util.safeValue(product, 'attributes', [])}
             isLoading={false}
           />
         </ScrollView>
@@ -92,7 +93,7 @@ export class ProductDetailScreen extends Component {
       <View style={{ alignItems: 'center' }}>
         <ImageWrapper
           resizeMode={'center'}
-          source={null}
+          source={util.safeValue(this.props.product, 'imageUrl', null)}
           style={{
             width: screen.width,
             height: scale(190),
@@ -125,12 +126,12 @@ export class ProductDetailScreen extends Component {
     let { product } = this.props;
     return (
       <View style={styles.infoSection}>
-        <Text style={[fonts.subheading, { color: colors.clearBlue }]}>SKU: {util.valueOrPlaceholder(product, 'sku')}</Text>
-        <Text style={fonts.display}>{util.valueOrPlaceholder(product, 'name')}</Text>
+        <Text style={[fonts.subheading, { color: colors.clearBlue }]}>SKU: {util.safeValue(product, 'sku')}</Text>
+        <Text style={fonts.display}>{util.safeValue(product, 'name')}</Text>
         <View style={{ flexDirection: 'row', marginTop: screen.distance.default }}>
           <ColoredTextLabel text={'Không xác định'} type={'info'} textStyle={{ fontFamily: 'sale-text-regular' }} />
           <ColoredTextLabel
-            text={`BH ${util.valueOrPlaceholder(product, 'warranty')} tháng`}
+            text={`BH ${util.safeValue(product, 'warranty')} tháng`}
             type="orange"
             style={{ marginLeft: scale(4) }}
             textStyle={{ fontFamily: 'sale-text-regular' }}
@@ -146,10 +147,10 @@ export class ProductDetailScreen extends Component {
       <View style={styles.priceSection}>
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <Text style={[fonts.medium, { color: colors.brightOrange, paddingVertical: screen.distance.smaller }]}>
-            {util.valueOrPlaceholder(product, 'price_w_vat')}
+            {util.safeValue(product, 'price_w_vat')}
           </Text>
           <Text style={[fonts.body1, { color: colors.darkGray, textDecorationLine: 'line-through', marginLeft: scale(4) }]}>
-            {util.valueOrPlaceholder(product, 'original_price')}
+            {util.safeValue(product, 'original_price')}
           </Text>
         </View>
         {this.renderCartButton()}
@@ -173,7 +174,7 @@ export class ProductDetailScreen extends Component {
 }
 
 function mapStateToProps(state, props) {
-  let product = useCaseCore.getProductDetail(state.productDetail, '1200512');
+  let product = useCaseCore.getProductDetail(state.productDetail, '1808213');
   return {
     product
   };

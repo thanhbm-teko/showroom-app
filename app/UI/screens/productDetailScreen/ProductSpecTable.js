@@ -78,7 +78,7 @@ export default class ProductSpecTable extends Component {
         <View style={{ borderRadius: screen.distance.default, overflow: 'hidden' }}>
           {specifications.map((item, index) => (
             <View style={{ flexDirection: 'row', backgroundColor: index % 2 === 0 ? colors.paleGrey : 'white' }} key={index}>
-              <Text style={[fonts.body1, styles.specification_value]}>{item.label}</Text>
+              <Text style={[fonts.body1, styles.specification_value]}>{item.name}</Text>
               <Text style={[fonts.body1, styles.specification_key]}>{item.value}</Text>
             </View>
           ))}

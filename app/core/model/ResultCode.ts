@@ -3,7 +3,16 @@ export enum ResultCode {
   Failure = 1
 }
 
-export interface ResultCodeMessage {
-  code: number;
+export interface ApiResult {
+  code: ResultCode;
+  data: any;
   message: string;
+}
+
+export function getDefaultApiResult(data: any = null): ApiResult {
+  return {
+    code: ResultCode.Failure,
+    message: '',
+    data
+  };
 }
