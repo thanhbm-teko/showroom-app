@@ -1,12 +1,9 @@
-import url from 'url';
-import axios, { AxiosError } from 'axios';
-import { FullInfoProduct } from '../../core/model/product';
-import { ResultCode, getDefaultApiResult } from '../../core/model/ResultCode';
+import { FullInfoProduct, PartialInfoProduct } from '../../core/model/product';
+import { ResultCode, ApiResult, getDefaultApiResult } from '../../core/model/ResultCode';
 import { ProductService, ProductSearchResult, ProductDetailResult } from '../../core/service/product/interface';
 import { ProductFilterData } from '../../core/useCase/searchProduct/filter';
 import { ProductSortData } from '../../core/useCase/searchProduct/sort';
-import Util from '../../core/util';
-import PhongVu from '../serviceProvider';
+import Teko from '../serviceProvider';
 import Adapter from '../serviceAdapter';
 
 class ProductServiceImpl implements ProductService {
@@ -19,43 +16,33 @@ class ProductServiceImpl implements ProductService {
     limit: number
   ): Promise<ProductSearchResult> {
     let r = getDefaultApiResult([]);
-    try {
-      let page = Math.floor(offset / limit);
-      let response = await axios.get(
-        url.format({
-          protocol: 'http',
-          host: 'search.phongvu.vn',
-          pathname: 'api',
-          query: {
-            query,
-            page,
-            mode: 'operator',
-            channelId: 'offline',
-            userId: Util.String.generateUuid()
-          }
-        })
-      );
-
-      if (response.status === 200) {
-        r.code = ResultCode.Success;
-        r.data = response.data.data.data.products;
-      } else {
-        r.message = response.statusText;
-      }
-    } catch (error) {
-      r.message = (<AxiosError>error).message;
-    }
-
+    r = await Teko.PSService.search(query, filter, sort, offset, limit);
+    r.data = r.data.map((p: PS.Product) => Adapter.PS.convertProduct(<PartialInfoProduct>{}, p));
     return r;
   }
 
   async getDetail(sku: string): Promise<ProductDetailResult> {
+    let getAsiaDetailJob = new Promise<ApiResult>(async resolve => {
+      let r = await Teko.PvisService.getProductDetail(sku);
+      resolve(r);
+    });
+
+    let getMagentoDetailJob = new Promise<ApiResult>(async resolve => {
+      let r = await Teko.MagentoService.getProductDetail(sku);
+      resolve(r);
+    });
+
+    let [pvisRes, magentoRes] = await Promise.all([getAsiaDetailJob, getMagentoDetailJob]);
     let product: FullInfoProduct = <FullInfoProduct>{};
     let r = getDefaultApiResult();
-    r = await PhongVu.PvisService.getProductDetail(sku);
-    product = Adapter.Pvis.convertProduct(null, r.data);
-    r = await PhongVu.MagentoService.getProductDetail(sku);
-    product = Adapter.Magento.convertProduct(product, r.data);
+
+    r = pvisRes;
+    if (pvisRes.code === ResultCode.Success) {
+      product = Adapter.Pvis.convertProduct(null, pvisRes.data);
+    }
+    if (magentoRes.code === ResultCode.Success) {
+      product = Adapter.Magento.convertProduct(product, magentoRes.data);
+    }
     r.data = product;
     return r;
   }
