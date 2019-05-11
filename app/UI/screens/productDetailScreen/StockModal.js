@@ -32,22 +32,20 @@ const StockModal = ({ onClose, visible, data, isUsingOM }) => (
             </View>
           </View>
           <ScrollView>
-            {data.map((item, index) => {
-              return (
-                <View key={index} style={{ flexDirection: 'row' }}>
-                  <View style={styles.labelContainer}>
-                    <Text style={[fonts.body1Regular, { color: item.highlight ? colors.clearBlue : colors.darkGreyBlue }]}>
-                      {item.name}
-                    </Text>
-                  </View>
-                  <View style={styles.valueContainer}>
-                    <Text style={[fonts.body1Regular, { color: item.highlight ? colors.clearBlue : colors.darkGreyBlue }]}>
-                      {item.quantity}
-                    </Text>
-                  </View>
+            {data.map((item, index) => (
+              <View key={index} style={{ flexDirection: 'row' }}>
+                <View style={styles.labelContainer}>
+                  <Text style={[fonts.body1Regular, { color: item.highlight ? colors.clearBlue : colors.darkGreyBlue }]}>
+                    {item.name}
+                  </Text>
                 </View>
-              );
-            })}
+                <View style={styles.valueContainer}>
+                  <Text style={[fonts.body1Regular, { color: item.highlight ? colors.clearBlue : colors.darkGreyBlue }]}>
+                    {item.quantity}
+                  </Text>
+                </View>
+              </View>
+            ))}
           </ScrollView>
         </View>
       </View>

@@ -3,24 +3,7 @@ import { Image, View, ActivityIndicator } from 'react-native';
 import { FileSystem } from 'expo';
 
 const USE_IMAGE_CACHE = true;
-const CHECK_MEDIA_EXT = false;
-const MEDIA_EXT = [
-  '.png',
-  '.jpg',
-  '.bmp',
-  '.gif',
-  '.psd',
-  '.jpeg',
-  '.webp',
-  '.PNG',
-  '.JPG',
-  '.BMP',
-  '.GIF',
-  '.PSD',
-  '.JPEG',
-  '.WEBP'
-];
-
+const DEFAULT_IMAGE_PATH = '../../../assets/images/no_product.png';
 export const STEP = {
   TRY_LOCAL: 0,
   DOWNLOADING: 1,
@@ -32,18 +15,22 @@ export const STEP = {
 class ImageWrapper extends Component {
   constructor(props) {
     super(props);
-    this.downloadImage = this.downloadImage.bind(this);
     this.state = {
-      step: STEP.TRY_LOCAL
+      step: STEP.TRY_LOCAL,
+      localUri: this.getLocalFileUri(props.source)
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(prevState, nextProps) {
+    let { step, localUri } = prevState;
     if (USE_IMAGE_CACHE) {
-      if (nextProps.source !== this.props.source && this.state.step !== STEP.TRY_LOCAL) {
-        this.setState({ step: STEP.TRY_LOCAL });
+      let newLocalUri = this.getLocalFileUri(nextProps.source);
+      if (newLocalUri !== localUri && step !== STEP.TRY_LOCAL) {
+        step = STEP.TRY_LOCAL;
       }
     }
+
+    return { step, localUri };
   }
 
   getLocalFileUri(path) {
@@ -56,77 +43,79 @@ class ImageWrapper extends Component {
     return null;
   }
 
-  downloadImage(localUri) {
-    if (localUri) {
-      if (!CHECK_MEDIA_EXT || MEDIA_EXT.indexOf(localUri.slice(-4)) !== -1 || MEDIA_EXT.indexOf(localUri.slice(-5)) !== -1) {
-        FileSystem.downloadAsync(this.props.source, localUri)
-          .then(({ uri, status }) => {
-            if (status === 200) {
-              this.setState({ step: STEP.USE_LOCAL });
-            } else {
-              this.setState({ step: STEP.USE_DEFAULT });
-              // android still download the file if 404 :v so need to delete it...
-              FileSystem.deleteAsync(uri, {}, true);
-            }
-          })
-          .catch(error => {
-            this.setState({ step: STEP.USE_ONLINE });
-          });
+  downloadImage = async () => {
+    let { step, localUri } = this.state;
+    try {
+      let ret = await FileSystem.downloadAsync(this.props.source, localUri);
+      if (ret.status === 200) {
+        step = STEP.USE_LOCAL;
       } else {
-        this.setState({ step: STEP.USE_ONLINE });
+        step = STEP.USE_DEFAULT;
+        // android still download the file if 404 :v so need to delete it...
+        FileSystem.deleteAsync(ret.uri, {}, true);
       }
+    } catch (error) {
+      step = STEP.USE_ONLINE;
+    }
+
+    this.setState({ step });
+  };
+
+  onLoadLocalImageError = () => {
+    let { step, localUri } = this.state;
+    if (step === STEP.TRY_LOCAL && localUri) {
+      this.setState({ step: STEP.DOWNLOADING }, this.downloadImage);
     } else {
-      this.setState({ step: STEP.USE_DEFAULT });
+      this.useDefaultImage();
+    }
+  };
+
+  useDefaultImage = () => {
+    this.setState({ step: STEP.USE_DEFAULT });
+  };
+
+  render() {
+    if (USE_IMAGE_CACHE) {
+      return this.renderImageWithCache();
+    } else {
+      return this.renderImage();
     }
   }
 
-  render() {
-    let { style, resizeMode, source } = this.props;
-    if (USE_IMAGE_CACHE) {
-      if (this.state.step === STEP.TRY_LOCAL || this.state.step === STEP.USE_LOCAL) {
-        let localUri = this.getLocalFileUri(source);
-        return (
-          <Image
-            style={style}
-            resizeMode={resizeMode}
-            source={localUri ? { isStatic: true, uri: localUri } : require('../../../assets/images/no_product.png')}
-            onError={() => {
-              if (this.state.step === STEP.TRY_LOCAL) {
-                this.setState({ step: STEP.DOWNLOADING }, () => this.downloadImage(localUri));
-              } else {
-                this.setState({ step: STEP.USE_DEFAULT });
-              }
-            }}
-          />
-        );
-      } else if (this.state.step === STEP.DOWNLOADING) {
-        return (
-          <View style={[this.props.style, { justifyContent: 'center', alignItems: 'center' }]}>
-            <ActivityIndicator size="large" />
-          </View>
-        );
-      } else {
-        return (
-          <Image
-            style={style}
-            resizeMode={resizeMode}
-            source={this.state.step === STEP.USE_ONLINE ? { uri: source } : require('../../../assets/images/no_product.png')}
-            onError={() => this.setState({ step: STEP.USE_DEFAULT })}
-          />
-        );
-      }
-    } else {
+  renderImageWithCache() {
+    let { style, resizeMode } = this.props;
+    let { step, localUri } = this.state;
+
+    if (step === STEP.TRY_LOCAL || step === STEP.USE_LOCAL) {
       return (
         <Image
           style={style}
           resizeMode={resizeMode}
-          source={
-            source && this.state.step !== STEP.USE_DEFAULT ? { uri: source } : require('../../../assets/images/no_product.png')
-          }
-          onError={() => this.setState({ step: STEP.USE_DEFAULT })}
+          source={localUri ? { isStatic: true, uri: localUri } : require(DEFAULT_IMAGE_PATH)}
+          onError={this.onLoadLocalImageError}
         />
       );
+    } else if (step === STEP.DOWNLOADING) {
+      return (
+        <View style={[style, { justifyContent: 'center', alignItems: 'center' }]}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
+    } else {
+      return this.renderImage();
     }
+  }
+
+  renderImage() {
+    let { style, resizeMode, source } = this.props;
+    return (
+      <Image
+        style={style}
+        resizeMode={resizeMode}
+        source={source && this.state.step !== STEP.USE_DEFAULT ? { uri: source } : require(DEFAULT_IMAGE_PATH)}
+        onError={this.useDefaultImage}
+      />
+    );
   }
 }
 

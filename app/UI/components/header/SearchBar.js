@@ -38,57 +38,50 @@ export default class SearchBar extends Component {
   };
 
   render() {
-    let { rightButton, searchText } = this.props;
+    let { rightButton } = this.props;
     return (
       <View style={styles.inputContainer}>
         <TouchableOpacity
           accessibilityLabel="cart_container_drawer_toggle"
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: screen.distance.smaller
-          }}
+          style={styles.drawerToggleIcon}
           onPress={this.onBack}
         >
           <Icon name="arrow-left" type="material-community" size={screen.iconSize.medium} color="white" />
         </TouchableOpacity>
         <View style={{ flex: 1 }}>
-          <Animated.View style={{ width: this.state.width }}>
-            <View
-              style={{
-                paddingHorizontal: screen.distance.default,
-                backgroundColor: 'white',
-                flexDirection: 'row',
-                alignItems: 'center',
-                borderRadius: scale(8)
-              }}
-            >
-              <Icon name="search" size={scale(20)} color={colors.reddishOrange} />
-              <TextInput
-                style={[fonts.body1Regular, { flex: 1, paddingLeft: scale(4), height: scale(32) }]}
-                underlineColorAndroid={'transparent'}
-                returnKeyType={'search'}
-                autoCorrect={false}
-                onChangeText={this.onSearchTextChange}
-                value={searchText}
-                placeholder={'Tên sản phẩm hoặc SKU...'}
-                placeholderTextColor={'#b0b0b0'}
-                ref={input => {
-                  this.textInput = input;
-                }}
-                selectionColor={colors.reddishOrange}
-              />
-              <Icon
-                type="material-community"
-                name="close-circle"
-                size={scale(18)}
-                color={colors.cloudyBlue}
-                onPress={this.clearSearchText}
-              />
-            </View>
-          </Animated.View>
+          <Animated.View style={{ width: this.state.width }}>{this.renderSearchInput()}</Animated.View>
         </View>
         {this.state.focusing ? this.renderCancelText() : rightButton && rightButton}
+      </View>
+    );
+  }
+
+  renderSearchInput() {
+    let { searchText } = this.props;
+    return (
+      <View style={styles.searchInput}>
+        <Icon name="search" size={scale(20)} color={colors.reddishOrange} />
+        <TextInput
+          style={[fonts.body1Regular, { flex: 1, paddingLeft: scale(4), height: scale(32) }]}
+          underlineColorAndroid={'transparent'}
+          returnKeyType={'search'}
+          autoCorrect={false}
+          onChangeText={this.onSearchTextChange}
+          value={searchText}
+          placeholder={'Tên sản phẩm hoặc SKU...'}
+          placeholderTextColor={'#b0b0b0'}
+          ref={input => {
+            this.textInput = input;
+          }}
+          selectionColor={colors.reddishOrange}
+        />
+        <Icon
+          type="material-community"
+          name="close-circle"
+          size={scale(18)}
+          color={colors.cloudyBlue}
+          onPress={this.clearSearchText}
+        />
       </View>
     );
   }
@@ -113,5 +106,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.darkGreyBlue,
     paddingTop: screen.header.statusBarHeight
+  },
+  drawerToggleIcon: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: screen.distance.smaller
+  },
+  searchInput: {
+    paddingHorizontal: screen.distance.default,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: scale(8)
   }
 });
