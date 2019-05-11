@@ -5,6 +5,7 @@ import { ProductFilterData } from '../../core/useCase/searchProduct/filter';
 import { ProductSortData } from '../../core/useCase/searchProduct/sort';
 import Teko from '../serviceProvider';
 import Adapter from '../serviceAdapter';
+import { runApiParallel } from '../serviceUtil';
 
 class ProductServiceImpl implements ProductService {
   name: 'Product';
@@ -22,19 +23,13 @@ class ProductServiceImpl implements ProductService {
   }
 
   async getDetail(sku: string): Promise<ProductDetailResult> {
-    let getAsiaDetailJob = new Promise<ApiResult>(async resolve => {
-      let r = await Teko.PvisService.getProductDetail(sku);
-      resolve(r);
-    });
-
-    let getMagentoDetailJob = new Promise<ApiResult>(async resolve => {
-      let r = await Teko.MagentoService.getProductDetail(sku);
-      resolve(r);
-    });
-
-    let [pvisRes, magentoRes] = await Promise.all([getAsiaDetailJob, getMagentoDetailJob]);
     let product: FullInfoProduct = <FullInfoProduct>{};
     let r = getDefaultApiResult();
+
+    let [pvisRes, magentoRes] = await runApiParallel([
+      () => Teko.PvisService.getProductDetail(sku),
+      () => Teko.MagentoService.getProductDetail(sku)
+    ]);
 
     r = pvisRes;
     if (pvisRes.code === ResultCode.Success) {

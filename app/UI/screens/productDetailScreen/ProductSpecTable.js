@@ -17,41 +17,33 @@ export default class ProductSpecTable extends Component {
   }
 
   renderSpecTableHeader = () => {
-    let { showFirstTab } = this.state;
-
     return (
       <View style={{ flexDirection: 'row', backgroundColor: 'white' }}>
-        <TouchableOpacity
-          style={[
-            styles.headerButton,
-            {
-              borderBottomColor: showFirstTab ? colors.brightOrange : colors.paleLilac,
-              borderBottomWidth: showFirstTab ? 4 : 0.5
-            }
-          ]}
-          onPress={() => this.setState({ showFirstTab: true })}
-        >
-          <Text style={[fonts.heading1, { color: showFirstTab ? colors.brightOrange : colors.darkGreyBlue }]}>
-            Mô tả sản phẩm
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.headerButton,
-            {
-              borderBottomColor: showFirstTab ? colors.paleLilac : colors.brightOrange,
-              borderBottomWidth: showFirstTab ? 0.5 : 4
-            }
-          ]}
-          onPress={() => this.setState({ showFirstTab: false })}
-        >
-          <Text style={[fonts.heading1, { color: showFirstTab ? colors.darkGreyBlue : colors.brightOrange }]}>
-            Thông số kỹ thuật
-          </Text>
-        </TouchableOpacity>
+        {this.renderHeaderTitle('Mô tả sản phẩm', true)}
+        {this.renderHeaderTitle('Thông số kỹ thuật', false)}
       </View>
     );
   };
+
+  renderHeaderTitle(titleText, isFirstTab) {
+    let { showFirstTab } = this.state;
+    let isFocus = (isFirstTab && showFirstTab) || (!isFirstTab && !showFirstTab);
+
+    return (
+      <TouchableOpacity
+        style={[
+          styles.headerButton,
+          {
+            borderBottomColor: isFocus ? colors.brightOrange : colors.paleLilac,
+            borderBottomWidth: isFocus ? 4 : 0.5
+          }
+        ]}
+        onPress={() => this.setState({ showFirstTab: isFirstTab })}
+      >
+        <Text style={[fonts.heading1, { color: isFocus ? colors.brightOrange : colors.darkGreyBlue }]}>{titleText}</Text>
+      </TouchableOpacity>
+    );
+  }
 
   renderSpecTable() {
     if (this.state.showFirstTab) {
@@ -78,8 +70,8 @@ export default class ProductSpecTable extends Component {
         <View style={{ borderRadius: screen.distance.default, overflow: 'hidden' }}>
           {specifications.map((item, index) => (
             <View style={{ flexDirection: 'row', backgroundColor: index % 2 === 0 ? colors.paleGrey : 'white' }} key={index}>
-              <Text style={[fonts.body1, styles.specification_value]}>{item.name}</Text>
-              <Text style={[fonts.body1, styles.specification_key]}>{item.value}</Text>
+              <Text style={[fonts.body1, styles.specificationValue]}>{item.name}</Text>
+              <Text style={[fonts.body1, styles.specificationKey]}>{item.value}</Text>
             </View>
           ))}
         </View>
@@ -100,7 +92,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(14),
     alignItems: 'center'
   },
-  specification_key: {
+  specificationKey: {
     flex: 1,
     paddingVertical: screen.distance.default,
     paddingRight: screen.distance.smaller,
@@ -108,7 +100,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     color: colors.darkGreyBlue
   },
-  specification_value: {
+  specificationValue: {
     flex: 1,
     paddingVertical: screen.distance.default,
     paddingLeft: screen.distance.smaller,

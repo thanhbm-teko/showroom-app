@@ -15,16 +15,8 @@ export default class ModalHeader extends PureComponent {
     );
   };
 
-  renderLeftButton = button => {
-    if (!button) return null;
-
-    return <View style={styles.left}>{this.renderHeaderButton(button)}</View>;
-  };
-
-  renderRightButton = button => {
-    if (!button) return null;
-
-    return <View style={styles.right}>{this.renderHeaderButton(button)}</View>;
+  renderButton = (button, style) => {
+    return <View style={style}>{this.renderHeaderButton(button)}</View>;
   };
 
   render() {
@@ -35,8 +27,8 @@ export default class ModalHeader extends PureComponent {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{title}</Text>
         </View>
-        {this.renderLeftButton(leftButton)}
-        {this.renderRightButton(rightButton)}
+        {leftButton && this.renderButton(leftButton, styles.left)}
+        {rightButton && this.renderButton(rightButton, styles.right)}
       </View>
     );
   }
