@@ -12,7 +12,8 @@ class PvisService {
       let response: AxiosResponse = await axios.get(
         url.format({
           protocol: this.protocol,
-          host: `${this.host}/api/products/${sku}`,
+          host: this.host,
+          pathname: `api/products/${sku}`,
           query: {
             DISABLE_SIGN: 2018
           }

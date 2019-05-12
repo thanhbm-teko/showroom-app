@@ -1,0 +1,102 @@
+{
+  "attributes": [
+    {
+      "name": "Thời gian Bảo hành",
+      "value": "24"
+    },
+    {
+      "name": "Thương hiệu",
+      "value": "ASUS"
+    },
+    {
+      "name": "Series laptop",
+      "value": "VivoBook"
+    },
+    {
+      "name": "Màu sắc",
+      "value": "Vàng"
+    },
+    {
+      "name": "Màn hình",
+      "value": "15.6' ( 1920 x 1080 ) không cảm ứng"
+    },
+    {
+      "name": "CPU",
+      "value": "Intel Core i5-8250U ( 1.6 GHz - 3.4 GHz / 6MB / 4 nhân, 8 luồng )"
+    },
+    {
+      "name": "Thế hệ CPU",
+      "value": "Intel Core thế hệ thứ 8"
+    },
+    {
+      "name": "Dòng CPU",
+      "value": "Core i5"
+    },
+    {
+      "name": "RAM",
+      "value": "1 x 4GB DDR4 2400MHz ( 2 Khe cắm / Hỗ trợ tối đa 16GB )"
+    },
+    {
+      "name": "Chip đồ họa",
+      "value": "Intel UHD Graphics 620"
+    },
+    {
+      "name": "Cổng kết nối",
+      "value": ", 1 x USB 3.0 , 2 x USB 2.0 , 1 x micro SD card slot"
+    },
+    {
+      "name": "Lưu trữ",
+      "value": "( 1TB HDD 5400RPM )"
+    },
+    {
+      "name": "Số cổng lưu trữ tối đa",
+      "value": "1 x 2.5' SATA , 1 x M.2 SATA/NVMe"
+    },
+    {
+      "name": "Kiểu khe M.2 hỗ trợ",
+      "value": "M.2 SATA/NVMe"
+    },
+    {
+      "name": "Cổng xuất hình",
+      "value": "1 x HDMI"
+    },
+    {
+      "name": "Kết nối không dây",
+      "value": "WiFi 802.11n , Bluetooth 4.0"
+    },
+    {
+      "name": "Bàn phím",
+      "value": "thường , có phím số , không đèn"
+    },
+    {
+      "name": "Hệ điều hành",
+      "value": "Windows 10 Home SL 64-bit"
+    },
+    {
+      "name": "Kích thước",
+      "value": "36.5 x 26.6 x 2.19 cm"
+    },
+    {
+      "name": "Pin",
+      "value": "3 cell 33 Wh , Pin liền"
+    },
+    {
+      "name": "Khối lượng",
+      "value": "1.7 kg"
+    },
+    {
+      "name": "Bảo mật",
+      "value": "Vân tay"
+    },
+    {
+      "name": "VR",
+      "value": "không hỗ trợ"
+    },
+    {
+      "name": "Webcam",
+      "value": "HD webcam"
+    }
+  ],
+  "description": "- CPU: Intel Core i5-8250U ( 1.6 GHz - 3.4 GHz / 6MB / 4 nhân, 8 luồng )",
+  "imageUrl": "https://img1.phongvu.vn/media/catalog/product/1/_/1_39_17.jpg"
+}

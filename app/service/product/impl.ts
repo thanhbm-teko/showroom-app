@@ -1,5 +1,5 @@
 import { FullInfoProduct, PartialInfoProduct } from '../../core/model/product';
-import { ResultCode, ApiResult, getDefaultApiResult } from '../../core/model/ResultCode';
+import { ResultCode, getDefaultApiResult } from '../../core/model/ResultCode';
 import { ProductService, ProductSearchResult, ProductDetailResult } from '../../core/service/product/interface';
 import { ProductFilterData } from '../../core/useCase/searchProduct/filter';
 import { ProductSortData } from '../../core/useCase/searchProduct/sort';
@@ -9,6 +9,7 @@ import { runApiParallel } from '../serviceUtil';
 
 class ProductServiceImpl implements ProductService {
   name: 'Product';
+
   async search(
     query: string,
     filter: ProductFilterData,
@@ -16,29 +17,25 @@ class ProductServiceImpl implements ProductService {
     offset: number,
     limit: number
   ): Promise<ProductSearchResult> {
-    let r = getDefaultApiResult([]);
-    r = await Teko.PSService.search(query, filter, sort, offset, limit);
+    let r = await Teko.PSService.search(query, filter, sort, offset, limit);
     r.data = r.data.map((p: PS.Product) => Adapter.PS.convertProduct(<PartialInfoProduct>{}, p));
     return r;
   }
 
   async getDetail(sku: string): Promise<ProductDetailResult> {
-    let product: FullInfoProduct = <FullInfoProduct>{};
-    let r = getDefaultApiResult();
-
     let [pvisRes, magentoRes] = await runApiParallel([
       () => Teko.PvisService.getProductDetail(sku),
       () => Teko.MagentoService.getProductDetail(sku)
     ]);
 
-    r = pvisRes;
+    let r = pvisRes;
     if (pvisRes.code === ResultCode.Success) {
-      product = Adapter.Pvis.convertProduct(null, pvisRes.data);
+      r.data = Adapter.Pvis.convertProduct(null, pvisRes.data);
+      if (magentoRes.code === ResultCode.Success) {
+        r.data = Adapter.Magento.convertProduct(r.data, magentoRes.data);
+      }
     }
-    if (magentoRes.code === ResultCode.Success) {
-      product = Adapter.Magento.convertProduct(product, magentoRes.data);
-    }
-    r.data = product;
+
     return r;
   }
 }

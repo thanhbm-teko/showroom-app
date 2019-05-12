@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "eject": "expo eject",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll",
-	"test-ci": "node ./node_modules/jest/bin/jest.js",
+    "test-ci": "node ./node_modules/jest/bin/jest.js",
     "clear_jest": "node ./node_modules/jest/bin/jest.js --clearCache"
   },
   "jest": {

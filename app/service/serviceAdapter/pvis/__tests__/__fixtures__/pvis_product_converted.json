@@ -1,0 +1,29 @@
+{
+  "category": "01-N001-02-02-01",
+  "name": "Máy tính xách tay/ Laptop Asus X507UA-EJ483T (Vàng)",
+  "price": 12890000,
+  "sku": "1809178",
+  "status": 1,
+  "stocks": [
+    {
+      "code": "1401",
+      "name": "Kho hàng bán Vũng Tàu",
+      "quantity": 5
+    },
+    {
+      "code": "1404",
+      "name": "Kho hàng bán Vũng Tàu chuyển ra trưng bày",
+      "quantity": 1
+    },
+    {
+      "code": "1804",
+      "name": "Kho hàng bán Đồng Tháp chuyển tr bày (Kho kiểm h",
+      "quantity": 1
+    },
+    {
+      "code": "2001",
+      "name": "Kho hàng bán Biên Hòa (Kho kiểm hàng)",
+      "quantity": 7
+    }
+  ]
+}

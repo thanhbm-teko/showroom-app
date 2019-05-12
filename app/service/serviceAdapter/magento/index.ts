@@ -30,8 +30,8 @@ function formatDescription(description: string) {
   if (description) {
     d = description
       .trim()
-      .replace(/<br>/g, '\r\n')
-      .replace(/<br( )*\/>/g, '\r\n')
+      .replace(/<br>/g, '\n')
+      .replace(/<br( )*\/>/g, '\n')
       .replace(/<[A-Za-z/][^<>]*>/g, '');
     if (d.indexOf('&') !== -1 && d.indexOf(';') !== -1) {
       d = he.decode(d);
