@@ -1,12 +1,20 @@
-import { combineReducers } from 'redux';
+import types from './actionTypes';
+import { getInitialSearchData } from '../../core/useCase/searchProduct/searchProduct.ts';
+import { getInitialDetailData } from '../../core/useCase/productDetail/productDetail.ts';
 
-import searchProduct from './searchProduct/reducer';
-import productDetail from './productDetail/reducer';
+export const initialState = {
+  searchProduct: getInitialSearchData(),
+  productDetail: getInitialDetailData()
+};
 
-// Combines all reducers to a single reducer function
-const reducers = combineReducers({
-  searchProduct,
-  productDetail
-});
-
-export default reducers;
+export default function reduce(state = initialState, action = {}) {
+  switch (action.type) {
+    case types.saveDataToRedux:
+      return {
+        ...state,
+        [action.key]: action.data
+      };
+    default:
+      return state;
+  }
+}

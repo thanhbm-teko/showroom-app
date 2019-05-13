@@ -1,13 +1,25 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
-import { AppLoading, Font } from 'expo';
+import { AppLoading, Font, Logs } from 'expo';
 import { MenuProvider } from 'react-native-popup-menu';
 
 import store from './app/UI/reduxConnector/configureStore';
 import ServiceLocator from './app/core/service/serviceLocator';
 import AppNavigator from './app/UI/navigation/AppNavigator';
 import ServiceMapConfig from './app/service/serviceMapConfig';
+
+// https://github.com/expo/expo/issues/2623#issuecomment-441364587
+const isRemoteDebuggingEnabled = typeof atob !== 'undefined';
+if (isRemoteDebuggingEnabled) {
+  console.log('disabling cli log');
+  Logs.disableExpoCliLogging();
+} else {
+  console.log('enabling cli log');
+  Logs.enableExpoCliLogging();
+}
+
+console.disableYellowBox = true;
 
 export default class App extends React.Component {
   state = {

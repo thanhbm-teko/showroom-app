@@ -17,23 +17,24 @@ class ImageWrapper extends Component {
     super(props);
     this.state = {
       step: STEP.TRY_LOCAL,
-      localUri: this.getLocalFileUri(props.source)
+      localUri: ImageWrapper.getLocalFileUri(props.source)
     };
   }
 
-  static getDerivedStateFromProps(prevState, nextProps) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     let { step, localUri } = prevState;
     if (USE_IMAGE_CACHE) {
-      let newLocalUri = this.getLocalFileUri(nextProps.source);
-      if (newLocalUri !== localUri && step !== STEP.TRY_LOCAL) {
+      let newLocalUri = ImageWrapper.getLocalFileUri(nextProps.source);
+      if (newLocalUri !== localUri) {
         step = STEP.TRY_LOCAL;
+        localUri = newLocalUri;
       }
     }
 
     return { step, localUri };
   }
 
-  getLocalFileUri(path) {
+  static getLocalFileUri = path => {
     if (path) {
       let i = path.lastIndexOf('/');
       if (i !== -1 && i < path.length - 1) {
@@ -41,7 +42,7 @@ class ImageWrapper extends Component {
       }
     }
     return null;
-  }
+  };
 
   downloadImage = async () => {
     let { step, localUri } = this.state;

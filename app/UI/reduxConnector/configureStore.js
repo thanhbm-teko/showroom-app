@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-import reducers from './reducer';
+import reducer from './reducer';
 import config from '../../config';
 
 // Returns the store instance
@@ -9,11 +9,11 @@ import config from '../../config';
 const configureStore = () => {
   if (config.logEnabled) {
     return {
-      ...createStore(reducers, applyMiddleware(thunk, logger))
+      ...createStore(reducer, applyMiddleware(thunk, logger))
     };
   } else {
     return {
-      ...createStore(reducers, applyMiddleware(thunk))
+      ...createStore(reducer, applyMiddleware(thunk))
     };
   }
 };
