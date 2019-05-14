@@ -16,6 +16,8 @@ import { fonts, screen, colors, scale } from '../../styles';
 import * as productDetailActions from '../../reduxConnector/productDetail/actions';
 import * as util from '../../util';
 
+import PRODUCT_TYPES from './productTypes.json';
+
 export class ProductDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     header: null
@@ -37,30 +39,13 @@ export class ProductDetailScreen extends Component {
 
   render() {
     let { product } = this.props;
-    console.log('product: ', product);
     return (
       <View style={styles.container}>
         <ScrollView>
           {this.renderTopPanel()}
           {this.renderProductGeneralInfo()}
           <View>
-            <ProductTypeChooser
-              productTypes={[
-                {
-                  key: 'Biz',
-                  label: 'Hàng bán'
-                },
-                {
-                  key: 'Disp',
-                  label: 'Hàng trưng bày'
-                },
-                {
-                  key: 'Outlet',
-                  label: 'Hàng thanh lý'
-                }
-              ]}
-              selectedProductType={'Biz'}
-            />
+            <ProductTypeChooser productTypes={PRODUCT_TYPES} selectedProductType={'Biz'} />
             {this.renderPriceSection()}
             <StockInfo stocks={util.safeValue(product, 'stocks', [])} isUsingOm={false} />
           </View>
@@ -106,7 +91,7 @@ export class ProductDetailScreen extends Component {
         >
           <Icon type="material-community" name="close" size={scale(24)} color={colors.brightOrange} />
         </TouchableOpacity>
-        {/*  add emptyview and then you can add report button :D */}
+        {/* add emptyview and then you can add report button :D */}
         <View style={styles.placeHolder} />
         {this.renderReportButton()}
       </View>

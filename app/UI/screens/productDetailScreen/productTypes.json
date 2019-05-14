@@ -1,0 +1,14 @@
+[
+  {
+    "key": "Biz",
+    "label": "Hàng bán"
+  },
+  {
+    "key": "Disp",
+    "label": "Hàng trưng bày"
+  },
+  {
+    "key": "Outlet",
+    "label": "Hàng thanh lý"
+  }
+]
