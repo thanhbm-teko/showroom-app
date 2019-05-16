@@ -1,9 +1,8 @@
 import { Service } from '../serviceLocator';
-import { ResultCode } from '../../model/ResultCode';
+import { ResultCode, ApiResult } from '../../model/ResultCode';
 import { Promotion } from '../../model/Promotion/promotion';
 
-export interface PromotionListResult {
-  code: ResultCode;
+export interface PromotionListResult extends ApiResult {
   data: Promotion[];
 }
 

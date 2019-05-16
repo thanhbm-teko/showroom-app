@@ -11,7 +11,10 @@ namespace Firebase {
 
   export namespace LegacyPromotion {
     export interface DataBlock {
-      promotionSkus: string[];
+      promotionSkus?: string[];
+      promotionPrice?: number;
+      discountPercent?: number;
+      limited_quantity?: number;
       quantity: number;
       sku: string;
     }
@@ -26,7 +29,7 @@ namespace Firebase {
       name: string;
       priority: number;
       banner_url: string;
-      time: TimeSlot[];
+      time?: TimeSlot[];
       data: { [key: string]: DataBlock };
     }
   }

@@ -1,0 +1,81 @@
+{
+  "Xa_hang_NVL_102018": {
+    "banner_url": "",
+    "branches": ["CH1001"],
+    "data": {
+      "1204495": {
+        "limited_quantity": 1,
+        "promotionPrice": "68500",
+        "quantity": "100",
+        "sku": "1204495"
+      },
+      "1204496": {
+        "limited_quantity": 1,
+        "promotionPrice": "59500",
+        "quantity": "40",
+        "sku": "1204496"
+      },
+      "1603779": {
+        "limited_quantity": 1,
+        "promotionPrice": "82000",
+        "quantity": "100",
+        "sku": "1603779"
+      }
+    },
+    "date": {
+      "endDate": 534265999000,
+      "startDate": 1528390800000
+    },
+    "key": "Xa_hang_NVL_102018",
+    "name": "Khuyến mãi Xả hàng NVL",
+    "priority": 1
+  },
+  "bucnhipdamme_022019": {
+    "banner_url": "",
+    "branches": ["CH0901", "CH0902", "CH1001"],
+    "data": {
+      "19010176": {
+        "limited_quantity": 1,
+        "promotionSkus": ["19010424"],
+        "quantity": "20",
+        "sku": "19010176"
+      },
+      "19010177": {
+        "limited_quantity": 1,
+        "promotionSkus": ["19010424"],
+        "quantity": "20",
+        "sku": "19010177"
+      }
+    },
+    "date": {
+      "endDate": 1551373199000,
+      "startDate": 1550163600000
+    },
+    "key": "bucnhipdamme_022019",
+    "name": "Bức nhịp đam mê. Sống trọn khoảnh khắc",
+    "priority": 1
+  },
+  "conloc_giamgia_lenovo": {
+    "banner_url": "",
+    "branches": ["CH0901", "CH0902"],
+    "data": {
+      "1702261": {
+        "discountPercent": 5,
+        "quantity": 0,
+        "sku": "1702261"
+      },
+      "1702369": {
+        "promotionPrice": "11615700",
+        "quantity": "27",
+        "sku": "1702369"
+      }
+    },
+    "date": {
+      "endDate": 1546275599000,
+      "startDate": 1539422800000
+    },
+    "key": "conloc_giamgia_lenovo",
+    "name": "Cơn lốc giảm giá Laptop Lenovo",
+    "priority": 1
+  }
+}

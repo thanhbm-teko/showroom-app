@@ -1,10 +1,16 @@
-import axios, { AxiosResponse } from 'axios';
-import PSService from '../index';
+import dbApi from '../dbApi';
 import { ApiResult, ResultCode } from '../../../../core/model/ResultCode';
 
-let mockApiSuccess = async () =>
-  <AxiosResponse>(<unknown>{ status: 200, statusText: 'ok', data: { data: { data: { products: [1, 2, 3] } } } });
-let mockApiFailure = async () => <AxiosResponse>(<unknown>{ status: 400, statusText: 'bad request', data: null });
+import LegacyPromotion = Firebase.LegacyPromotion;
+import LEGACY_PROMOTIONS from './__fixtures__/legacy_promotions.json';
+import LEGACY_PROMOTIONS_DETAIL from './__fixtures__/legacy_promotions_detail.json';
+
+let mockApiListSuccess = async () => <{ [key: string]: LegacyPromotion.Condition }>LEGACY_PROMOTIONS;
+let mockApiListFail = async () => <{ [key: string]: LegacyPromotion.Condition }>{};
+let mockApiDetailSuccess = async (key: string) =>
+  <LegacyPromotion.Detail>(<{ [key: string]: LegacyPromotion.Condition }>LEGACY_PROMOTIONS_DETAIL)[key];
+let mockApiDetailFail = async (key: string) => <LegacyPromotion.Detail>null;
+
 let mockApiException = async () => {
   throw new Error('test exception');
 };
