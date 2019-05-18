@@ -1,5 +1,5 @@
 import { Promotion } from '../../../core/model/Promotion/promotion';
-import { GiftBenefit, DiscountBenefit, CombineBenefit } from '../../../core/model/Promotion/Benefit';
+import { GiftBenefit, DiscountBenefit, CombineBenefit, Benefit } from '../../../core/model/Promotion/Benefit';
 import { SkuCondition } from '../../../core/model/Promotion/Condition';
 
 function convertLegacyPromotions(legacyPromotion: Firebase.LegacyPromotion.Detail): Promotion[] {
@@ -7,21 +7,9 @@ function convertLegacyPromotions(legacyPromotion: Firebase.LegacyPromotion.Detai
   if (legacyPromotion) {
     let { key, name, branches, date, time, data } = legacyPromotion;
     for (let productKey in data) {
-      let { promotionSkus, quantity, promotionPrice, sku } = data[key];
-      let gifts = promotionSkus
-        ? promotionSkus.map(
-            giftSku =>
-              <GiftBenefit>{
-                id: `${key}-${productKey}-gift-${giftSku}`,
-                type: 'gift',
-                product: { sku: giftSku },
-                quantity: 1
-              }
-          )
-        : [];
-      let discounts = promotionPrice
-        ? [<DiscountBenefit>{ id: `${key}-${productKey}-discount-${promotionPrice}`, type: 'discount', value: promotionPrice }]
-        : [];
+      let { quantity, sku } = data[productKey];
+      let benefit = extractLegacyPromotionBenefit(`${key}-${productKey}`, data[productKey]);
+
       promotions.push({
         key,
         name,
@@ -34,16 +22,44 @@ function convertLegacyPromotions(legacyPromotion: Firebase.LegacyPromotion.Detai
           type: 'sku',
           sku
         },
-        benefit: <CombineBenefit>{
-          id: `${key}-${productKey}`,
-          type: 'allOf',
-          children: [...gifts, ...discounts]
-        }
+        benefit
       });
     }
   }
 
   return promotions;
+}
+
+function extractLegacyPromotionBenefit(parentKey: string, dataBlock: Firebase.LegacyPromotion.DataBlock): Benefit {
+  let { promotionSkus, promotionPrice } = dataBlock;
+  let gifts = promotionSkus
+    ? promotionSkus.map(
+        giftSku =>
+          <GiftBenefit>{
+            id: `${parentKey}-gift-${giftSku}`,
+            type: 'gift',
+            product: { sku: giftSku },
+            quantity: 1
+          }
+      )
+    : [];
+  let discounts = promotionPrice
+    ? [<DiscountBenefit>{ id: `${parentKey}-discount-${promotionPrice}`, type: 'discount', value: promotionPrice }]
+    : [];
+
+  let benefit = null;
+  let children = [...gifts, ...discounts];
+  if (children.length > 1) {
+    benefit = <CombineBenefit>{
+      id: `${parentKey}`,
+      type: 'allOf',
+      children: [...gifts, ...discounts]
+    };
+  } else {
+    benefit = children[0];
+  }
+
+  return benefit;
 }
 
 export default {

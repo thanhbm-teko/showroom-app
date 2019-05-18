@@ -1,23 +1,23 @@
 {
   "Xa_hang_NVL_102018": {
-    "branches": ["CH1001"],
+    "branches": ["CP09"],
     "date": {
-      "endDate": 534265999000,
-      "startDate": 1528390800000
+      "endDate": 4000,
+      "startDate": 1000
     }
   },
   "bucnhipdamme_022019": {
-    "branches": ["CH0901", "CH0902", "CH1001"],
+    "branches": ["CP09", "CH0901"],
     "date": {
-      "endDate": 1551373199000,
-      "startDate": 1550163600000
+      "endDate": 2000,
+      "startDate": 500
     }
   },
   "conloc_giamgia_lenovo": {
-    "branches": ["CH0901", "CH0902"],
+    "branches": ["CP10", "CH0902"],
     "date": {
-      "endDate": 1546275599000,
-      "startDate": 1539422800000
+      "endDate": 3000,
+      "startDate": 1000
     }
   }
 }

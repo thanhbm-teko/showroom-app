@@ -1,4 +1,5 @@
-import dbApi from '../dbApi';
+import DbApi from '../dbApi';
+import FirebaseService from '../index';
 import { ApiResult, ResultCode } from '../../../../core/model/ResultCode';
 
 import LegacyPromotion = Firebase.LegacyPromotion;
@@ -16,20 +17,70 @@ let mockApiException = async () => {
 };
 let r: ApiResult = null;
 
-describe('placeholder', () => {
-  // describe('when api success', () => {
-  //   beforeAll(async () => {
-  //     axios.get = jest.fn(mockApiSuccess);
-  //     r = await PSService.search('abc', null, null, 0, 10);
-  //   });
+describe('FirebaseService.getLegacyPromotions', () => {
+  beforeAll(() => {
+    Date.now = jest.fn(() => 2000);
+  });
 
-  //   it('should return status success and data', () => {
-  //     expect(r.code).toBe(ResultCode.Success);
-  //     expect(r.data).toEqual([1, 2, 3]);
-  //     expect(r.message).toBe('');
-  //   });
-  // });
-  it('placeholder', () => {
-    expect(true).toBe(true);
+  describe('when call api success', () => {
+    beforeAll(async () => {
+      DbApi.getLegacyPromotions = jest.fn(mockApiListSuccess);
+      DbApi.getLegacyPromotionDetail = jest.fn(mockApiDetailSuccess);
+      r = await FirebaseService.getLegacyPromotions();
+    });
+
+    it('should return status success and data', () => {
+      expect(r.code).toBe(ResultCode.Success);
+      expect(r.data).toEqual([LEGACY_PROMOTIONS_DETAIL.Xa_hang_NVL_102018]);
+      expect(r.message).toBe('');
+    });
+  });
+
+  describe('when call api getLegacyPromotions fail', () => {
+    beforeAll(async () => {
+      DbApi.getLegacyPromotions = jest.fn(mockApiListFail);
+      DbApi.getLegacyPromotionDetail = jest.fn(mockApiDetailSuccess);
+      r = await FirebaseService.getLegacyPromotions();
+    });
+
+    it('should return status success and data empty array', () => {
+      expect(r.code).toBe(ResultCode.Success);
+      expect(r.data).toEqual([]);
+      expect(r.message).toBe('');
+    });
+  });
+
+  describe('when call api getLegacyPromotionDetail fail', () => {
+    beforeAll(async () => {
+      DbApi.getLegacyPromotions = jest.fn(mockApiListSuccess);
+      DbApi.getLegacyPromotionDetail = jest.fn(mockApiDetailFail);
+      r = await FirebaseService.getLegacyPromotions();
+    });
+
+    it('should return status success and data empty array', () => {
+      expect(r.code).toBe(ResultCode.Success);
+      expect(r.data).toEqual([]);
+      expect(r.message).toBe('');
+    });
+  });
+
+  describe('when call api exception', () => {
+    it('should return status failure and data empty array when api detail exception', async () => {
+      DbApi.getLegacyPromotions = jest.fn(mockApiListSuccess);
+      DbApi.getLegacyPromotionDetail = jest.fn(mockApiException);
+      r = await FirebaseService.getLegacyPromotions();
+      expect(r.code).toBe(ResultCode.Failure);
+      expect(r.data).toEqual([]);
+      expect(r.message).toBe('test exception');
+    });
+
+    it('should return status failure and data empty array when api list exception', async () => {
+      DbApi.getLegacyPromotions = jest.fn(mockApiException);
+      DbApi.getLegacyPromotionDetail = jest.fn(mockApiDetailSuccess);
+      r = await FirebaseService.getLegacyPromotions();
+      expect(r.code).toBe(ResultCode.Failure);
+      expect(r.data).toEqual([]);
+      expect(r.message).toBe('test exception');
+    });
   });
 });

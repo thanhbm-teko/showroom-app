@@ -1,26 +1,29 @@
-import firebase from 'firebase';
+import FbProxy from './fbProxy';
+import DbCache from './dbCache';
 
 import LegacyPromotion = Firebase.LegacyPromotion;
 
-async function getLegacyPromotions(): Promise<{ [key: string]: LegacyPromotion.Condition }> {
-  let snapshot = await firebase
-    .database()
-    .ref(`simplified/promotions-v2/promotions`)
-    .once('value');
-  let promotions: { [key: string]: LegacyPromotion.Condition } = snapshot.val() ? snapshot.val() : {};
-  return promotions;
+class DbApi {
+  async getLegacyPromotions(): Promise<{ [key: string]: LegacyPromotion.Condition }> {
+    let data = await this.fetchDbWithCache('simplified/promotions-v2/promotions');
+    return <{ [key: string]: LegacyPromotion.Condition }>(data || {});
+  }
+
+  async getLegacyPromotionDetail(key: string): Promise<LegacyPromotion.Detail> {
+    let data = await this.fetchDbWithCache(`promotions-v2/promotions/${key}`);
+    return <LegacyPromotion.Detail>data;
+  }
+
+  async fetchDbWithCache(path: string): Promise<any> {
+    if (DbCache.isListening(path)) {
+      return DbCache.get(path);
+    } else {
+      let snapshot = await FbProxy.getDb()
+        .ref(path)
+        .once('value');
+      return snapshot.val();
+    }
+  }
 }
 
-async function getLegacyPromotionsDetail(key: string): Promise<LegacyPromotion.Detail> {
-  let snapshot = await firebase
-    .database()
-    .ref(`promotions-v2/promotions/${key}`)
-    .once('value');
-  let promotion = snapshot.val() ? <LegacyPromotion.Detail>snapshot.val() : null;
-  return promotion;
-}
-
-export default {
-  getLegacyPromotions,
-  getLegacyPromotionsDetail
-};
+export default new DbApi();

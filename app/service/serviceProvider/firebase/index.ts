@@ -1,6 +1,5 @@
-import firebase from 'firebase';
 import { ApiResult, getDefaultApiResult, ResultCode } from '../../../core/model/ResultCode';
-import dbApi from './dbApi';
+import DbApi from './dbApi';
 
 import LegacyPromotion = Firebase.LegacyPromotion;
 
@@ -8,14 +7,15 @@ class FirebaseService {
   async getLegacyPromotions(): Promise<ApiResult> {
     let r = getDefaultApiResult([]);
     try {
-      let promotions = await dbApi.getLegacyPromotions();
+      let promotions = await DbApi.getLegacyPromotions();
       for (let key in promotions) {
         if (this.isConditionApplicable(promotions[key])) {
-          let detail = await dbApi.getLegacyPromotionsDetail(key);
+          let detail = await DbApi.getLegacyPromotionDetail(key);
           r.data.push(detail);
         }
       }
 
+      r.data = r.data.filter((p: any) => p !== null);
       r.code = ResultCode.Success;
     } catch (error) {
       r.data = [];

@@ -1,10 +1,18 @@
 {
   "Xa_hang_NVL_102018": {
+    "priority": 1,
     "banner_url": "",
-    "branches": ["CH1001"],
+    "key": "Xa_hang_NVL_102018",
+    "name": "Khuyến mãi Xả hàng NVL",
+    "branches": ["CP09"],
+    "date": {
+      "endDate": 4000,
+      "startDate": 1000
+    },
     "data": {
       "1204495": {
         "limited_quantity": 1,
+        "promotionSkus": ["1200512", "1800957"],
         "promotionPrice": "68500",
         "quantity": "100",
         "sku": "1204495"
@@ -17,22 +25,22 @@
       },
       "1603779": {
         "limited_quantity": 1,
-        "promotionPrice": "82000",
+        "promotionSkus": ["1200512"],
         "quantity": "100",
         "sku": "1603779"
       }
-    },
-    "date": {
-      "endDate": 534265999000,
-      "startDate": 1528390800000
-    },
-    "key": "Xa_hang_NVL_102018",
-    "name": "Khuyến mãi Xả hàng NVL",
-    "priority": 1
+    }
   },
   "bucnhipdamme_022019": {
+    "priority": 1,
     "banner_url": "",
-    "branches": ["CH0901", "CH0902", "CH1001"],
+    "key": "bucnhipdamme_022019",
+    "name": "Bức nhịp đam mê. Sống trọn khoảnh khắc",
+    "branches": ["CP09", "CH0901"],
+    "date": {
+      "endDate": 2000,
+      "startDate": 500
+    },
     "data": {
       "19010176": {
         "limited_quantity": 1,
@@ -46,18 +54,18 @@
         "quantity": "20",
         "sku": "19010177"
       }
-    },
-    "date": {
-      "endDate": 1551373199000,
-      "startDate": 1550163600000
-    },
-    "key": "bucnhipdamme_022019",
-    "name": "Bức nhịp đam mê. Sống trọn khoảnh khắc",
-    "priority": 1
+    }
   },
   "conloc_giamgia_lenovo": {
+    "priority": 1,
     "banner_url": "",
-    "branches": ["CH0901", "CH0902"],
+    "key": "conloc_giamgia_lenovo",
+    "name": "Cơn lốc giảm giá Laptop Lenovo",
+    "branches": ["CP10", "CH0902"],
+    "date": {
+      "endDate": 3000,
+      "startDate": 1000
+    },
     "data": {
       "1702261": {
         "discountPercent": 5,
@@ -69,13 +77,6 @@
         "quantity": "27",
         "sku": "1702369"
       }
-    },
-    "date": {
-      "endDate": 1546275599000,
-      "startDate": 1539422800000
-    },
-    "key": "conloc_giamgia_lenovo",
-    "name": "Cơn lốc giảm giá Laptop Lenovo",
-    "priority": 1
+    }
   }
 }

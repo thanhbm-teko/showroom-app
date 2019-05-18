@@ -1,8 +1,8 @@
-import firebase from 'firebase';
+import FbProxy from './fbProxy';
 
 class DbCache {
   database: any = {};
-  monitorPaths: string[] = [];
+  listeningPaths: string[] = [];
 
   get(path: string): any {
     let pointer: any = this.database;
@@ -28,30 +28,25 @@ class DbCache {
     });
   }
 
-  on(path: string): void {
-    this.monitorPaths.push(path);
-    firebase
-      .database()
+  listen(path: string): void {
+    this.listeningPaths.push(path);
+    FbProxy.getDb()
       .ref(path)
       .on('value', snapshot => {
-        let data = snapshot.val() ? snapshot.val() : null;
-        if (data) {
-          this.set(path, data);
-        }
+        this.set(path, snapshot.val());
       });
   }
 
-  off(path: string): void {
-    this.monitorPaths = this.monitorPaths.filter(p => p !== path);
+  unlisten(path: string): void {
+    this.listeningPaths = this.listeningPaths.filter(p => p !== path);
     this.set(path, null);
-    firebase
-      .database()
+    FbProxy.getDb()
       .ref(path)
       .off('value');
   }
 
-  hasData(path: string): boolean {
-    return this.monitorPaths.find(mp => path.includes(mp)) ? true : false;
+  isListening(path: string): boolean {
+    return this.listeningPaths.find(mp => path.includes(mp)) ? true : false;
   }
 }
 

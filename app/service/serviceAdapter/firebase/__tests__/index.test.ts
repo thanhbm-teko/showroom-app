@@ -1,26 +1,13 @@
-// import { PartialInfoProduct } from '../../../../core/model/product';
-// import PSAdapter from '../index';
+import FirebaseAdapter from '../index';
 
-// import PS_PRODUCT from '../../../serviceProvider/ps/__tests__/__fixtures__/ps_product.json';
-// import PS_CONVERTED from './__fixtures__/ps_converted_product.json';
+import FB_PROMOTIONS from '../../../serviceProvider/firebase/__tests__/__fixtures__/legacy_promotions_detail.json';
+import FB_CONVERTED_PROMOTIONS from './__fixtures__/fb_converted_promotions.json';
 
-// describe('convertProduct', () => {
-//   it('should convert product from PS format correctly', () => {
-//     let p = PSAdapter.convertProduct(<PartialInfoProduct>{}, <PS.Product>(<unknown>PS_PRODUCT));
-//     expect(p).toEqual(PS_CONVERTED);
-//   });
-
-//   it('should override existing attributes', () => {
-//     let p = PSAdapter.convertProduct(
-//       <PartialInfoProduct>{
-//         category: 'cat',
-//         name: 'name',
-//         price: 0,
-//         sku: 'sku',
-//         status: 0
-//       },
-//       <PS.Product>(<unknown>PS_PRODUCT)
-//     );
-//     expect(p).toEqual(PS_CONVERTED);
-//   });
-// });
+describe('convertLegacyPromotions', () => {
+  it('should convert promotions from FirebaseLegacy format correctly', () => {
+    let promotions = FirebaseAdapter.convertLegacyPromotions(<Firebase.LegacyPromotion.Detail>(
+      (<unknown>FB_PROMOTIONS.Xa_hang_NVL_102018)
+    ));
+    expect(promotions).toEqual(FB_CONVERTED_PROMOTIONS);
+  });
+});

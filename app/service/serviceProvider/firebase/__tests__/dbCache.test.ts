@@ -1,6 +1,6 @@
-import firebase from 'firebase';
+import FbProxy from '../fbProxy';
 import DbCache from '../dbCache';
-import config from '../../../../config.json';
+import { mockFirebaseDbReturn } from './testUtils';
 
 const DATA = { sampleJson: { sampleKey: 'sampleContent' } };
 
@@ -11,11 +11,12 @@ describe('dbCache.set', () => {
       expect(DbCache.database.test).toEqual(DATA);
     });
 
-    it('should not touch other fields in database', () => {
-      DbCache.set('test', DATA);
+    it('should not clear other existing data in database', () => {
       DbCache.set('test/other', DATA);
-      expect(DbCache.database.test).toEqual({ ...DATA, other: DATA });
+      DbCache.set('test/another/data', DATA);
+      expect(DbCache.database.test).toEqual({ ...DATA, other: DATA, another: { data: DATA } });
       expect(DbCache.database.test.other).toEqual(DATA);
+      expect(DbCache.database.test.another.data).toEqual(DATA);
     });
   });
 });
@@ -34,29 +35,52 @@ describe('dbCache.get', () => {
   });
 });
 
-describe('dbCache.on', () => {
+describe('dbCache.listen', () => {
   describe('when call', () => {
-    it('should set the data when received', () => {
-      // jest.mock('firebase/app', () => {
-      //   let snapshot = <firebase.database.DataSnapshot>{ val: () => DATA };
-      //   return {
-      //     initializeApp: jest.fn().mockReturnValue()
-      //   };
-      // });
-      let snapshot = <firebase.database.DataSnapshot>{ val: () => DATA };
-      firebase.initializeApp = jest.fn().mockReturnValue({
-        database: jest.fn().mockReturnValue({
-          ref: jest.fn().mockReturnThis(),
-          on: jest.fn((eventType, callback) => callback(snapshot)),
-          once: jest.fn(() => Promise.resolve(snapshot))
-        })
-      });
+    beforeAll(() => {
+      FbProxy.getDb = mockFirebaseDbReturn(DATA);
       DbCache.set = jest.fn();
+      DbCache.listen('test/on/a/path');
+    });
 
-      firebase.initializeApp(config.firebase);
-      DbCache.on('test/on/a/path');
-      expect(DbCache.monitorPaths).toContain('test/on/a/path');
+    it('should add the path to listen list', () => {
+      expect(DbCache.listeningPaths).toContain('test/on/a/path');
+    });
+
+    it('should call firebase.database.on', () => {
+      expect(FbProxy.getDb().ref().on).toBeCalled();
+    });
+
+    it('should set the data when received', () => {
       expect(DbCache.set).toBeCalledWith('test/on/a/path', DATA);
+    });
+
+    it('isListening should return true', () => {
+      expect(DbCache.isListening('test/on/a/path')).toBe(true);
+    });
+
+    describe('dbCache.unlisten', () => {
+      describe('when call', () => {
+        beforeAll(() => {
+          DbCache.unlisten('test/on/a/path');
+        });
+
+        it('should remove the path from listen list', () => {
+          expect(DbCache.listeningPaths).not.toContain('test/on/a/path');
+        });
+
+        it('should call firebase.database.off', () => {
+          expect(FbProxy.getDb().ref().off).toBeCalled();
+        });
+
+        it('should unset the data', () => {
+          expect(DbCache.set).toBeCalledWith('test/on/a/path', null);
+        });
+
+        it('isListening should return false', () => {
+          expect(DbCache.isListening('test/on/a/path')).toBe(false);
+        });
+      });
     });
   });
 });
