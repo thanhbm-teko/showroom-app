@@ -47,19 +47,8 @@ function extractLegacyPromotionBenefit(parentKey: string, dataBlock: Firebase.Le
     ? [<DiscountBenefit>{ id: `${parentKey}-discount-${promotionPrice}`, type: 'discount', value: promotionPrice }]
     : [];
 
-  let benefit = null;
   let children = [...gifts, ...discounts];
-  if (children.length > 1) {
-    benefit = <CombineBenefit>{
-      id: `${parentKey}`,
-      type: 'allOf',
-      children: [...gifts, ...discounts]
-    };
-  } else {
-    benefit = children[0];
-  }
-
-  return benefit;
+  return children.length > 1 ? <CombineBenefit>{ id: `${parentKey}`, type: 'allOf', children } : children[0];
 }
 
 export default {

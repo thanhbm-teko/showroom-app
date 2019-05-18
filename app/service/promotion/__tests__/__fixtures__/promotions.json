@@ -1,0 +1,159 @@
+[
+  {
+    "applyWithOther": false,
+    "benefit": {
+      "children": [
+        {
+          "id": "Xa_hang_NVL_102018-1204495-gift-1200512",
+          "product": {
+            "sku": "1200512"
+          },
+          "quantity": 1,
+          "type": "gift"
+        },
+        {
+          "id": "Xa_hang_NVL_102018-1204495-gift-1800957",
+          "product": {
+            "sku": "1800957"
+          },
+          "quantity": 1,
+          "type": "gift"
+        },
+        {
+          "id": "Xa_hang_NVL_102018-1204495-discount-68500",
+          "type": "discount",
+          "value": "68500"
+        }
+      ],
+      "id": "Xa_hang_NVL_102018-1204495",
+      "type": "allOf"
+    },
+    "condition": {
+      "sku": "1204495",
+      "type": "sku"
+    },
+    "key": "Xa_hang_NVL_102018",
+    "name": "Khuyến mãi Xả hàng NVL",
+    "promotionQuantity": {
+      "maxQuantity": "100",
+      "remainQuantity": "100"
+    }
+  },
+  {
+    "applyWithOther": false,
+    "benefit": {
+      "id": "Xa_hang_NVL_102018-1204496-discount-59500",
+      "type": "discount",
+      "value": "59500"
+    },
+    "condition": {
+      "sku": "1204496",
+      "type": "sku"
+    },
+    "key": "Xa_hang_NVL_102018",
+    "name": "Khuyến mãi Xả hàng NVL",
+    "promotionQuantity": {
+      "maxQuantity": "40",
+      "remainQuantity": "40"
+    }
+  },
+  {
+    "applyWithOther": false,
+    "benefit": {
+      "id": "Xa_hang_NVL_102018-1603779-gift-1200512",
+      "product": {
+        "sku": "1200512"
+      },
+      "quantity": 1,
+      "type": "gift"
+    },
+    "condition": {
+      "sku": "1603779",
+      "type": "sku"
+    },
+    "key": "Xa_hang_NVL_102018",
+    "name": "Khuyến mãi Xả hàng NVL",
+    "promotionQuantity": {
+      "maxQuantity": "100",
+      "remainQuantity": "100"
+    }
+  },
+  {
+    "applyWithOther": false,
+    "benefit": {
+      "id": "bucnhipdamme_022019-19010176-gift-19010424",
+      "product": {
+        "sku": "19010424"
+      },
+      "quantity": 1,
+      "type": "gift"
+    },
+    "condition": {
+      "sku": "19010176",
+      "type": "sku"
+    },
+    "key": "bucnhipdamme_022019",
+    "name": "Bức nhịp đam mê. Sống trọn khoảnh khắc",
+    "promotionQuantity": {
+      "maxQuantity": "20",
+      "remainQuantity": "20"
+    }
+  },
+  {
+    "applyWithOther": false,
+    "benefit": {
+      "id": "bucnhipdamme_022019-19010177-gift-19010424",
+      "product": {
+        "sku": "19010424"
+      },
+      "quantity": 1,
+      "type": "gift"
+    },
+    "condition": {
+      "sku": "19010177",
+      "type": "sku"
+    },
+    "key": "bucnhipdamme_022019",
+    "name": "Bức nhịp đam mê. Sống trọn khoảnh khắc",
+    "promotionQuantity": {
+      "maxQuantity": "20",
+      "remainQuantity": "20"
+    }
+  },
+  {
+    "applyWithOther": false,
+    "benefit": {
+      "id": "conloc_giamgia_lenovo-1702261-discount-500000",
+      "type": "discount",
+      "value": "500000"
+    },
+    "condition": {
+      "sku": "1702261",
+      "type": "sku"
+    },
+    "key": "conloc_giamgia_lenovo",
+    "name": "Cơn lốc giảm giá Laptop Lenovo",
+    "promotionQuantity": {
+      "maxQuantity": 0,
+      "remainQuantity": 0
+    }
+  },
+  {
+    "applyWithOther": false,
+    "benefit": {
+      "id": "conloc_giamgia_lenovo-1702369-discount-11615700",
+      "type": "discount",
+      "value": "11615700"
+    },
+    "condition": {
+      "sku": "1702369",
+      "type": "sku"
+    },
+    "key": "conloc_giamgia_lenovo",
+    "name": "Cơn lốc giảm giá Laptop Lenovo",
+    "promotionQuantity": {
+      "maxQuantity": "27",
+      "remainQuantity": "27"
+    }
+  }
+]

@@ -9,6 +9,7 @@ import PVIS_PRODUCT from '../../serviceProvider/pvis/__tests__/__fixtures__/pvis
 import MAGENTO_PRODUCT from '../../serviceProvider/magento/__tests__/__fixtures__/magento_product.json';
 import PVIS_PRODUCT_CONVERTED from '../../serviceAdapter/pvis/__tests__/__fixtures__/pvis_product_converted.json';
 import MAGENTO_PRODUCT_CONVERTED from '../../serviceAdapter/magento/__tests__/__fixtures__/magento_product_converted.json';
+import PRODUCTS from './__fixtures__/products.json';
 
 describe('ProductServiceImpl.search', () => {
   let mockSearchFailureNoResults = async () => <ApiResult>{ code: ResultCode.Failure, data: [], message: 'xyz' };
@@ -50,7 +51,7 @@ describe('ProductServiceImpl.search', () => {
     it('should return result according to result of Teko.PSService.search', () => {
       expect(r.code).toBe(ResultCode.Success);
       expect(r.message).toBe('');
-      expect(r.data).toHaveLength(2);
+      expect(r.data).toEqual(PRODUCTS);
     });
   });
 });

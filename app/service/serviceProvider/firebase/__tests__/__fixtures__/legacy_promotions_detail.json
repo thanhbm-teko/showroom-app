@@ -69,6 +69,7 @@
     "data": {
       "1702261": {
         "discountPercent": 5,
+        "promotionPrice": "500000",
         "quantity": 0,
         "sku": "1702261"
       },
