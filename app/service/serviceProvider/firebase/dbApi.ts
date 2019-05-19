@@ -1,17 +1,15 @@
 import FbProxy from './fbProxy';
 import DbCache from './dbCache';
 
-import LegacyPromotion = Firebase.LegacyPromotion;
-
 class DbApi {
-  async getLegacyPromotions(): Promise<{ [key: string]: LegacyPromotion.Condition }> {
+  async getLegacyPromotions(): Promise<{ [key: string]: Firebase.LegacyPromotion.Condition }> {
     let data = await this.fetchDbWithCache('simplified/promotions-v2/promotions');
-    return <{ [key: string]: LegacyPromotion.Condition }>(data || {});
+    return <{ [key: string]: Firebase.LegacyPromotion.Condition }>(data || {});
   }
 
-  async getLegacyPromotionDetail(key: string): Promise<LegacyPromotion.Detail> {
+  async getLegacyPromotionDetail(key: string): Promise<Firebase.LegacyPromotion.Detail> {
     let data = await this.fetchDbWithCache(`promotions-v2/promotions/${key}`);
-    return <LegacyPromotion.Detail>data;
+    return <Firebase.LegacyPromotion.Detail>data;
   }
 
   async fetchDbWithCache(path: string): Promise<any> {

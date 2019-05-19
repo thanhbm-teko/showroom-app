@@ -39,6 +39,7 @@ export const screen = {
     large: scale(35)
   },
   fontSize: {
+    default: scale(12),
     tiny: scale(8),
     verySmall: scale(10),
     small: scale(12),

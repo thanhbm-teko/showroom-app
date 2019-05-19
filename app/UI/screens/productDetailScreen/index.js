@@ -8,6 +8,7 @@ import * as useCaseCore from '../../../core/useCase/productDetail/productDetail.
 import Button from '../../components/button/Button';
 import ImageWrapper from '../../components/ImageWrapper';
 import ColoredTextLabel from '../../components/label/ColoredTextLabel';
+import ProductPromotionChooser from './ProductPromotionChooser';
 import ProductTypeChooser from './ProductTypeChooser';
 import ProductSpecTable from './ProductSpecTable';
 import StockInfo from './StockInfo';
@@ -17,6 +18,7 @@ import * as productDetailActions from '../../reduxConnector/productDetail/action
 import * as util from '../../util';
 
 import PRODUCT_TYPES from './productTypes.json';
+import PROMOTIONS from './promotions.json';
 
 export class ProductDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -49,20 +51,7 @@ export class ProductDetailScreen extends Component {
             {this.renderPriceSection()}
             <StockInfo stocks={util.safeValue(product, 'stocks', [])} isUsingOm={false} />
           </View>
-          {/* Các chương trình khuyến mãi của sản phẩm */}
-          {/* <View style={{ paddingTop: scale(10) }}>
-            <ProductPromotion
-              editPrice={this.state.editPriceService === null ? 0 : this.state.editPriceService}
-              editPriceService={this.editPriceService}
-              product={product}
-              ignoreCheckVoucher={this.props.ignoreCheckVoucher}
-              hidePromotion={this.props.hidePromotion}
-              hostScreen="detail"
-              onChooseProductSale={this.onChooseProductSale}
-              cartItem={this.props.cartItem}
-              defaultPromotion={this.props.defaultPromotion}
-            />
-          </View> */}
+          <ProductPromotionChooser promotions={PROMOTIONS} />
           <ProductSpecTable
             description={util.safeValue(product, 'description')}
             specifications={util.safeValue(product, 'attributes', [])}

@@ -1,8 +1,6 @@
 import { ApiResult, getDefaultApiResult, ResultCode } from '../../../core/model/ResultCode';
 import DbApi from './dbApi';
 
-import LegacyPromotion = Firebase.LegacyPromotion;
-
 class FirebaseService {
   async getLegacyPromotions(): Promise<ApiResult> {
     let r = getDefaultApiResult([]);
@@ -24,7 +22,7 @@ class FirebaseService {
     return r;
   }
 
-  isConditionApplicable(condition: LegacyPromotion.Condition): boolean {
+  isConditionApplicable(condition: Firebase.LegacyPromotion.Condition): boolean {
     return condition.date.endDate > Date.now() && (!condition.branches || condition.branches.includes('CP09'));
   }
 }

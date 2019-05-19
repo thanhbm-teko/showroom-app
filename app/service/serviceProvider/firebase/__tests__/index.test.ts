@@ -2,15 +2,14 @@ import DbApi from '../dbApi';
 import FirebaseService from '../index';
 import { ApiResult, ResultCode } from '../../../../core/model/ResultCode';
 
-import LegacyPromotion = Firebase.LegacyPromotion;
 import LEGACY_PROMOTIONS from './__fixtures__/legacy_promotions.json';
 import LEGACY_PROMOTIONS_DETAIL from './__fixtures__/legacy_promotions_detail.json';
 
-let mockApiListSuccess = async () => <{ [key: string]: LegacyPromotion.Condition }>LEGACY_PROMOTIONS;
-let mockApiListFail = async () => <{ [key: string]: LegacyPromotion.Condition }>{};
+let mockApiListSuccess = async () => <{ [key: string]: Firebase.LegacyPromotion.Condition }>LEGACY_PROMOTIONS;
+let mockApiListFail = async () => <{ [key: string]: Firebase.LegacyPromotion.Condition }>{};
 let mockApiDetailSuccess = async (key: string) =>
-  <LegacyPromotion.Detail>(<{ [key: string]: LegacyPromotion.Condition }>LEGACY_PROMOTIONS_DETAIL)[key];
-let mockApiDetailFail = async (key: string) => <LegacyPromotion.Detail>null;
+  <Firebase.LegacyPromotion.Detail>(<{ [key: string]: Firebase.LegacyPromotion.Condition }>LEGACY_PROMOTIONS_DETAIL)[key];
+let mockApiDetailFail = async (key: string) => <Firebase.LegacyPromotion.Detail>null;
 
 let mockApiException = async () => {
   throw new Error('test exception');
