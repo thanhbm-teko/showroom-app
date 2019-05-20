@@ -40,6 +40,7 @@
     "@types/react-native": "^0.57.0",
     "@types/uuid": "^3.4.4",
     "babel-preset-expo": "^5.0.0",
+    "codeclimate-test-reporter": "^0.5.1",
     "eslint": "^5.16.0",
     "flatted": "^2.0.0",
     "jest": "^24.7.1",
