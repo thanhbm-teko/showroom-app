@@ -8,8 +8,8 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Jest",
-      "program": "${workspaceFolder}\\node_modules\\jest\\bin\\jest.js",
-      "args": ["--runInBand", "--config=${workspaceFolder}\\jest.config.js"],
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "args": ["--runInBand", "--config=${workspaceRoot}/jest.config.js"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     }

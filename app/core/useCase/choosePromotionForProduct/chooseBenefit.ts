@@ -94,6 +94,14 @@ export function toggleBenefit(benefit: BenefitPreview, selected: boolean): void 
       toggleBenefit(c, i === 0 && selected);
     });
   }
+
+  if (selected) {
+    let iterator: BenefitPreview = benefit.parent;
+    while (iterator) {
+      iterator.selected = true;
+      iterator = iterator.parent;
+    }
+  }
 }
 
 export function getBenefitValue(benefit: BenefitPreview): BenefitItem {

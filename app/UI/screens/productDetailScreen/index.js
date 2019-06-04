@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import * as useCaseCore from '../../../core/useCase/productDetail/productDetail.ts';
+import { getPromotionApplyResult } from '../../../core/useCase/choosePromotionForProduct/choosePromotion.ts';
 
 import Button from '../../components/button/Button';
 import ImageWrapper from '../../components/ImageWrapper';
@@ -15,6 +16,7 @@ import StockInfo from './StockInfo';
 
 import { fonts, screen, colors, scale } from '../../styles';
 import * as productDetailActions from '../../reduxConnector/productDetail/actions';
+import * as cartActions from '../../reduxConnector/cart/actions';
 import * as util from '../../util';
 
 import PRODUCT_TYPES from './productTypes.json';
@@ -139,24 +141,32 @@ export class ProductDetailScreen extends Component {
           title={'Chọn'}
           color={colors.brightOrange}
           textStyle={[fonts.heading1, { color: 'white' }]}
-          onPress={this.onPressCartButton}
+          onPress={this.onAddToCart}
           containerStyle={styles.addToCartButton}
         />
       </View>
     );
+  }
+
+  onAddToCart = () => {
+    let { product } = this.props;
+    let orderItem = getPromotionApplyResult({ product, quantity: 1 }, this.props.promotionsPreview);
+    this.props.addItemToCart(orderItem);
   }
 }
 
 function mapStateToProps(state, props) {
   let product = useCaseCore.getProductDetail(state.productDetail, '1808213');
   return {
-    product
+    product,
+    promotionsPreview: state.promotionsPreview
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchProductDetail: sku => dispatch(productDetailActions.fetchProductDetail(sku))
+    fetchProductDetail: sku => dispatch(productDetailActions.fetchProductDetail(sku)),
+    addItemToCart: orderItem => dispatch(cartActions.addItemToCart(orderItem))
   };
 }
 

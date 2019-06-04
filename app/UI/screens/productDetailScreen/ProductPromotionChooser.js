@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Collapsible from 'react-native-collapsible';
@@ -9,22 +9,16 @@ import ChoosePromotionsModal from './ChoosePromotionsModal';
 import ColoredTextLabel from '../../components/label/ColoredTextLabel';
 import { fonts, screen, colors, scale } from '../../styles';
 
-import { getPromotionsPreview } from '../../../core/useCase/choosePromotionForProduct/choosePromotion.ts';
+import * as promotionsPreviewActions from '../../reduxConnector/promotionsPreview/actions';
 
 class ProductPromotionChooser extends Component {
   state = {
-    promotionsPreview: [],
     showChooserPopup: false,
     collapsed: true
   };
 
-  async componentDidMount() {
-    let { promotions } = this.props;
-    let promotionsPreview = await getPromotionsPreview(promotions);
-
-    this.setState({
-      promotionsPreview
-    });
+  componentDidMount() {
+    this.props.initPromotionsPreview(this.props.promotions);
   }
 
   onToggleShowPromotions = () => {
@@ -33,24 +27,31 @@ class ProductPromotionChooser extends Component {
 
   onClose = () => this.setState({ showChooserPopup: false });
 
-  renderSelector = () => {
-    return (
-      <TouchableOpacity onPress={() => {}} style={{ padding: screen.distance.smaller, paddingRight: 0 }}>
-        <Icon type="material" name={'radio-button-unchecked'} size={scale(24)} />
-      </TouchableOpacity>
-    );
-  };
+  onChoosePromotionProgram = promotion => {
+    this.props.choosePromotionProgram(promotion, this.askUserWhenMeetPromotionConflict);
+  }
+  
+  onChooseBenefit = benefit => {
+    this.props.chooseBenefit(benefit, this.askUserWhenMeetPromotionConflict);
+  }
+  
+  askUserWhenMeetPromotionConflict = () => {
+    return new Promise((resolve, reject) => {
+      Alert.alert('Thông báo', 'Chương trình này không áp dụng đồng thời với các chương trình khác.\n Bạn vẫn muốn chọn?', [
+        { text: 'Không', onPress: () => resolve(false), style: 'cancel' },
+        { text: 'Có', onPress: () => resolve(true) }
+      ], { cancelable: false } );
+    });
+  }
 
-  renderPrice = discount => {
+  renderSelector = promotion => {
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Text style={[fonts.heading1, { color: colors.brightOrange }]}>80000</Text>
-        {discount > 0 ? (
-          <Text style={[fonts.subheading, { textDecorationLine: 'line-through', marginLeft: screen.distance.default }]}>
-            100000
-          </Text>
-        ) : null}
-      </View>
+      <TouchableOpacity onPress={() => this.onChoosePromotionProgram(promotion)} style={{ padding: screen.distance.smaller, paddingRight: 0 }}>
+        <Icon type="material" 
+          name={promotion.selected ? 'radio-button-checked' : 'radio-button-unchecked'}
+          size={scale(24)}
+          color={promotion.selected ? colors.reddishOrange : colors.cloudyBlue}/>
+      </TouchableOpacity>
     );
   };
 
@@ -59,7 +60,7 @@ class ProductPromotionChooser extends Component {
     if (name === 'Không sử dụng khuyến mãi') {
       return (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          {this.renderSelector()}
+          {this.renderSelector(promotion)}
           <TouchableOpacity style={{ padding: scale(14), flex: 1 }} onPress={() => {}}>
             <Text style={fonts.body1}>{name}</Text>
           </TouchableOpacity>
@@ -68,13 +69,10 @@ class ProductPromotionChooser extends Component {
     } else {
       return (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          {this.renderSelector()}
+          {this.renderSelector(promotion)}
           <TouchableOpacity style={styles.promotionInfoContainer} onPress={() => {}}>
-            <View>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={[fonts.heading1]}>{name}</Text>
-              </View>
-              {this.renderPrice(discount)}
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={[fonts.heading1]}>{name}</Text>
             </View>
             {promotionQuantity.remainQuantity ? (
               <ColoredTextLabel textStyle={fonts.footnote} type="quantity" text={promotionQuantity.remainQuantity} />
@@ -90,14 +88,14 @@ class ProductPromotionChooser extends Component {
       <View style={styles.promotionContainer}>
         {this.renderPromotionHeader(promotion, 0)}
         <Collapsible collapsed={false}>
-          <BenefitItem benefit={promotion.benefit} />
+          <BenefitItem benefit={promotion.benefit} onChooseBenefit={this.onChooseBenefit} />
         </Collapsible>
       </View>
     );
   };
 
   render() {
-    let { promotionsPreview } = this.state;
+    let { promotionsPreview } = this.props;
 
     return (
       <View style={styles.promotionsContainer}>
@@ -125,11 +123,17 @@ class ProductPromotionChooser extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    promotionsPreview: state.promotionsPreview
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    initPromotionsPreview: promotions => dispatch(promotionsPreviewActions.initPromotionsPreview(promotions)),
+    choosePromotionProgram: (promotion, askUserWhenMeetPromotionConflict) => dispatch(promotionsPreviewActions.choosePromotionProgram(promotion, askUserWhenMeetPromotionConflict)),
+    chooseBenefit: (benefit, askUserWhenMeetPromotionConflict) => dispatch(promotionsPreviewActions.chooseBenefit(benefit, askUserWhenMeetPromotionConflict))
+  };
 }
 
 export default connect(

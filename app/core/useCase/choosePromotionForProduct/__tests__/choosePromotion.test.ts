@@ -94,6 +94,16 @@ describe('choosePromotion', () => {
         expect(promotions[0].selected).toBe(false);
         expect(promotions[1].selected).toBe(true);
       });
+
+      it('should not notice user if select an already selected promotion', async () => {
+        let decisionCallbackDummy = jest.fn(async () => true);
+        let res = await choosePromotion(promotions, 'key1', decisionCallbackYes);
+        res = await choosePromotion(promotions, 'key1', decisionCallbackDummy);
+        expect(res).toBe(ResultCode.Success);
+        expect(decisionCallbackDummy).not.toBeCalled();
+        expect(promotions[0].selected).toBe(true);
+        expect(promotions[1].selected).toBe(false);
+      });
     });
   });
 

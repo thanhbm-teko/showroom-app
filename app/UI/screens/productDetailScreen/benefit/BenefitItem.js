@@ -13,9 +13,9 @@ export default class BenefitItem extends Component {
 
     if (!benefit.children) {
       return (
-        <View style={styles.benefitContainer}>
+        <View style={[styles.benefitContainer, benefit.parent? {} : { backgroundColor: colors.paleGrey }]}>
           {this.renderSingleBenefit()}
-          {this.renderQuantity()}
+          {this.renderSelector()}
         </View>
       );
     } else {
@@ -35,28 +35,28 @@ export default class BenefitItem extends Component {
     }
   }
 
-  renderQuantity() {
-    let quantity = 1;
+  renderSelector() {
+    let { benefit, onChooseBenefit } = this.props;
     return (
-      <TouchableOpacity onPress={this.onPressQuantity} style={styles.benefitQuantity}>
+      <TouchableOpacity onPress={() => onChooseBenefit(benefit)} style={styles.benefitQuantity}>
         <Icon
           type="material"
-          name={quantity > 0 ? 'radio-button-checked' : 'radio-button-unchecked'}
+          name={benefit.selected ? 'radio-button-checked' : 'radio-button-unchecked'}
           size={scale(20)}
-          color={quantity > 0 ? colors.reddishOrange : colors.cloudyBlue}
+          color={benefit.selected ? colors.reddishOrange : colors.cloudyBlue}
         />
       </TouchableOpacity>
     );
   }
 
   renderCombineBenefit() {
-    let { benefit } = this.props;
+    let { benefit, onChooseBenefit } = this.props;
     let listStyle = this.getBenefitListStyle(benefit);
 
     return (
       <View style={listStyle}>
         {benefit.children.map((b, i) => (
-          <BenefitItem key={i} benefit={b} />
+          <BenefitItem key={i} benefit={b} onChooseBenefit={onChooseBenefit}  />
         ))}
       </View>
     );
@@ -71,7 +71,7 @@ export default class BenefitItem extends Component {
 
     return [
       styles.benefitList,
-      hasSibling ? styles.benefitListWithSibling : {},
+      hasSibling ? benefit.selected ? styles.activeBenefitListWithSibling : styles.inactiveBenefitListWithSibling : {},
       hasGrandChild ? { backgroundColor: 'white' } : {}
     ];
   }
@@ -84,7 +84,7 @@ BenefitItem.defaultProps = {
 const styles = StyleSheet.create({
   benefitContainer: {
     flexDirection: 'row',
-    backgroundColor: colors.paleGrey,
+    backgroundColor: 'transparent',
     paddingHorizontal: screen.margin.default,
     paddingVertical: screen.margin.tiny
   },
@@ -99,11 +99,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center'
   },
-  benefitListWithSibling: {
-    backgroundColor: colors.paleGrey,
+  activeBenefitListWithSibling: {
+    backgroundColor: 'white',
     marginVertical: screen.margin.tiny,
     borderColor: colors.orangeRed,
     borderWidth: scale(1),
+    borderRadius: scale(8)
+  },
+  inactiveBenefitListWithSibling: {
+    backgroundColor: colors.paleGrey,
+    marginVertical: screen.margin.tiny,
     borderRadius: scale(8)
   },
   quantity: {

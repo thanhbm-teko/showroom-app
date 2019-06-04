@@ -39,10 +39,12 @@ export async function choosePromotion(
   let i = promotions.findIndex(p => p.key === key);
   if (i !== -1) {
     res = ResultCode.Success;
-    if (!promotions[i].applyWithOther) {
-      res = await resolvePromotionConflict(promotions, promotions[i], askUserForDecision);
-    } else {
-      togglePromotion(promotions[i], true);
+    if (!promotions[i].selected) {
+      if (!promotions[i].applyWithOther) {
+        res = await resolvePromotionConflict(promotions, promotions[i], askUserForDecision);
+      } else {
+        togglePromotion(promotions[i], true);
+      }
     }
   }
 
