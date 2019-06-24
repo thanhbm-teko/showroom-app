@@ -4,7 +4,7 @@
     "name": "Chuột máy tính Mitsumi 6603",
     "price": 137000.0,
     "category": "03-N004-15",
-    "status": 1,
+    "status": "1",
     "stocks": [
       {
         "code": "1404",
@@ -23,7 +23,7 @@
     "name": "Máy tính xách tay/ Laptop MacBook Pro 2017 13.3\" MPXR2 (Bạc)",
     "price": 33300000.0,
     "category": "01-N004-03",
-    "status": 6,
+    "status": "6",
     "stocks": [
       {
         "code": "0104",
@@ -37,7 +37,7 @@
     "name": "Bộ vi xử lý/ CPU Intel Coffee Lake Core i9-9900K Processor (16M Cache, up to 5.0GHz)",
     "price": 13690000.0,
     "category": "02-N003-02-08",
-    "status": 1,
+    "status": "1",
     "stocks": [
       {
         "code": "3204",

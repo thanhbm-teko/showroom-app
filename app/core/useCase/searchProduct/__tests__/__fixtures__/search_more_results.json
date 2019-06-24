@@ -4,7 +4,7 @@
     "name": "Chuột máy tính Logitech M238 Marvel Panther",
     "price": 499000.0,
     "category": "03-N004-02",
-    "status": 5,
+    "status": "5",
     "stocks": []
   },
   {
@@ -12,7 +12,7 @@
     "name": "Miếng lót chuột Kingmaster X2",
     "price": 30000.0,
     "category": "03-N004-01",
-    "status": 4,
+    "status": "4",
     "stocks": [
       {
         "code": "2601",
@@ -41,7 +41,7 @@
     "name": "Chuột máy tính Logitech B100",
     "price": 75000.0,
     "category": "03-N004-02",
-    "status": 1,
+    "status": "1",
     "stocks": [
       {
         "code": "1801",

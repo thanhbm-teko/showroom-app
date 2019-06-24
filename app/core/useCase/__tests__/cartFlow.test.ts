@@ -36,12 +36,13 @@ describe('Add product to cart flow', () => {
   let product: FullInfoProduct = null;
 
   beforeAll(() => {
-    let mockSearchSuccessWResults = async () => <ProductSearchResult>{ code: ResultCode.Success, data: SEARCH_RESULTS };
+    let mockSearchSuccessWResults = async () =>
+      <ProductSearchResult>{ code: ResultCode.Success, data: SEARCH_RESULTS, message: '' };
     ServiceLocator.getProductService().search = jest.fn(mockSearchSuccessWResults);
-    let mockGetDetailSuccessWResult = async () => <ProductDetailResult>{ code: ResultCode.Success, data: PRODUCT };
+    let mockGetDetailSuccessWResult = async () => <ProductDetailResult>{ code: ResultCode.Success, data: PRODUCT, message: '' };
     ServiceLocator.getProductService().getDetail = jest.fn(mockGetDetailSuccessWResult);
     let mockGetPromotionsSuccessWResults = async () =>
-      <PromotionListResult>{ code: ResultCode.Success, data: <unknown>PROMOTIONS };
+      <PromotionListResult>{ code: ResultCode.Success, data: <unknown>PROMOTIONS, message: '' };
     ServiceLocator.getPromotionService().list = jest.fn(mockGetPromotionsSuccessWResults);
     let mockSaveCartSuccess = async () => ResultCode.Success;
     ServiceLocator.getOrderService().saveCart = jest.fn(mockSaveCartSuccess);

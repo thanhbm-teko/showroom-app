@@ -28,7 +28,7 @@ describe('convertProduct', () => {
       name: 'name',
       price: 0,
       sku: 'sku',
-      status: 0
+      status: '0'
     };
     let p = MagentoAdapter.convertProduct(<FullInfoProduct>initialProduct, <Magento.Product>(<unknown>MAGENTO_PRODUCT));
     expect(p).toEqual({ ...MAGENTO_PRODUCT_CONVERTED, ...initialProduct });

@@ -13,10 +13,12 @@ import { ProductSearchResult } from '../../../service/product/interface';
 import SEARCH_RESULTS from './__fixtures__/search_results.json';
 import MORE_SEARCH_RESULTS from './__fixtures__/search_more_results.json';
 
-let mockSearchSuccessWResults = async () => <ProductSearchResult>{ code: ResultCode.Success, data: SEARCH_RESULTS };
-let mockSearchSuccessWMoreResults = async () => <ProductSearchResult>{ code: ResultCode.Success, data: MORE_SEARCH_RESULTS };
-let mockSearchSuccessNoResults = async () => <ProductSearchResult>{ code: ResultCode.Success, data: [] };
-let mockSearchFailureNoResults = async () => <ProductSearchResult>{ code: ResultCode.Failure, data: [] };
+let mockSearchSuccessWResults = async () =>
+  <ProductSearchResult>{ code: ResultCode.Success, data: SEARCH_RESULTS, message: '' };
+let mockSearchSuccessWMoreResults = async () =>
+  <ProductSearchResult>{ code: ResultCode.Success, data: MORE_SEARCH_RESULTS, message: '' };
+let mockSearchSuccessNoResults = async () => <ProductSearchResult>{ code: ResultCode.Success, data: [], message: '' };
+let mockSearchFailureNoResults = async () => <ProductSearchResult>{ code: ResultCode.Failure, data: [], message: '' };
 let searchData: ProductSearchData = null;
 let newSearchData: ProductSearchData = null;
 

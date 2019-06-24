@@ -3,7 +3,7 @@
   "name": "Chuột máy tính Mitsumi 6603",
   "price": 137000.0,
   "category": "03-N004-15",
-  "status": 5,
+  "status": "5",
   "stocks": [
     {
       "code": "1404",

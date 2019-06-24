@@ -5,8 +5,8 @@ import { ProductDetailResult } from '../../../service/product/interface';
 
 import PRODUCT from './__fixtures__/product.json';
 
-let mockGetDetailSuccessWResult = async () => <ProductDetailResult>{ code: ResultCode.Success, data: PRODUCT };
-let mockGetDetailFailureNoResult = async () => <ProductDetailResult>{ code: ResultCode.Failure, data: null };
+let mockGetDetailSuccessWResult = async () => <ProductDetailResult>{ code: ResultCode.Success, data: PRODUCT, message: '' };
+let mockGetDetailFailureNoResult = async () => <ProductDetailResult>{ code: ResultCode.Failure, data: null, message: 'Error!' };
 let detailData: ProductDetailsData = null;
 let newDetailData: ProductDetailsData = null;
 
