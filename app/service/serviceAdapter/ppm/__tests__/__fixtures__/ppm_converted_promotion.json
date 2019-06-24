@@ -1,0 +1,37 @@
+{
+  "applyWithOther": false,
+  "benefit": {
+    "id": "1",
+    "type": "allOf",
+    "children": [
+      {
+        "id": "30",
+        "product": {
+          "sku": 1602062
+        },
+        "quantity": 1,
+        "type": "gift"
+      },
+      {
+        "id": "1",
+        "type": "discount",
+        "value": null
+      },
+      {
+        "id": "2",
+        "type": "discount",
+        "value": 100000
+      }
+    ]
+  },
+  "condition": {
+    "type": "boolean",
+    "value": true
+  },
+  "key": "1",
+  "name": "VNPAYQR10",
+  "promotionQuantity": {
+    "maxQuantity": 1000,
+    "remainQuantity": 1000
+  }
+}

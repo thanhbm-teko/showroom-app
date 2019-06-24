@@ -1,20 +1,20 @@
 import axios, { AxiosResponse } from 'axios';
-import PSService from '../index';
+import PPMService from '../index';
 import { ApiResult, ResultCode } from '../../../../core/model/ResultCode';
 
 let mockApiSuccess = async () =>
-  <AxiosResponse>(<unknown>{ status: 200, statusText: 'ok', data: { data: { data: { products: [1, 2, 3] } } } });
+  <AxiosResponse>(<unknown>{ status: 200, statusText: 'ok', data: { code: 200, result: { promotions: [1, 2, 3] } } });
 let mockApiFailure = async () => <AxiosResponse>(<unknown>{ status: 400, statusText: 'bad request', data: null });
 let mockApiException = async () => {
   throw new Error('test exception');
 };
 let r: ApiResult = null;
 
-describe('PSService.search', () => {
+describe('PPMService.getPromotions', () => {
   describe('when api success', () => {
     beforeAll(async () => {
       axios.get = jest.fn(mockApiSuccess);
-      r = await PSService.search('abc', null, null, 0, 10);
+      r = await PPMService.getPromotions();
     });
 
     expectCorrectUrlCall();
@@ -29,7 +29,7 @@ describe('PSService.search', () => {
   describe('when api failure', () => {
     beforeAll(async () => {
       axios.get = jest.fn(mockApiFailure);
-      r = await PSService.search('abc', null, null, 0, 10);
+      r = await PPMService.getPromotions();
     });
 
     expectCorrectUrlCall();
@@ -44,7 +44,7 @@ describe('PSService.search', () => {
   describe('when api exception', () => {
     beforeAll(async () => {
       axios.get = jest.fn(mockApiException);
-      r = await PSService.search('abc', null, null, 0, 10);
+      r = await PPMService.getPromotions();
     });
 
     expectCorrectUrlCall();
@@ -58,9 +58,7 @@ describe('PSService.search', () => {
 
   function expectCorrectUrlCall() {
     it('should send correct url by axios', () => {
-      expect(axios.get).toBeCalledWith(
-        'http://search.phongvu.vn/api?query=abc&page=0&mode=operator&channelId=offline&userId=test-test-test-test'
-      );
+      expect(axios.get).toBeCalledWith('http://dev-ppm.phongvu.vn/promotions?channel=phong_vu_showroom');
     });
   }
 });

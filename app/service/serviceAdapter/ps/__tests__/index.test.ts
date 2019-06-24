@@ -17,7 +17,7 @@ describe('convertProduct', () => {
         name: 'name',
         price: 0,
         sku: 'sku',
-        status: 0
+        status: '0'
       },
       <PS.Product>(<unknown>PS_PRODUCT)
     );

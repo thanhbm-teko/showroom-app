@@ -10,7 +10,7 @@ export interface PartialInfoProduct extends Product {
   name: string;
   price: number;
   stocks: Stock[];
-  status: number;
+  status: string;
 }
 
 export interface FullInfoProduct extends PartialInfoProduct {

@@ -1,0 +1,55 @@
+{
+  "id": 1,
+  "name": "VNPAYQR10",
+  "description": "Giảm thêm 10% tối đa 200K khi nhập mã VNPAYQR10",
+  "type": "order",
+  "startedAt": "2019-01-02T10:00:00.000Z",
+  "endedAt": "2019-02-02T10:00:00.000Z",
+  "partner": "VNPAY",
+  "isDefault": false,
+  "timeRanges": [
+    {
+      "start": "11:00:00",
+      "end": "14:00:00"
+    },
+    {
+      "start": "20:00:00",
+      "end": "23:00:00"
+    }
+  ],
+  "condition": {
+    "paymentMethods": ["online", "offline"],
+    "orderValueMin": 90000,
+    "orderValueMax": null,
+    "coupon": "VNPAYQR10"
+  },
+  "benefit": {
+    "money": [
+      {
+        "id": 1,
+        "money": null,
+        "percent": 10,
+        "applyOn": "product",
+        "maxDiscount": 200000,
+        "discountType": "percent"
+      },
+      {
+        "id": 2,
+        "money": 100000,
+        "percent": 10,
+        "applyOn": "order",
+        "maxDiscount": null,
+        "discountType": "money"
+      }
+    ],
+    "items": [
+      {
+        "id": 30,
+        "sku": 1602062,
+        "name": "Loa sonic",
+        "applyOn": "product",
+        "quantity": 1
+      }
+    ]
+  }
+}

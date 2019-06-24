@@ -8,7 +8,7 @@ function convertProduct(product: PartialInfoProduct, psProduct: PS.Product): Par
       ...product,
       sku: pv_sku,
       name,
-      status,
+      status: String(status),
       category: asia_category_code,
       price: original_price
     };

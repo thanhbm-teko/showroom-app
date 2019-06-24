@@ -17,7 +17,8 @@ describe('convertProduct', () => {
         name: 'name',
         price: 0,
         sku: 'sku',
-        status: 0
+        status: '0',
+        stocks: []
       },
       <Pvis.Product>(<unknown>PVIS_PRODUCT)
     );

@@ -1,0 +1,195 @@
+{
+  "sku": 1810912,
+  "name": "Máy tính xách tay/ Laptop Asus A510UF-EJ587T (i5-8250U)",
+  "displayName": "Laptop ASUS VivoBook A510UF-EJ587T (15.6\"/i5-8250U 1.6 GHz - 3.4 GHz/4GB RAM/1TB HDD/NVIDIA GeForce MX130 2GB/Windows 10 Home SL 64-bit/1.7kg)",
+  "url": "https://phongvu.vn/may-tinh-xach-tay-laptop-asus-a510uf-ej587t-i5-8250u-vang-p35635.html",
+  "brand": {
+    "code": "Asus",
+    "name": "ASUS"
+  },
+  "color": {
+    "code": "BLK",
+    "name": "Đen"
+  },
+  "status": {
+    "sale": "1",
+    "publish": true
+  },
+  "prices": {
+    "supplierSalePrice": 5000000,
+    "sellPrice": 4700000
+  },
+  "promotionPrices": [
+    {
+      "channel": "online",
+      "terminal": null,
+      "promotionPrice": 4600000,
+      "flashSalePrice": null,
+      "finalPrice": 4600000
+    },
+    {
+      "channel": "offline",
+      "terminal": "CP04",
+      "promotionPrice": 4600000,
+      "flashSalePrice": 4500000,
+      "finalPrice": 4500000
+    }
+  ],
+  "images": [
+    {
+      "url": "https://phongvu.vn/media/catalog/product/cache/23/small_image/60x60/9df78eab33525d08d6e5fb8d27136e95//d/e/dell_vostro_5568_1.jpg",
+      "priority": 1
+    }
+  ],
+  "tags": ["tag_1", "tag_2"],
+  "stocks": [
+    {
+      "branch": "CP02",
+      "branchName": "KINH DOANH 8",
+      "warehouse": "CP02",
+      "warehouseName": "Kho",
+      "location": "0201",
+      "locationName": "Kho a1ng",
+      "storeCode": "B",
+      "productBizType": "Biz",
+      "available": 5,
+      "reserved": 0,
+      "onHand": 5
+    }
+  ],
+  "promotions": [
+    {
+      "channel": "online",
+      "terminal": null,
+      "definitions": [
+        {
+          "id": 1,
+          "name": "VNPAYQR10",
+          "description": "Giảm thêm 10% tối đa 200K khi nhập mã VNPAYQR10",
+          "type": "order",
+          "startedAt": "2019-01-02T10:00:00.000Z",
+          "endedAt": "2019-02-02T10:00:00.000Z",
+          "partner": "VNPAY",
+          "isDefault": false,
+          "timeRanges": [
+            {
+              "start": "11:00:00",
+              "end": "14:00:00"
+            },
+            {
+              "start": "20:00:00",
+              "end": "23:00:00"
+            }
+          ],
+          "condition": {
+            "paymentMethods": ["online", "offline"],
+            "orderValueMin": 90000,
+            "orderValueMax": null,
+            "coupon": "VNPAYQR10"
+          },
+          "benefit": {
+            "money": [
+              {
+                "id": 39,
+                "money": null,
+                "percent": 10,
+                "applyOn": "order",
+                "maxDiscount": 200000,
+                "discountType": "percent"
+              }
+            ],
+            "items": null
+          }
+        }
+      ]
+    },
+    {
+      "channel": "showroom",
+      "terminal": "CP00",
+      "definitions": [
+        {
+          "id": 1,
+          "name": "CTKM 1",
+          "description": "Mô tả cho CTKM 1",
+          "type": "product",
+          "startedAt": "2019-04-01T10:00:00.000Z",
+          "endedAt": "2019-08-01T10:00:00.000Z",
+          "partner": "PHONGVU",
+          "isDefault": false,
+          "timeRanges": [
+            {
+              "start": "11:00:00",
+              "end": "14:00:00"
+            },
+            {
+              "start": "20:00:00",
+              "end": "23:00:00"
+            }
+          ],
+          "condition": {
+            "paymentMethods": ["all"],
+            "orderValueMin": 90000,
+            "orderValueMax": 900000,
+            "coupon": null
+          },
+          "benefit": {
+            "money": [
+              {
+                "id": 1,
+                "money": null,
+                "percent": 10,
+                "applyOn": "product",
+                "maxDiscount": 200000,
+                "discountType": "percent"
+              },
+              {
+                "id": 2,
+                "money": 100000,
+                "percent": 10,
+                "applyOn": "order",
+                "maxDiscount": null,
+                "discountType": "money"
+              }
+            ],
+            "items": [
+              {
+                "id": 30,
+                "sku": 1602062,
+                "name": "Loa sonic",
+                "applyOn": "product",
+                "quantity": 1
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "flashSales": [
+    {
+      "channel": "all",
+      "terminal": null,
+      "total": 5,
+      "used": 0,
+      "discountPercent": 3,
+      "definition": {
+        "name": "Flash sale 4",
+        "description": "",
+        "startedAt": "2019-04-01T04:00:00.000Z",
+        "endedAt": "2019-04-01T06:00:00.000Z",
+        "timeRanges": [
+          {
+            "start": "11:00:00",
+            "end": "13:00:00"
+          }
+        ],
+        "type": {
+          "id": 4,
+          "code": "DEAL_CUOI_TUAN",
+          "name": "Deal cuoi tuan"
+        },
+        "paymentMethods": ["all"]
+      }
+    }
+  ]
+}

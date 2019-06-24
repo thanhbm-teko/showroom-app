@@ -9,7 +9,7 @@ function convertProduct(product: FullInfoProduct, pvisProduct: Pvis.Product): Fu
       ...product,
       sku,
       name,
-      status,
+      status: String(status),
       category,
       price: original_price,
       stocks: Object.keys(store_in_stock).map(k => convertStock(k, store_in_stock[k]))

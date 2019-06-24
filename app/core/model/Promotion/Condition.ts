@@ -2,7 +2,8 @@ export enum ConditionType {
   allOf = 'allOf',
   oneOf = 'oneOf',
   sku = 'sku',
-  category = 'category'
+  category = 'category',
+  boolean = 'boolean'
 }
 
 export interface Condition {
@@ -20,4 +21,8 @@ export interface SkuCondition extends Condition {
 export interface CategoryCondition extends Condition {
   category: string;
   includeChildren: boolean;
+}
+
+export interface BooleanCondition extends Condition {
+  value: boolean;
 }
