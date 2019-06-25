@@ -35,6 +35,7 @@ export const screen = {
   iconSize: {
     small: scale(15),
     medium: scale(20),
+    normal: scale(24),
     default: scale(29),
     large: scale(35)
   },

@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 
 import CartList from './CartList';
 import SearchHeader from './SearchHeader';
-// import CustomerQuickInfo from './CustomerQuickInfo';
-// import VoucherInput from './VoucherInput';
-// import CartInvoice from './CartInvoice';
-// import CartContent from './CartContent';
+import CustomerQuickInfo from './CustomerQuickInfo';
+import VoucherInput from './VoucherInput';
+import CartInvoice from './CartInvoice';
+import CartContent from './CartContent';
 
 import * as cartActions from '../../reduxConnector/cart/actions';
 
@@ -23,10 +23,10 @@ export class CartScreen extends React.Component {
       <View style={styles.container}>
         <SearchHeader />
         <CartList />
-        {/* <CustomerQuickInfo />
+        <CustomerQuickInfo />
         <VoucherInput />
         <CartInvoice />
-        <CartContent /> */}
+        <CartContent />
       </View>
     );
   }

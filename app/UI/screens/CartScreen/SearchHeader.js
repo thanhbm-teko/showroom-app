@@ -16,7 +16,7 @@ export default class SearchHeader extends React.Component {
             this.props.navigation.openDrawer();
           }}
         >
-          <Icon type="material-community" name="menu" size={screen.iconSize.medium} color="white" />
+          <Icon type="material-community" name="menu" size={screen.iconSize.normal} color="white" />
         </TouchableOpacity>
         <TouchableOpacity
           accessibilityLabel="cart_container_search"
@@ -32,14 +32,14 @@ export default class SearchHeader extends React.Component {
           style={styles.btn3}
           onPress={() => this.props.navigation.navigate('Category')}
         >
-          <Icon type="material-community" name="format-list-bulleted" color={'white'} size={screen.iconSize.medium} />
+          <Icon type="material-community" name="format-list-bulleted" color={'white'} size={screen.iconSize.normal} />
         </TouchableOpacity>
         <TouchableOpacity
           accessibilityLabel="cart_container_scan_qrcode"
           style={styles.btn3}
           onPress={() => this.props.navigation.navigate('BarCodeScanner')}
         >
-          <Icon type="material-icon" name="center-focus-weak" color={'white'} size={screen.iconSize.medium} />
+          <Icon type="material-icon" name="center-focus-weak" color={'white'} size={screen.iconSize.normal} />
         </TouchableOpacity>
       </View>
     );
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flexDirection: 'row',
-    height: scale(48),
+    height: scale(48) + screen.header.statusBarHeight,
     backgroundColor: colors.darkGreyBlue,
     paddingTop: screen.header.statusBarHeight
   },
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
   },
   btn2: {
     flex: 1,
+    height: scale(32),
     paddingHorizontal: screen.distance.default,
     backgroundColor: 'white',
     flexDirection: 'row',
