@@ -2,7 +2,8 @@ import { ResultCode } from '../../../model/ResultCode';
 import { Benefit } from '../../../model/Promotion/Benefit';
 import { PromotionPreview } from '../PromotionPreview';
 import { BenefitPreview, CombineBenefitPreview } from '../BenefitPreview';
-import { chooseBenefit, getDefaultBenefitPreview } from '../chooseBenefit';
+import { chooseBenefit } from '../choosePromotion';
+import { getDefaultBenefitPreview } from '../chooseBenefit';
 
 import { makePromotionPreview, makeBenefitPreview, makeAllOfBenefitPreview, makeOneOfBenefitPreview } from './testUtils';
 

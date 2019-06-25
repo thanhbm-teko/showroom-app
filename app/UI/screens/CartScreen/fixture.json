@@ -1,0 +1,31 @@
+{
+  "carts": [
+    {
+      "id": "e93486f5-6e5f-4987-8295-8c4dc5865923",
+      "createdAt": 1561449292818,
+      "items": [
+        {
+          "id": "8b4544c5-e17f-4da3-baef-91c038bfec01",
+          "product": {
+            "sku": "1204495",
+            "name": "Chuột máy tính Mitsumi 6603",
+            "price": 137000,
+            "category": "03-N004-15",
+            "status": "5",
+            "stocks": [
+              { "code": "1404", "name": "Kho hàng bán Vũng Tàu chuyển ra trưng bày", "quantity": 1 },
+              { "code": "1801", "name": "Kho hàng bán Đồng Tháp (Kho kiểm hàng)", "quantity": 15 }
+            ],
+            "imageUrl": "https://img1.phongvu.vn/media/catalog/product/uploads/product/p_999/2017/06/09/999.jpg"
+          },
+          "quantity": 1,
+          "discount": 35000,
+          "gifts": [],
+          "vouchers": [],
+          "benefitIds": ["benefit-id-1", "benefit-id-1-1", "benefit-id-2"]
+        }
+      ]
+    }
+  ],
+  "selectedIdx": 0
+}

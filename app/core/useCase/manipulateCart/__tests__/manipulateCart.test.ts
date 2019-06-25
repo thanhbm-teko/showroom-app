@@ -1,6 +1,6 @@
 import { ResultCode } from '../../../model/ResultCode';
 import ServiceLocator from '../../../service/serviceLocator';
-import { CartData, getInitialCartData, addCart, deleteCart, getSelectedCart, Cart } from '../manipulateCart';
+import { CartData, getInitialCartData, addCart, deleteCart, getSelectedCart, Cart, selectCart } from '../manipulateCart';
 import Util from '../../../util';
 
 let mockSaveCartSuccess = async (cartData: CartData) => ResultCode.Success;
@@ -121,6 +121,29 @@ describe('getSelectedCart', () => {
       selectedCart = getSelectedCart(cartData);
       expect(selectedCart).toBeFalsy();
       expect(cartData.selectedIdx).toBe(-1);
+    });
+  });
+});
+
+describe('selectCart', () => {
+  describe('when call', () => {
+    beforeAll(() => {
+      Util.String.generateUuid = originalIdGenerator;
+      cartData = getInitialCartData();
+    });
+
+    it('should select the desired cart when cartId is correct', () => {
+      cartData = addCart(cartData);
+      cartData = addCart(cartData);
+      cartData = selectCart(cartData, cartData.carts[1].id);
+      expect(getSelectedCart(cartData)).toEqual(cartData.carts[1]);
+      cartData = selectCart(cartData, cartData.carts[0].id);
+      expect(getSelectedCart(cartData)).toEqual(cartData.carts[0]);
+    });
+
+    it('should do nothing if selected cart not existed', () => {
+      cartData = selectCart(cartData, 'unexisted-id');
+      expect(getSelectedCart(cartData)).toEqual(cartData.carts[0]);
     });
   });
 });

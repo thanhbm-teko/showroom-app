@@ -4,7 +4,14 @@ import { OrderItem, BenefitItem } from '../../model/OrderItem';
 import { Promotion } from '../../model/Promotion/promotion';
 import { PromotionPreview } from './PromotionPreview';
 import { DecisionCallback } from '../../model/Function';
-import { getBenefitValue, toggleBenefit, getDefaultBenefitPreview, joinBenefitItem, chooseBenefit } from './chooseBenefit';
+import {
+  getBenefitValue,
+  toggleBenefit,
+  getDefaultBenefitPreview,
+  joinBenefitItem,
+  getChosenPromotionAndBenefit,
+  disableOtherOneOfBenefit
+} from './chooseBenefit';
 import Util from '../../util';
 
 export async function getPromotionsPreview(
@@ -28,6 +35,21 @@ export async function getPromotionsPreview(
   }
 
   return promotionsPreview;
+}
+
+export async function chooseBenefit(
+  promotions: PromotionPreview[],
+  benefitId: string,
+  askUserForDecision: DecisionCallback
+): Promise<ResultCode> {
+  let { benefit, promotion } = getChosenPromotionAndBenefit(promotions, benefitId);
+  let res = await choosePromotion(promotions, promotion.key, askUserForDecision);
+  if (res === ResultCode.Success) {
+    toggleBenefit(benefit, true);
+    disableOtherOneOfBenefit(benefit);
+  }
+
+  return res;
 }
 
 export async function choosePromotion(

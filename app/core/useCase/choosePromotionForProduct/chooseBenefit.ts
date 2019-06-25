@@ -8,11 +8,8 @@ import {
   iterateBenefit,
   CombineBenefit
 } from '../../model/Promotion/Benefit';
-import { ResultCode } from '../../model/ResultCode';
 import { PromotionPreview } from './PromotionPreview';
-import { DecisionCallback } from '../../model/Function';
 import { BenefitPreview, CombineBenefitPreview } from './BenefitPreview';
-import { choosePromotion } from './choosePromotion';
 
 export function getDefaultBenefitPreview(
   benefit: Benefit,
@@ -38,22 +35,7 @@ export function makeDefaultBenefitPreview(benefit: Benefit, parent: BenefitPrevi
   return me;
 }
 
-export async function chooseBenefit(
-  promotions: PromotionPreview[],
-  benefitId: string,
-  askUserForDecision: DecisionCallback
-): Promise<ResultCode> {
-  let { benefit, promotion } = getChosenPromotionAndBenefit(promotions, benefitId);
-  let res = await choosePromotion(promotions, promotion.key, askUserForDecision);
-  if (res === ResultCode.Success) {
-    toggleBenefit(benefit, true);
-    disableOtherOneOfBenefit(benefit);
-  }
-
-  return res;
-}
-
-function getChosenPromotionAndBenefit(
+export function getChosenPromotionAndBenefit(
   promotions: PromotionPreview[],
   benefitId: string
 ): { benefit: BenefitPreview; promotion: PromotionPreview } {
@@ -73,7 +55,7 @@ function getChosenPromotionAndBenefit(
   return { benefit, promotion };
 }
 
-function disableOtherOneOfBenefit(benefit: BenefitPreview): void {
+export function disableOtherOneOfBenefit(benefit: BenefitPreview): void {
   let b = benefit.parent;
   let currentSelected = benefit;
   while (b) {

@@ -52,6 +52,12 @@ export function deleteCart(cartData: CartData, cartId: string): CartData {
   return newCartData;
 }
 
+export function selectCart(cartData: CartData, cartId: string): CartData {
+  let idx = cartData.carts.findIndex(c => c.id === cartId);
+  let selectedIdx = idx !== -1 ? idx : cartData.selectedIdx;
+  return { ...cartData, selectedIdx };
+}
+
 export function getSelectedCart(cartData: CartData): Cart {
   return cartData.carts[cartData.selectedIdx];
 }

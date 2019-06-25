@@ -2,7 +2,6 @@ import _ from 'lodash';
 
 import types from '../actionTypes';
 import * as promotionUseCases from '../../../core/useCase/choosePromotionForProduct/choosePromotion.ts';
-import * as benefitUseCases from '../../../core/useCase/choosePromotionForProduct/chooseBenefit.ts';
 
 const saveDataToRedux = data => ({
   type: types.saveDataToRedux,
@@ -15,8 +14,7 @@ export const initPromotionsPreview = promotions => {
     let promotionsPreview = await promotionUseCases.getPromotionsPreview(promotions);
     dispatch(saveDataToRedux(promotionsPreview));
   };
-}
-
+};
 
 export const choosePromotionProgram = (promotion, askUserWhenMeetPromotionConflict) => {
   return async (dispatch, getState) => {
@@ -24,13 +22,12 @@ export const choosePromotionProgram = (promotion, askUserWhenMeetPromotionConfli
     await promotionUseCases.choosePromotion(promotionsPreview, promotion.key, askUserWhenMeetPromotionConflict);
     dispatch(saveDataToRedux(promotionsPreview));
   };
-}
+};
 
 export const chooseBenefit = (benefit, askUserWhenMeetPromotionConflict) => {
   return async (dispatch, getState) => {
     let promotionsPreview = _.cloneDeep(getState().promotionsPreview);
-    await benefitUseCases.chooseBenefit(promotionsPreview, benefit.id, askUserWhenMeetPromotionConflict);
+    await promotionUseCases.chooseBenefit(promotionsPreview, benefit.id, askUserWhenMeetPromotionConflict);
     dispatch(saveDataToRedux(promotionsPreview));
   };
-}
-
+};

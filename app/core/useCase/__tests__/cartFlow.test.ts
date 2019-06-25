@@ -8,12 +8,16 @@ import {
   PromotionData,
   getPromotionsForProduct
 } from '../promotionProgram/promotionProgram';
-import { getPromotionsPreview, choosePromotion, getPromotionApplyResult } from '../choosePromotionForProduct/choosePromotion';
+import {
+  getPromotionsPreview,
+  choosePromotion,
+  chooseBenefit,
+  getPromotionApplyResult
+} from '../choosePromotionForProduct/choosePromotion';
 import { CombineBenefitPreview } from '../choosePromotionForProduct/BenefitPreview';
 import { BenefitType } from '../../model/Promotion/Benefit';
 import { Promotion } from '../../model/Promotion/promotion';
 import { PromotionPreview } from '../choosePromotionForProduct/PromotionPreview';
-import { chooseBenefit } from '../choosePromotionForProduct/chooseBenefit';
 import { OrderItem } from '../../model/OrderItem';
 import { FullInfoProduct } from '../../model/Product';
 import { CartData, getInitialCartData, getSelectedCart } from '../manipulateCart/manipulateCart';
