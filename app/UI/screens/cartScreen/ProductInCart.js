@@ -9,6 +9,7 @@ import * as util from '../../util';
 
 import ColoredTextLabel from '../../components/label/ColoredTextLabel';
 import ChangeQuantityItem from '../../components/common/ChangeQuantityItem';
+import PromotionSummary from './PromotionSummary';
 
 export class ProductInCart extends Component {
   state = {
@@ -47,7 +48,7 @@ export class ProductInCart extends Component {
           </View>
           {this.renderPrice()}
         </TouchableOpacity>
-        {/* <View style={{ backgroundColor: 'white' }}>{this.renderPromotion()}</View> */}
+        <PromotionSummary promotions={item.promotions} />
         <View style={styles.border} />
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
           <TouchableOpacity style={styles.removeButton} onPress={() => {}}>
@@ -112,7 +113,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    paddingBottom: scale(12)
   },
   border: {
     borderColor: colors.paleLilac,

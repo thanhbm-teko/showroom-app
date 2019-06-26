@@ -4,8 +4,8 @@ import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Collapsible from 'react-native-collapsible';
 
-import BenefitItem from './benefit/BenefitItem';
 import ChoosePromotionsModal from './ChoosePromotionsModal';
+import BenefitItem from '../../components/benefit/BenefitItem';
 import ColoredTextLabel from '../../components/label/ColoredTextLabel';
 import { fonts, screen, colors, scale } from '../../styles';
 
@@ -29,28 +29,35 @@ class ProductPromotionChooser extends Component {
 
   onChoosePromotionProgram = promotion => {
     this.props.choosePromotionProgram(promotion, this.askUserWhenMeetPromotionConflict);
-  }
-  
+  };
+
   onChooseBenefit = benefit => {
     this.props.chooseBenefit(benefit, this.askUserWhenMeetPromotionConflict);
-  }
-  
+  };
+
   askUserWhenMeetPromotionConflict = () => {
     return new Promise((resolve, reject) => {
-      Alert.alert('Thông báo', 'Chương trình này không áp dụng đồng thời với các chương trình khác.\n Bạn vẫn muốn chọn?', [
-        { text: 'Không', onPress: () => resolve(false), style: 'cancel' },
-        { text: 'Có', onPress: () => resolve(true) }
-      ], { cancelable: false } );
+      Alert.alert(
+        'Thông báo',
+        'Chương trình này không áp dụng đồng thời với các chương trình khác.\n Bạn vẫn muốn chọn?',
+        [{ text: 'Không', onPress: () => resolve(false), style: 'cancel' }, { text: 'Có', onPress: () => resolve(true) }],
+        { cancelable: false }
+      );
     });
-  }
+  };
 
   renderSelector = promotion => {
     return (
-      <TouchableOpacity onPress={() => this.onChoosePromotionProgram(promotion)} style={{ padding: screen.distance.smaller, paddingRight: 0 }}>
-        <Icon type="material" 
+      <TouchableOpacity
+        onPress={() => this.onChoosePromotionProgram(promotion)}
+        style={{ padding: screen.distance.smaller, paddingRight: 0 }}
+      >
+        <Icon
+          type="material"
           name={promotion.selected ? 'radio-button-checked' : 'radio-button-unchecked'}
           size={scale(24)}
-          color={promotion.selected ? colors.reddishOrange : colors.cloudyBlue}/>
+          color={promotion.selected ? colors.reddishOrange : colors.cloudyBlue}
+        />
       </TouchableOpacity>
     );
   };
@@ -131,8 +138,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     initPromotionsPreview: promotions => dispatch(promotionsPreviewActions.initPromotionsPreview(promotions)),
-    choosePromotionProgram: (promotion, askUserWhenMeetPromotionConflict) => dispatch(promotionsPreviewActions.choosePromotionProgram(promotion, askUserWhenMeetPromotionConflict)),
-    chooseBenefit: (benefit, askUserWhenMeetPromotionConflict) => dispatch(promotionsPreviewActions.chooseBenefit(benefit, askUserWhenMeetPromotionConflict))
+    choosePromotionProgram: (promotion, askUserWhenMeetPromotionConflict) =>
+      dispatch(promotionsPreviewActions.choosePromotionProgram(promotion, askUserWhenMeetPromotionConflict)),
+    chooseBenefit: (benefit, askUserWhenMeetPromotionConflict) =>
+      dispatch(promotionsPreviewActions.chooseBenefit(benefit, askUserWhenMeetPromotionConflict))
   };
 }
 

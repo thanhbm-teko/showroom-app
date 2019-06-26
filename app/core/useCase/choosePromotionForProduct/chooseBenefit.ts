@@ -1,4 +1,4 @@
-import { BenefitItem } from '../../model/OrderItem';
+import { BenefitSummary } from '../../model/OrderItem';
 import {
   GiftBenefit,
   DiscountBenefit,
@@ -86,38 +86,38 @@ export function toggleBenefit(benefit: BenefitPreview, selected: boolean): void 
   }
 }
 
-export function getBenefitValue(benefit: BenefitPreview): BenefitItem {
-  let benefitItem: BenefitItem = { discount: 0, gifts: [], vouchers: [], benefitIds: [] };
+export function getBenefitValue(benefit: BenefitPreview): BenefitSummary {
+  let summary: BenefitSummary = { discount: 0, gifts: [], vouchers: [], benefitIds: [] };
 
   if (benefit.selected) {
-    benefitItem.benefitIds = [benefit.id];
+    summary.benefitIds = [benefit.id];
     switch (benefit.type) {
       case BenefitType.allOf:
       case BenefitType.oneOf:
         let childrenBenefits = (<CombineBenefitPreview>benefit).children;
         for (let b of childrenBenefits) {
           let result = getBenefitValue(b);
-          benefitItem = joinBenefitItem(benefitItem, result);
+          summary = joinBenefitSummary(summary, result);
         }
         break;
       case BenefitType.gift:
         let giftBenefit = <GiftBenefit>(<unknown>benefit);
-        benefitItem.gifts = [{ product: giftBenefit.product, quantity: giftBenefit.quantity }];
+        summary.gifts = [{ product: giftBenefit.product, quantity: giftBenefit.quantity }];
         break;
       case BenefitType.discount:
-        benefitItem.discount = (<DiscountBenefit>(<unknown>benefit)).value;
+        summary.discount = (<DiscountBenefit>(<unknown>benefit)).value;
         break;
       case BenefitType.voucher:
         let voucherBenefit = <VoucherBenefit>(<unknown>benefit);
-        benefitItem.vouchers = [{ voucher: voucherBenefit.voucher, quantity: voucherBenefit.quantity }];
+        summary.vouchers = [{ voucher: voucherBenefit.voucher, quantity: voucherBenefit.quantity }];
         break;
     }
   }
 
-  return benefitItem;
+  return summary;
 }
 
-export function joinBenefitItem(bi1: BenefitItem, bi2: BenefitItem): BenefitItem {
+export function joinBenefitSummary(bi1: BenefitSummary, bi2: BenefitSummary): BenefitSummary {
   return {
     discount: bi1.discount + bi2.discount,
     gifts: [...bi1.gifts, ...bi2.gifts],

@@ -2,13 +2,12 @@ import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import * as util from '../../../util';
-import { fonts, screen, colors, scale } from '../../../styles';
+import * as util from '../../util';
+import { fonts, screen, colors, scale } from '../../styles';
 
 export default class Gift extends PureComponent {
   render() {
-    let { benefit } = this.props;
-    let gift = benefit.product;
+    let { gift, promotionQuantity } = this.props;
 
     return (
       <View style={styles.benefitDetail}>
@@ -27,8 +26,8 @@ export default class Gift extends PureComponent {
                 {`BH: ${gift.warranty ? gift.warranty : 0}`}
               </Text>
             ) : null}
-            {benefit.promotionQuantity.remainQuantity > 0 || benefit.promotionQuantity.remainQuantity === 0 ? (
-              <Text style={styles.note}>{`Số lượng KM còn lại: ${benefit.promotionQuantity.remainQuantity}`}</Text>
+            {promotionQuantity && promotionQuantity.remainQuantity >= 0 ? (
+              <Text style={styles.note}>{`Số lượng KM còn lại: ${promotionQuantity.remainQuantity}`}</Text>
             ) : null}
           </View>
         </View>

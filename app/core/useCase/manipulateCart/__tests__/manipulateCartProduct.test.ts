@@ -11,28 +11,19 @@ let orderItem1: OrderItem = {
   id: 'item-id-1',
   product: null,
   quantity: 1,
-  discount: 0,
-  gifts: [],
-  vouchers: [],
-  benefitIds: []
+  promotions: []
 };
 let orderItem1Clone: OrderItem = {
   id: 'item-id-1',
   product: null,
   quantity: 2,
-  discount: 0,
-  gifts: [],
-  vouchers: [],
-  benefitIds: []
+  promotions: []
 };
 let orderItem2: OrderItem = {
   id: 'item-id-2',
   product: null,
   quantity: 1,
-  discount: 0,
-  gifts: [],
-  vouchers: [],
-  benefitIds: []
+  promotions: []
 };
 
 describe('addItemToCart', () => {

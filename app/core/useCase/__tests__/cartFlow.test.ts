@@ -142,9 +142,24 @@ describe('Add product to cart flow', () => {
       orderItem = getPromotionApplyResult({ product, quantity: 1 }, promotionsPreview);
       expect(orderItem.product).toEqual(product);
       expect(orderItem.quantity).toBe(1);
-      expect(orderItem.discount).toBe(35000);
-      expect(orderItem.gifts).toEqual([]);
-      expect(orderItem.vouchers).toEqual([]);
+      expect(orderItem.promotions).toEqual([
+        {
+          key: 'CTKM_1',
+          name: 'Chương trình khuyến mãi 1',
+          benefitIds: ['benefit-id-1', 'benefit-id-1-1'],
+          discount: 25000,
+          gifts: [],
+          vouchers: []
+        },
+        {
+          key: 'CTKM_2',
+          name: 'Chương trình khuyến mãi 2 (đồng thời)',
+          benefitIds: ['benefit-id-2'],
+          discount: 10000,
+          gifts: [],
+          vouchers: []
+        }
+      ]);
     });
   }
 
@@ -181,11 +196,33 @@ describe('Add product to cart flow', () => {
       orderItem = getPromotionApplyResult({ product, quantity: 1 }, promotionsPreview);
       expect(orderItem.product).toEqual(product);
       expect(orderItem.quantity).toBe(1);
-      expect(orderItem.discount).toBe(25000);
-      expect(orderItem.gifts).toEqual([
-        { product: { sku: '1200512', name: 'Bàn laptop Mlucky Win', price: 100000 }, quantity: 1 }
+      expect(orderItem.promotions).toEqual([
+        {
+          key: 'CTKM_2',
+          name: 'Chương trình khuyến mãi 2 (đồng thời)',
+          benefitIds: ['benefit-id-2'],
+          discount: 10000,
+          gifts: [],
+          vouchers: []
+        },
+        {
+          key: 'CTKM_3',
+          name: 'Chương trình khuyến mãi 3',
+          benefitIds: ['benefit-id-3', 'benefit-id-3-1', 'benefit-id-3-2'],
+          discount: 15000,
+          gifts: [
+            {
+              product: {
+                name: 'Bàn laptop Mlucky Win',
+                price: 100000,
+                sku: '1200512'
+              },
+              quantity: 1
+            }
+          ],
+          vouchers: []
+        }
       ]);
-      expect(orderItem.vouchers).toEqual([]);
     });
   }
 });

@@ -1,7 +1,7 @@
 import { Product } from '../../../model/Product';
 import { OrderItem } from '../../../model/OrderItem';
 import { Benefit } from '../../../model/Promotion/Benefit';
-import { getPromotionApplyResult } from '../choosePromotion';
+import { getPromotionApplyResult, getTotalBenefit } from '../choosePromotion';
 import { makePromotionPreview, makeBenefitPreview, makeAllOfBenefitPreview, makeOneOfBenefitPreview } from './testUtils';
 
 import PRODUCT from '../../productDetail/__tests__/__fixtures__/product.json';
@@ -28,9 +28,16 @@ describe('getPromotionApplyResult', () => {
       let orderItem: OrderItem = getPromotionApplyResult({ product, quantity: 1 }, [promotion]);
       expect(orderItem.product).toEqual(product);
       expect(orderItem.quantity).toBe(1);
-      expect(orderItem.discount).toBe(25000);
-      expect(orderItem.gifts).toEqual([]);
-      expect(orderItem.vouchers).toEqual([]);
+      expect(orderItem.promotions).toEqual([
+        {
+          key: promotion.key,
+          name: promotion.name,
+          discount: 25000,
+          gifts: [],
+          vouchers: [],
+          benefitIds: [discountBenefit.id]
+        }
+      ]);
     });
 
     it('should return promotion gift', () => {
@@ -41,11 +48,16 @@ describe('getPromotionApplyResult', () => {
       let orderItem: OrderItem = getPromotionApplyResult({ product, quantity: 1 }, [promotion]);
       expect(orderItem.product).toEqual(product);
       expect(orderItem.quantity).toBe(1);
-      expect(orderItem.discount).toBe(0);
-      expect(orderItem.gifts).toEqual([
-        { product: { sku: '1200512', name: 'Bàn laptop Mlucky Win', price: 100000 }, quantity: 2 }
+      expect(orderItem.promotions).toEqual([
+        {
+          key: promotion.key,
+          name: promotion.name,
+          discount: 0,
+          gifts: [{ product: { sku: '1200512', name: 'Bàn laptop Mlucky Win', price: 100000 }, quantity: 2 }],
+          vouchers: [],
+          benefitIds: [giftBenefit.id]
+        }
       ]);
-      expect(orderItem.vouchers).toEqual([]);
     });
 
     it('should return promotion voucher', () => {
@@ -56,10 +68,15 @@ describe('getPromotionApplyResult', () => {
       let orderItem: OrderItem = getPromotionApplyResult({ product, quantity: 1 }, [promotion]);
       expect(orderItem.product).toEqual(product);
       expect(orderItem.quantity).toBe(1);
-      expect(orderItem.discount).toBe(0);
-      expect(orderItem.gifts).toEqual([]);
-      expect(orderItem.vouchers).toEqual([
-        { voucher: { key: 'VOUCHER_APRIL_200K', name: 'Phiếu mua hàng 200K' }, quantity: 1 }
+      expect(orderItem.promotions).toEqual([
+        {
+          key: promotion.key,
+          name: promotion.name,
+          discount: 0,
+          gifts: [],
+          vouchers: [{ voucher: { key: 'VOUCHER_APRIL_200K', name: 'Phiếu mua hàng 200K' }, quantity: 1 }],
+          benefitIds: [voucherBenefit.id]
+        }
       ]);
     });
 
@@ -75,12 +92,15 @@ describe('getPromotionApplyResult', () => {
       let orderItem: OrderItem = getPromotionApplyResult({ product, quantity: 1 }, [promotion]);
       expect(orderItem.product).toEqual(product);
       expect(orderItem.quantity).toBe(1);
-      expect(orderItem.discount).toBe(25000);
-      expect(orderItem.gifts).toEqual([
-        { product: { sku: '1200512', name: 'Bàn laptop Mlucky Win', price: 100000 }, quantity: 2 }
-      ]);
-      expect(orderItem.vouchers).toEqual([
-        { voucher: { key: 'VOUCHER_APRIL_200K', name: 'Phiếu mua hàng 200K' }, quantity: 1 }
+      expect(orderItem.promotions).toEqual([
+        {
+          key: promotion.key,
+          name: promotion.name,
+          discount: 25000,
+          gifts: [{ product: { sku: '1200512', name: 'Bàn laptop Mlucky Win', price: 100000 }, quantity: 2 }],
+          vouchers: [{ voucher: { key: 'VOUCHER_APRIL_200K', name: 'Phiếu mua hàng 200K' }, quantity: 1 }],
+          benefitIds: [allOfBenefit.id, discountBenefit.id, giftBenefit.id, voucherBenefit.id]
+        }
       ]);
     });
 
@@ -95,11 +115,65 @@ describe('getPromotionApplyResult', () => {
       let orderItem: OrderItem = getPromotionApplyResult({ product, quantity: 1 }, [promotion]);
       expect(orderItem.product).toEqual(product);
       expect(orderItem.quantity).toBe(1);
-      expect(orderItem.discount).toBe(0);
-      expect(orderItem.gifts).toEqual([
-        { product: { sku: '1200512', name: 'Bàn laptop Mlucky Win', price: 100000 }, quantity: 2 }
+      expect(orderItem.promotions).toEqual([
+        {
+          key: promotion.key,
+          name: promotion.name,
+          discount: 0,
+          gifts: [{ product: { sku: '1200512', name: 'Bàn laptop Mlucky Win', price: 100000 }, quantity: 2 }],
+          vouchers: [],
+          benefitIds: [oneOfBenefit.id, giftBenefit.id]
+        }
       ]);
-      expect(orderItem.vouchers).toEqual([]);
+    });
+  });
+});
+
+describe('getTotalBenefit', () => {
+  describe('when called', () => {
+    it('should summary all discount, gifts and vouchers', () => {
+      let orderItem: OrderItem = {
+        id: '12345678',
+        product: <Product>PRODUCT,
+        quantity: 1,
+        promotions: [
+          {
+            key: 'CTKM_2',
+            name: 'Chương trình khuyến mãi 2 (đồng thời)',
+            benefitIds: ['benefit-id-2'],
+            discount: 10000,
+            gifts: [],
+            vouchers: []
+          },
+          {
+            key: 'CTKM_3',
+            name: 'Chương trình khuyến mãi 3',
+            benefitIds: ['benefit-id-3', 'benefit-id-3-1', 'benefit-id-3-2'],
+            discount: 15000,
+            gifts: [
+              {
+                product: {
+                  sku: '1200512'
+                },
+                quantity: 1
+              }
+            ],
+            vouchers: []
+          }
+        ]
+      };
+
+      let benefit = getTotalBenefit(orderItem);
+      expect(benefit.discount).toBe(25000);
+      expect(benefit.gifts).toEqual([
+        {
+          product: {
+            sku: '1200512'
+          },
+          quantity: 1
+        }
+      ]);
+      expect(benefit.vouchers).toEqual([]);
     });
   });
 });

@@ -1,6 +1,6 @@
 import { ResultCode } from '../../model/ResultCode';
 import { ProductWQuantity } from '../../model/Product';
-import { OrderItem, BenefitItem } from '../../model/OrderItem';
+import { OrderItem, PromotionSummary, BenefitSummary } from '../../model/OrderItem';
 import { Promotion } from '../../model/Promotion/promotion';
 import { PromotionPreview } from './PromotionPreview';
 import { DecisionCallback } from '../../model/Function';
@@ -8,7 +8,7 @@ import {
   getBenefitValue,
   toggleBenefit,
   getDefaultBenefitPreview,
-  joinBenefitItem,
+  joinBenefitSummary,
   getChosenPromotionAndBenefit,
   disableOtherOneOfBenefit
 } from './chooseBenefit';
@@ -99,17 +99,29 @@ function togglePromotion(promotion: PromotionPreview, selected: boolean): void {
 }
 
 export function getPromotionApplyResult(productWQuantity: ProductWQuantity, promotions: PromotionPreview[]): OrderItem {
-  let benefitItem: BenefitItem = { discount: 0, gifts: [], vouchers: [], benefitIds: [] };
+  let applyResults: PromotionSummary[] = [];
   for (let p of promotions) {
     if (p.selected) {
-      let bi = getBenefitValue(p.benefit);
-      benefitItem = joinBenefitItem(benefitItem, bi);
+      applyResults.push({
+        key: p.key,
+        name: p.name,
+        ...getBenefitValue(p.benefit)
+      });
     }
   }
 
   return {
     id: Util.String.generateUuid(),
     ...productWQuantity,
-    ...benefitItem
+    promotions: applyResults
   };
+}
+
+export function getTotalBenefit(orderItem: OrderItem): BenefitSummary {
+  let total: BenefitSummary = { discount: 0, gifts: [], vouchers: [], benefitIds: [] };
+  for (let p of orderItem.promotions) {
+    total = joinBenefitSummary(total, p);
+  }
+
+  return total;
 }

@@ -5,7 +5,7 @@ import { Icon } from 'react-native-elements';
 import Gift from './Gift';
 import Discount from './Discount';
 
-import { fonts, screen, colors, scale } from '../../../styles';
+import { screen, colors, scale } from '../../styles';
 
 export default class BenefitItem extends Component {
   render() {
@@ -13,7 +13,7 @@ export default class BenefitItem extends Component {
 
     if (!benefit.children) {
       return (
-        <View style={[styles.benefitContainer, benefit.parent? {} : { backgroundColor: colors.paleGrey }]}>
+        <View style={[styles.benefitContainer, benefit.parent ? {} : { backgroundColor: colors.paleGrey }]}>
           {this.renderSingleBenefit()}
           {this.renderSelector()}
         </View>
@@ -27,9 +27,9 @@ export default class BenefitItem extends Component {
     let { benefit } = this.props;
     switch (benefit.type) {
       case 'discount':
-        return <Discount benefit={benefit} />;
+        return <Discount value={benefit.value} />;
       case 'gift':
-        return <Gift benefit={benefit} />;
+        return <Gift gift={benefit.product} promotionQuantity={benefit.promotionQuantity} />;
       default:
         return null;
     }
@@ -56,7 +56,7 @@ export default class BenefitItem extends Component {
     return (
       <View style={listStyle}>
         {benefit.children.map((b, i) => (
-          <BenefitItem key={i} benefit={b} onChooseBenefit={onChooseBenefit}  />
+          <BenefitItem key={i} benefit={b} onChooseBenefit={onChooseBenefit} />
         ))}
       </View>
     );
@@ -71,7 +71,7 @@ export default class BenefitItem extends Component {
 
     return [
       styles.benefitList,
-      hasSibling ? benefit.selected ? styles.activeBenefitListWithSibling : styles.inactiveBenefitListWithSibling : {},
+      hasSibling ? (benefit.selected ? styles.activeBenefitListWithSibling : styles.inactiveBenefitListWithSibling) : {},
       hasGrandChild ? { backgroundColor: 'white' } : {}
     ];
   }

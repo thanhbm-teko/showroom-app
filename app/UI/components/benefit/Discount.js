@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import * as util from '../../../util';
-import { fonts, screen, colors, scale } from '../../../styles';
+import * as util from '../../util';
+import { fonts, screen, colors, scale } from '../../styles';
 
 export default class Discount extends PureComponent {
   render() {
-    let { benefit } = this.props;
+    let { value } = this.props;
 
     return (
       <View style={styles.benefitDetail}>
@@ -15,7 +15,7 @@ export default class Discount extends PureComponent {
         <View style={styles.info}>
           <Text style={[fonts.subheading, { color: colors.darkGreyBlue }]}>
             {'Giảm giá '}
-            {benefit.value ? <Text style={styles.price}>{util.formatPrice(benefit.value)}</Text> : null}
+            {value ? <Text style={styles.price}>{util.formatPrice(value)}</Text> : null}
           </Text>
         </View>
       </View>
