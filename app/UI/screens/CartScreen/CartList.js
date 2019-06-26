@@ -34,7 +34,9 @@ export class CartList extends React.Component {
                   {`Đơn ${index + 1}`}
                 </Text>
                 {this.state.isEditCartList ? (
-                  <View style={[styles.btnContainer, { backgroundColor: selectedIdx === index ? 'white' : colors.orangeRed }]}>
+                  <View
+                    style={[styles.smallBtnContainer, { backgroundColor: selectedIdx === index ? 'white' : colors.orangeRed }]}
+                  >
                     <Icon
                       name="remove"
                       type="material-icon"
@@ -142,5 +144,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.darkGreyBlue
+  },
+  smallBtnContainer: {
+    marginLeft: screen.distance.default,
+    width: scale(16),
+    height: scale(16),
+    borderRadius: scale(8),
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

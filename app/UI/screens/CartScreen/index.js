@@ -8,6 +8,7 @@ import CustomerQuickInfo from './CustomerQuickInfo';
 import VoucherInput from './VoucherInput';
 import CartInvoice from './CartInvoice';
 import CartContent from './CartContent';
+import BottomButtons from './BottomButtons';
 
 import * as cartActions from '../../reduxConnector/cart/actions';
 
@@ -27,6 +28,7 @@ export class CartScreen extends React.Component {
         <VoucherInput />
         <CartInvoice />
         <CartContent />
+        <BottomButtons />
       </View>
     );
   }
