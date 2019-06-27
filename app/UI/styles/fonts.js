@@ -80,6 +80,14 @@ export const fonts = StyleSheet.create({
     textAlignVertical: 'center',
     color: colors.steel
   },
+  price: {
+    fontFamily: 'sale-text-semibold',
+    fontSize: scale(15),
+    letterSpacing: getLetterSpacing(-0.2),
+    lineHeight: scale(18),
+    textAlignVertical: 'center',
+    color: colors.brightOrange
+  },
   body2: {
     fontFamily: 'sale-text-regular',
     fontSize: scale(14),

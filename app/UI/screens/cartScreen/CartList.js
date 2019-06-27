@@ -97,7 +97,7 @@ export class CartList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    cartData: state.cart.carts.length > 0 ? state.cart : CART_FIXTURE
+    cartData: state.cart
   };
 }
 

@@ -18,6 +18,7 @@ import { fonts, screen, colors, scale } from '../../styles';
 import * as productDetailActions from '../../reduxConnector/productDetail/actions';
 import * as cartActions from '../../reduxConnector/cart/actions';
 import * as util from '../../util';
+import * as navUtil from '../../util/navigation';
 
 import PRODUCT_TYPES from './productTypes.json';
 import PROMOTIONS from './promotions.json';
@@ -28,7 +29,8 @@ export class ProductDetailScreen extends Component {
   });
 
   componentDidMount() {
-    this.props.fetchProductDetail('1808213');
+    let { sku } = this.props.navigation.state.params;
+    this.props.fetchProductDetail(sku);
     BackHandler.addEventListener('hardwareBackPress', this.onBackPressed);
   }
 
@@ -78,7 +80,7 @@ export class ProductDetailScreen extends Component {
         />
         <TouchableOpacity
           style={{ position: 'absolute', top: screen.distance.smaller, right: screen.distance.smaller }}
-          onPress={this.props.onClose}
+          onPress={this.onClose}
         >
           <Icon type="material-community" name="close" size={scale(24)} color={colors.brightOrange} />
         </TouchableOpacity>
@@ -121,12 +123,10 @@ export class ProductDetailScreen extends Component {
     let { product } = this.props;
     return (
       <View style={styles.priceSection}>
-        <View style={{ flex: 1, flexDirection: 'row' }}>
-          <Text style={[fonts.medium, { color: colors.brightOrange, paddingVertical: screen.distance.smaller }]}>
-            {util.safeValue(product, 'price_w_vat')}
-          </Text>
-          <Text style={[fonts.body1, { color: colors.darkGray, textDecorationLine: 'line-through', marginLeft: scale(4) }]}>
-            {util.safeValue(product, 'original_price')}
+        <View style={styles.priceSectionInside}>
+          <Text style={[fonts.price, { fontSize: scale(17) }]}>{util.formatPrice(util.safeValue(product, 'price'))}</Text>
+          <Text style={[fonts.original_price, { marginLeft: scale(4), fontSize: scale(15) }]}>
+            {util.formatPrice(util.safeValue(product, 'price'))}
           </Text>
         </View>
         {this.renderCartButton()}
@@ -152,11 +152,17 @@ export class ProductDetailScreen extends Component {
     let { product } = this.props;
     let orderItem = getPromotionApplyResult({ product, quantity: 1 }, this.props.promotionsPreview);
     this.props.addItemToCart(orderItem);
-  }
+    this.props.navigation.dispatch(navUtil.resetToCart());
+  };
+
+  onClose = () => {
+    this.props.navigation.goBack();
+  };
 }
 
 function mapStateToProps(state, props) {
-  let product = useCaseCore.getProductDetail(state.productDetail, '1808213');
+  let { sku } = props.navigation.state.params;
+  let product = useCaseCore.getProductDetail(state.productDetail, sku);
   return {
     product,
     promotionsPreview: state.promotionsPreview
@@ -204,7 +210,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   cartButtonContainer: {
-    marginTop: screen.margin.default,
     flex: 1,
     justifyContent: 'flex-end',
     flexDirection: 'row'
@@ -225,6 +230,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: colors.paleLilac,
     backgroundColor: 'white'
+  },
+  priceSectionInside: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingVertical: screen.distance.smaller,
+    alignItems: 'center'
   },
   infoSection: {
     padding: screen.distance.smaller,

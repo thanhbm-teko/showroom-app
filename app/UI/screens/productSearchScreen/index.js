@@ -64,9 +64,17 @@ export class ProductSearchScreen extends React.Component {
   };
 
   toggleFilter = () => {};
-  onBackPressed = () => {};
-  goToDetail = (item, index) => {};
+
+  onBackPressed = () => {
+    this.props.navigation.goBack();
+  };
+
+  goToDetail = (item, index) => {
+    this.props.navigation.navigate('ProductDetail', { sku: item.sku });
+  };
+
   getStockQty = item => {};
+
   checkPromotion = item => {};
 }
 

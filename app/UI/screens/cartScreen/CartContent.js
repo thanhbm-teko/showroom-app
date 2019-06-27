@@ -78,7 +78,7 @@ export class CartContent extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    selectedCart: CART_FIXTURE.carts[0]
+    selectedCart: state.cart.carts[state.cart.selectedIdx]
   };
 }
 
@@ -95,6 +95,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.paleGrey
+  },
+  emptyCart: {
+    margin: 10,
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
   createCartBtn: {
     width: scale(255),

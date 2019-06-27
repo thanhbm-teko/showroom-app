@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Keyboard } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import { screen, colors, fonts, scale } from '../../styles';
@@ -20,7 +20,7 @@ export default class SearchHeader extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
           accessibilityLabel="cart_container_search"
-          onPress={() => this.props.navigation.navigate('Search')}
+          onPress={() => this.props.navigation.navigate('ProductSearch')}
           activeOpacity={1.0}
           style={styles.btn2}
         >

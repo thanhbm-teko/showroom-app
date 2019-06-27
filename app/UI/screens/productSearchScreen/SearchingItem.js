@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 
 import { fonts, screen, colors, scale } from '../../styles';
 
-import Util from '../../../core/util/index.ts';
+import * as util from '../../util';
 import ColoredTextLabel from '../../components/label/ColoredTextLabel';
 
 export default class SearchingItem extends Component {
@@ -28,44 +28,51 @@ export default class SearchingItem extends Component {
     return (
       <TouchableOpacity style={styles.container} onPress={this.onPress}>
         <View>
-          {this.renderGiftNamePriceRow()}
-          {this.renderSkuStatusStockRow()}
+          <View style={styles.row}>
+            {this.renderName()}
+            {this.renderPrice()}
+          </View>
+          {this.renderLowerRow()}
         </View>
       </TouchableOpacity>
     );
   }
 
-  renderGiftNamePriceRow() {
+  renderName() {
     let { item } = this.props;
-    let hasPromoPrice = true;
     let hasGifts = true;
 
     return (
-      <View style={styles.row}>
-        <View style={styles.leftInfo}>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-            {hasGifts ? (
-              <View style={{ position: 'absolute' }}>
-                <Icon type="font-awesome" name="gift" color="#e60000" size={scale(15)} />
-              </View>
-            ) : null}
-            <Text style={fonts.body1} numberOfLines={3}>
-              {hasGifts ? '     ' : ''}
-              {item.name}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.rightInfo}>
-          <View style={styles.rightInfo}>
-            {hasPromoPrice ? <Text style={styles.priceTextOriginal}>{Util.String.formatPrice(item.price)}</Text> : null}
-            <Text style={styles.priceText}>{Util.String.formatPrice(item.price)}</Text>
-          </View>
+      <View style={styles.leftInfo}>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+          {hasGifts ? (
+            <View style={{ position: 'absolute' }}>
+              <Icon type="ionicon" name="ios-gift" color="#e60000" size={scale(15)} />
+            </View>
+          ) : null}
+          <Text style={fonts.heading1} numberOfLines={3}>
+            {`${hasGifts ? '     ' : ''}${item.name}`}
+          </Text>
         </View>
       </View>
     );
   }
 
-  renderSkuStatusStockRow() {
+  renderPrice() {
+    let { item } = this.props;
+    let hasPromoPrice = true;
+
+    return (
+      <View style={styles.rightInfo}>
+        <View style={styles.rightInfo}>
+          {hasPromoPrice ? <Text style={fonts.original_price}>{util.formatPrice(item.price)}</Text> : null}
+          <Text style={fonts.price}>{util.formatPrice(item.price)}</Text>
+        </View>
+      </View>
+    );
+  }
+
+  renderLowerRow() {
     let { item } = this.props;
     let currentStoreStock = 1;
     let totalStock = 10;
@@ -73,9 +80,7 @@ export default class SearchingItem extends Component {
     return (
       <View style={{ flexDirection: 'row', marginTop: screen.distance.smaller }}>
         <ColoredTextLabel text={`#${item.sku}`} type="success" />
-        <View style={{ marginLeft: scale(8) }}>
-          <ColoredTextLabel text={`Trạng thái: ${item.status}`} type="info" />
-        </View>
+        <ColoredTextLabel style={{ marginLeft: scale(8) }} text={`Trạng thái: ${item.status}`} type="info" />
         <View style={{ flex: 1 }} />
         <ColoredTextLabel
           text={currentStoreStock > 0 ? `${currentStoreStock} / ${totalStock}` : 'xem chi tiết'}
@@ -111,18 +116,5 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: screen.commonRatio.fontSize
-  },
-  priceText: {
-    fontSize: scale(17),
-    color: colors.brightOrange,
-    fontFamily: 'sale-text-semibold',
-    textAlign: 'right'
-  },
-  priceTextOriginal: {
-    fontSize: screen.commonRatio.fontSize,
-    //fontWeight: '600',
-    color: 'gray',
-    textAlign: 'right',
-    textDecorationLine: 'line-through'
   }
 });

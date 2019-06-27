@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: colors.darkGreyBlue,
-    paddingTop: screen.header.statusBarHeight
+    paddingTop: screen.header.statusBarHeight,
+    height: screen.header.statusBarHeight + scale(48)
   },
   drawerToggleIcon: {
     justifyContent: 'center',

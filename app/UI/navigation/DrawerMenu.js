@@ -18,16 +18,16 @@ export class DrawerMenu extends Component {
         { text: 'Không', style: 'cancel' },
         {
           text: 'Có',
-          onPress: () => this.props.logOut(this.onLogoutResult.bind(this))
+          onPress: () => this.props.logOut(this.onLogoutResult)
         }
       ],
       { cancelable: false }
     );
   };
 
-  onLogoutResult() {
+  onLogoutResult = () => {
     RootNavigationService.dispatch(resetToLogin());
-  }
+  };
 
   goToNotifications = () => {
     this.props.navigation.navigate('NotificationList');
@@ -47,10 +47,6 @@ export class DrawerMenu extends Component {
 
   goToSalesman = () => {
     this.props.navigation.navigate('Salesman');
-  };
-
-  onChangeTypeSearch = () => {
-    this.props.changeTypeSearch();
   };
 
   gotoChooseShop = () => {
@@ -88,18 +84,10 @@ export class DrawerMenu extends Component {
     );
   };
 
-  renderHeaderDrawer = () => {
+  renderDrawerHeader = () => {
     let { user } = this.props;
     return (
-      <View
-        style={{
-          backgroundColor: colors.darkGreyBlue,
-          alignItems: 'center',
-          padding: screen.distance.small,
-          flexDirection: 'row',
-          paddingTop: screen.distance.small + screen.header.statusBarHeight
-        }}
-      >
+      <View style={styles.drawerHeader}>
         <Image
           source={{ uri: user && user.userInfo.photoURL }}
           style={{ width: scale(48), height: scale(48), borderRadius: scale(24) }}
@@ -118,7 +106,7 @@ export class DrawerMenu extends Component {
   render() {
     return (
       <View>
-        {this.renderHeaderDrawer()}
+        {this.renderDrawerHeader()}
         <ScrollView>
           <View style={{ height: screen.distance.default }} />
           {this.renderDrawerItem(
@@ -138,7 +126,6 @@ export class DrawerMenu extends Component {
           {this.renderDrawerItem('account-circle', 'Salesman', this.goToSalesman, 'drawer_menu_salesman')}
           {this.renderDrawerItem('store', 'Chọn cửa hàng', this.gotoChooseShop, 'drawer_menu_choose_shop')}
           {this.renderDrawerItem('trending-up', 'Báo cáo', this.goToSalesInfo, 'drawer_menu_sale_info')}
-
           {this.renderDrawerItem(
             {
               name: 'tag',
@@ -177,6 +164,13 @@ export default connect(
 )(DrawerMenu);
 
 const styles = StyleSheet.create({
+  drawerHeader: {
+    backgroundColor: colors.darkGreyBlue,
+    alignItems: 'center',
+    padding: screen.distance.small,
+    flexDirection: 'row',
+    paddingTop: screen.distance.small + screen.header.statusBarHeight
+  },
   drawerItems: {
     flexDirection: 'row',
     height: scale(48),

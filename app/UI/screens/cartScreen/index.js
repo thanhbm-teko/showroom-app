@@ -10,8 +10,6 @@ import CartInvoice from './CartInvoice';
 import CartContent from './CartContent';
 import BottomButtons from './BottomButtons';
 
-import * as cartActions from '../../reduxConnector/cart/actions';
-
 import CART_FIXTURE from './fixture.json';
 
 export class CartScreen extends React.Component {
@@ -20,15 +18,17 @@ export class CartScreen extends React.Component {
   };
 
   render() {
+    let hasCart = this.props.cartData.carts.length > 0;
+
     return (
       <View style={styles.container}>
-        <SearchHeader />
-        <CartList />
-        <CustomerQuickInfo />
-        <VoucherInput />
-        <CartInvoice />
+        <SearchHeader navigation={this.props.navigation} />
+        {hasCart ? <CartList /> : null}
+        {hasCart ? <CustomerQuickInfo /> : null}
+        {hasCart ? <VoucherInput /> : null}
+        {hasCart ? <CartInvoice /> : null}
         <CartContent />
-        <BottomButtons />
+        {hasCart ? <BottomButtons /> : null}
       </View>
     );
   }
@@ -36,7 +36,7 @@ export class CartScreen extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    cartData: CART_FIXTURE
+    cartData: state.cart
   };
 }
 
