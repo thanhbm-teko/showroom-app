@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, View, ActivityIndicator } from 'react-native';
-import { FileSystem } from 'expo';
+import * as FileSystem from 'expo-file-system';
 
 const USE_IMAGE_CACHE = true;
 const DEFAULT_IMAGE_PATH = '../../../assets/images/no_product.png';

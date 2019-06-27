@@ -1,5 +1,3 @@
-import { Location } from 'expo';
-
 export interface Location {
   code: string;
   name: string;
