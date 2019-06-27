@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-import { fonts, screen, colors, scale } from '../../styles';
+import { fonts, screen, scale } from '../../styles';
 
 import * as util from '../../util';
 import ColoredTextLabel from '../../components/label/ColoredTextLabel';

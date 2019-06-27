@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import SearchBar from '../../components/header/SearchBar';
 import HeaderIcon from '../../components/header/HeaderIcon';
-import SearchingItem from './SearchingItem';
+import SearchingItem from '../../components/product/SearchingItem';
 
 import { screen, colors } from '../../styles';
 
