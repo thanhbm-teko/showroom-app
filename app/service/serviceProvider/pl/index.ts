@@ -1,49 +1,24 @@
 import url from 'url';
-import axios, { AxiosResponse, AxiosError } from 'axios';
-import { ApiResult, getDefaultApiResult, ResultCode } from '../../../core/model/ResultCode';
-import { ProductFilterData } from '../../../core/useCase/searchProduct/filter';
-import { ProductSortData } from '../../../core/useCase/searchProduct/sort';
+import { ApiResult } from '../../apiDefine';
+import Client from '../../client';
 
-class PLService {
-  protocol: string = 'http';
-  host: string = 'listing.teko.com';
-
-  async search(
-    query: string,
-    filter: ProductFilterData,
-    sort: ProductSortData,
-    offset: number,
-    limit: number
-  ): Promise<ApiResult> {
-    let r = getDefaultApiResult([]);
-    try {
-      let page = Math.floor(offset / limit);
-      let response = await axios.get(
-        url.format({
-          protocol: this.protocol,
-          host: this.host,
-          pathname: 'api/search',
-          query: {
-            q: query,
-            _page: page,
-            channel: 'pv_showroom',
-            visitorId: 'test-test-test-test'
-          }
-        })
-      );
-
-      if (response.status === 200) {
-        r.code = ResultCode.Success;
-        r.data = response.data.result.products;
-      } else {
-        r.message = response.statusText;
-      }
-    } catch (error) {
-      r.message = (<AxiosError>error).message;
-    }
-
-    return r;
-  }
+export async function search(searchRequest: PL.API.SearchRequest): Promise<ApiResult> {
+  return Client.request({
+    method: 'get',
+    url: url.format({
+      ...Client.getServerConfig('pl'),
+      pathname: 'api/search',
+      query: searchRequest
+    })
+  });
 }
 
-export default new PLService();
+export async function getProductDetail(sku: string): Promise<ApiResult> {
+  return Client.request({
+    method: 'get',
+    url: url.format({
+      ...Client.getServerConfig('pl'),
+      pathname: `api/product/${sku}`
+    })
+  });
+}

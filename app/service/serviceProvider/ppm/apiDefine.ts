@@ -75,10 +75,12 @@ namespace PPM {
     };
   }
 
-  export interface GetPromotionsResponse {
-    code: string;
-    result: {
-      promotions: Promotion[];
-    };
+  export namespace API {
+    export interface GetPromotionsResponse {
+      code: string;
+      result: {
+        promotions: Promotion[];
+      };
+    }
   }
 }

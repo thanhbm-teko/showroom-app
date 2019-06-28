@@ -1,4 +1,4 @@
-import FbProxy from './fbProxy';
+import * as FbProxy from './fbProxy';
 
 class DbCache {
   database: any = {};

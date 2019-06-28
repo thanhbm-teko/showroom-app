@@ -6,9 +6,10 @@ import * as Font from 'expo-font';
 import { MenuProvider } from 'react-native-popup-menu';
 
 import store from './app/UI/reduxConnector/configureStore';
-import ServiceLocator from './app/core/service/serviceLocator';
+import ServiceProvider from './app/service/serviceProvider';
 import AppNavigator from './app/UI/navigation/AppNavigator';
 import ServiceMapConfig from './app/service/serviceMapConfig';
+import { getConfig } from './app/service/serviceProviderConfig';
 
 console.disableYellowBox = true;
 
@@ -82,7 +83,7 @@ export default class App extends React.Component {
   };
 
   _handleFinishLoading = () => {
-    ServiceLocator.setContext(ServiceMapConfig);
+    ServiceProvider.initialize(getConfig('dev'));
     this.setState({ isLoadingComplete: true });
   };
 }

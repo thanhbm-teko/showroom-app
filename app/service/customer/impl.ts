@@ -1,7 +1,7 @@
 import { ResultCode } from '../../core/model/ResultCode';
 import { CustomerService, CustomerSearchResult } from '../../core/service/customer/interface';
 
-class CustomerServiceImpl implements CustomerService {
+export class CustomerServiceImpl implements CustomerService {
   name: 'Customer';
   search(phone: string): Promise<CustomerSearchResult> {
     return new Promise((resolve, reject) => {
@@ -13,5 +13,3 @@ class CustomerServiceImpl implements CustomerService {
     });
   }
 }
-
-export default new CustomerServiceImpl();

@@ -4,7 +4,7 @@ import Teko from '../serviceProvider';
 import Adapter from '../serviceAdapter';
 import { Promotion } from '../../core/model/Promotion/promotion';
 
-class PromotionServiceImpl implements PromotionService {
+export class PromotionServiceImpl implements PromotionService {
   name: 'Promotion';
 
   async list(): Promise<PromotionListResult> {
@@ -21,5 +21,3 @@ class PromotionServiceImpl implements PromotionService {
     return r;
   }
 }
-
-export default new PromotionServiceImpl();

@@ -7,7 +7,7 @@ import Teko from '../serviceProvider';
 import Adapter from '../serviceAdapter';
 import { runApiParallel } from '../serviceUtil';
 
-class ProductServiceImpl implements ProductService {
+export class ProductServiceImpl implements ProductService {
   name: 'Product';
 
   async search(
@@ -39,5 +39,3 @@ class ProductServiceImpl implements ProductService {
     return r;
   }
 }
-
-export default new ProductServiceImpl();

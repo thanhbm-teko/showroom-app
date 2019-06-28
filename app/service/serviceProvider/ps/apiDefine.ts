@@ -27,4 +27,14 @@ namespace PS {
     store_in_stock: Pvis.StoreInStock[];
     branch_in_stock: Pvis.BranchInStock[];
   }
+
+  export namespace API {
+    export interface SearchResponse {
+      data: {
+        data: {
+          products: Product[];
+        };
+      };
+    }
+  }
 }

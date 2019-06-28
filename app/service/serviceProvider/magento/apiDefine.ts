@@ -23,4 +23,10 @@ namespace Magento {
       displayAttr: string;
     };
   }
+
+  export namespace API {
+    export interface DetailProductListResponse {
+      data: Product[];
+    }
+  }
 }

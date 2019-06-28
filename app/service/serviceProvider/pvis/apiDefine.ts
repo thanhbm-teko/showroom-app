@@ -81,4 +81,8 @@ namespace Pvis {
     status: number;
     sale_in_stock: number;
   }
+
+  export namespace API {
+    export interface DetailProductResponse extends Product {}
+  }
 }

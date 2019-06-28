@@ -1,4 +1,4 @@
-namespace Firebase {
+namespace FB {
   export interface DateSlot {
     startDate: number;
     endDate: number;
